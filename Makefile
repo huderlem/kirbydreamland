@@ -18,13 +18,12 @@ endif
 
 %.o: dep = $(shell tools/scan_includes $(@D)/$*.asm)
 %.o: %.asm $$(dep)
-	rgbasm -h -o $@ $<
+	rgbasm -o $@ $<
 
-$(ROM): $(OBJS) contents/contents.link
-	rgblink -n $(ROM:.gbc=.sym) -m $(ROM:.gbc=.map) -l contents/contents.link -o $@ $(OBJS)
-	# rgbfix -jsvc -k 01 -l 0x33 -m 0x1e -p 0 -r 02 -t "POKEPINBALL" -i VPHE $@
+$(ROM): $(OBJS)
+	rgblink -n $(ROM:.gb=.sym) -m $(ROM:.gb=.map) -o $@ $(OBJS)
+	rgbfix -jv -l 0x01 -m 0x01 -p 0xFF -r 0 -t "KIRBY DREAM LAND" $@
 
-# For contributors to make sure a change didn't affect the contents of the rom.
 compare: $(ROM)
 	@$(MD5) rom.md5
 
@@ -32,7 +31,7 @@ tools:
 	$(MAKE) -C tools
 
 tidy:
-	rm -f $(ROM) $(OBJS) $(ROM:.gbc=.sym) $(ROM:.gbc=.map)
+	rm -f $(ROM) $(OBJS) $(ROM:.gb=.sym) $(ROM:.gb=.map)
 	$(MAKE) -C tools clean
 
 clean: tidy
