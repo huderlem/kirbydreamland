@@ -9875,7 +9875,7 @@ jr_002_6ace:
     ld b, h
     nop
     rst $38
-    jp RST_00
+    jp $0000
 
 
     dec h
@@ -10056,7 +10056,7 @@ jr_002_6ace:
     add b
     add l
     dec b
-    call nz, RST_08
+    call nz, $0008
     add b
     ret nz
 

@@ -2673,7 +2673,7 @@ jr_00f_4c08:
     ld [hl], $07
 
 Call_00f_4c36:
-    call c, Boot
+    call c, Entry
     ld b, a
     ld e, c
     ld b, h

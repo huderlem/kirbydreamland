@@ -14437,7 +14437,7 @@ Call_003_7f02:
     nop
     nop
     add [hl]
-    call nz, RST_00
+    call nz, $0000
     sub b
     xor l
     nop

@@ -1,7 +1,6 @@
 SECTION "ROM Bank $006", ROMX[$4000], BANK[$6]
 
 Call_006_4000:
-Jump_006_4000:
     ld a, $ff
     ld [$d096], a
     call $193b
@@ -10,7 +9,7 @@ Jump_006_4000:
     ld [$d095], a
     ld [$d053], a
     ld [$d081], a
-    ld [$d080], a
+    ld [wBGP], a
     ld a, $00
     ld [$d055], a
     ld hl, $4000
@@ -116,8 +115,8 @@ jr_006_40b0:
     ld a, $01
     ld [$d039], a
     ld a, $06
-    ld [$d02c], a
-    ld [$2100], a
+    ld [wLoadedROMBank], a
+    ld [MBC1RomBank], a
     jp Jump_006_486c
 
 
@@ -165,7 +164,7 @@ jr_006_411c:
     xor a
     ld_long $ff8c, a
     ld_long $ff8d, a
-    call $0648
+    call Call_000_0648
     ld a, $ff
     call $1e96
     ld a, $ff
@@ -182,8 +181,8 @@ jr_006_4142:
     ld a, $ff
     ld [$d096], a
     call $231e
-    call $0648
-    call $1c0a
+    call Call_000_0648
+    call Call_000_1c0a
     call $1e74
     call Call_006_4285
     ld d, $00
@@ -291,7 +290,7 @@ jr_006_421e:
     ld [$d095], a
     call $21fb
     call $139b
-    call $2329
+    call Call_000_2329
     call $193b
     ld a, [$d03b]
     cp $04
@@ -320,10 +319,10 @@ jr_006_424a:
     call $1eb4
 
 jr_006_4263:
-    call $1570
+    call Call_000_1570
     call $1e67
-    call $0670
-    call $08dc
+    call Call_000_0670
+    call Call_000_8dc
     ret
 
 
@@ -531,6 +530,8 @@ jr_006_43af:
     ret z
 
     ld [bc], a
+
+Jump_006_43bf:
     ld a, [$d041]
     ld [$d042], a
     call Call_006_444f
@@ -659,7 +660,7 @@ Call_006_4485:
     ld [$d03e], a
     push hl
     call $19c9
-    call $0648
+    call Call_000_0648
     ld a, $ff
     call $1e96
     pop hl
@@ -821,7 +822,7 @@ jr_006_4591:
     pop hl
     ret
 
-
+Call_006_459e:
     ld a, $21
     call $1e96
     xor a
@@ -895,7 +896,7 @@ jr_006_45f6:
     ld hl, $ff94
     res 0, [hl]
     ld a, $1e
-    call $1de0
+    call Call_000_1de0
     ret
 
 
@@ -947,16 +948,16 @@ jr_006_4678:
     ld_long a, $ff95
     and $81
     ld_long $ff95, a
-    call $2329
+    call Call_000_2329
     ld a, $01
     call $1dc3
     ld a, $3b
-    call $1de0
+    call Call_000_1de0
     ld a, $07
     call $1eb4
     ld hl, $ff94
     set 5, [hl]
-    call $2317
+    call Call_000_2317
     xor a
     ld [$d3cc], a
     ld bc, $0000
@@ -1014,7 +1015,7 @@ jr_006_46c7:
     ld [$d03e], a
     push hl
     call $19c9
-    call $0648
+    call Call_000_0648
     call $19f9
     pop hl
     ld a, [hl+]
@@ -1058,7 +1059,7 @@ jr_006_4731:
     inc b
 
 jr_006_4757:
-    call $0648
+    call Call_000_0648
     call $1c01
     call $1e74
     ld a, $0a
@@ -1107,7 +1108,7 @@ jr_006_479c:
 jr_006_47b0:
     ld hl, $ff95
     set 0, [hl]
-    call $0648
+    call Call_000_0648
     call $1c01
     call $1e74
     call $231e
@@ -1163,7 +1164,7 @@ jr_006_4810:
 
     ld a, [$d08a]
     ld [$d089], a
-    call $1570
+    call Call_000_1570
     ld hl, $d048
     ld a, [hl-]
     and a
@@ -1197,7 +1198,7 @@ jr_006_483e:
 Jump_006_485e:
     ld a, $3c
     call $1dc3
-    call $0648
+    call Call_000_0648
     call $1e74
     jp $0156
 
@@ -1206,7 +1207,7 @@ Jump_006_486c:
     ld a, $ff
     ld [$d096], a
     call $193b
-    call $0648
+    call Call_000_0648
     ld a, $ff
     call $1e96
     ld a, $ff
@@ -1265,7 +1266,7 @@ jr_006_48e0:
     ld a, $ff
     ld [$d096], a
     call $193b
-    call $0648
+    call Call_000_0648
     call $1e74
     ld hl, $4000
     ld de, $8000
@@ -1317,7 +1318,7 @@ jr_006_495b:
     ld a, $ff
     ld [$d096], a
     call $193b
-    call $0648
+    call Call_000_0648
     ld a, $05
     call $21fb
     call Call_006_5098
@@ -1356,7 +1357,7 @@ jr_006_49b7:
     or e
     jr nz, jr_006_49b5
 
-    call $0648
+    call Call_000_0648
     call $1e74
     ld a, $06
     call $21fb
@@ -1467,7 +1468,7 @@ Jump_006_4a65:
     ld a, $ff
     ld [$d096], a
     call $193b
-    call $0648
+    call Call_000_0648
     call $1e74
     ld a, $07
     call $21fb
@@ -1545,19 +1546,19 @@ jr_006_4aba:
     ld [$d05b], a
     call $1e67
     ld a, $40
-    ld [$d080], a
+    ld [wBGP], a
     ld a, $40
     ldh [rOBP0], a
     ld a, $05
     call $1dc3
     ld a, $90
-    ld [$d080], a
+    ld [wBGP], a
     ld a, $80
     ldh [rOBP0], a
     ld a, $05
     call $1dc3
     ld a, $e1
-    ld [$d080], a
+    ld [wBGP], a
 
 Call_006_4b00:
     ld a, $d0
@@ -1767,26 +1768,26 @@ jr_006_4c1e:
 
 Jump_006_4c5c:
     ld a, $90
-    ld [$d080], a
+    ld [wBGP], a
     ld a, $d0
     ldh [rOBP0], a
     ld a, $05
     call $1dc3
     ld a, $40
-    ld [$d080], a
+    ld [wBGP], a
     ld a, $80
     ldh [rOBP0], a
     ld a, $05
     call $1dc3
     ld a, $00
-    ld [$d080], a
+    ld [wBGP], a
     ld a, $40
     ldh [rOBP0], a
     ld a, $05
     call $1dc3
     call $1e74
     xor a
-    ld [$d080], a
+    ld [wBGP], a
     ld a, $08
     call $21fb
     call Call_006_5098
@@ -1817,7 +1818,7 @@ jr_006_4cba:
     or e
     jr nz, jr_006_4cb8
 
-    call $0648
+    call Call_000_0648
     call $1e74
     ld a, $09
     call $21fb
@@ -1851,7 +1852,7 @@ jr_006_4cf3:
     jr nz, jr_006_4cf1
 
 jr_006_4d06:
-    call $0648
+    call Call_000_0648
     call $1e74
     call $231e
     ld a, [$d039]
@@ -1880,7 +1881,7 @@ jr_006_4d06:
     call $0670
     ld de, $01a0
     call Call_006_5086
-    call $0648
+    call Call_000_0648
     call $1e74
     ld a, $0d
     call $21fb
@@ -1897,7 +1898,7 @@ jr_006_4d06:
     call $0670
     ld de, $01a0
     call Call_006_5086
-    call $0648
+    call Call_000_0648
     call $1e74
     ld a, $0e
     call $21fb
@@ -1914,7 +1915,7 @@ jr_006_4d06:
     call $0670
     ld de, $00ec
     call Call_006_5086
-    call $0648
+    call Call_000_0648
     call $1e74
     ld a, $01
     ld [$d03b], a
@@ -1934,7 +1935,7 @@ jr_006_4d06:
     call $0670
     ld de, $01a0
     call Call_006_5086
-    call $0648
+    call Call_000_0648
     call $1e74
     ld a, $10
     call $21fb
@@ -1951,7 +1952,7 @@ jr_006_4d06:
     call $0670
     ld de, $01a0
     call Call_006_5086
-    call $0648
+    call Call_000_0648
     call $1e74
     ld a, $02
     ld [$d03b], a
@@ -1971,7 +1972,7 @@ jr_006_4d06:
     call $0670
     ld de, $01a0
     call Call_006_5086
-    call $0648
+    call Call_000_0648
     call $1e74
     ld a, $12
     call $21fb
@@ -1988,7 +1989,7 @@ jr_006_4d06:
     call $0670
     ld de, $01a0
     call Call_006_5086
-    call $0648
+    call Call_000_0648
     call $1e74
     ld a, $03
     ld [$d03b], a
@@ -2008,7 +2009,7 @@ jr_006_4d06:
     call $0670
     ld de, $01a0
     call Call_006_5086
-    call $0648
+    call Call_000_0648
     call $1e74
     ld a, $14
     call $21fb
@@ -2025,7 +2026,7 @@ jr_006_4d06:
     call $0670
     ld de, $01a0
     call Call_006_5086
-    call $0648
+    call Call_000_0648
     call $1e74
     xor a
     ld [$d03b], a
@@ -2045,7 +2046,7 @@ jr_006_4d06:
     call $0670
     ld de, $01a0
     call Call_006_5086
-    call $0648
+    call Call_000_0648
     call $1e74
     ld a, $01
     ld [$d03b], a
@@ -2065,7 +2066,7 @@ jr_006_4d06:
     call $0670
     ld de, $01a0
     call Call_006_5086
-    call $0648
+    call Call_000_0648
     call $1e74
     ld a, $02
     ld [$d03b], a
@@ -2085,7 +2086,7 @@ jr_006_4d06:
     call $0670
     ld de, $01a0
     call Call_006_5086
-    call $0648
+    call Call_000_0648
     call $1e74
     ld a, $03
     ld [$d03b], a
@@ -2105,7 +2106,7 @@ jr_006_4d06:
     call $0670
     ld de, $01a0
     call Call_006_5086
-    call $0648
+    call Call_000_0648
     call $1e74
     ld hl, $6c49
     ld de, $8800
@@ -2147,7 +2148,7 @@ jr_006_500b:
     jr nz, jr_006_5009
 
 jr_006_501e:
-    call $0648
+    call Call_000_0648
     call $1e74
     ld a, $ff
     call $1eb4
@@ -7094,7 +7095,7 @@ Jump_006_5f00:
     rst $38
 
 Jump_006_6386:
-    call $0648
+    call Call_000_0648
     call $1e74
     call $231e
     call $1c01
@@ -7195,7 +7196,7 @@ Jump_006_6440:
     pop hl
     ld a, $0c
     ld [$d050], a
-    jp Jump_006_4000
+    jp Call_006_4000
 
 
 Jump_006_6449:
@@ -7372,7 +7373,7 @@ jr_006_652f:
 
 Jump_006_655e:
     pop hl
-    call $0648
+    call Call_000_0648
     call $1e74
     ld a, $02
     call $21fb
@@ -10883,7 +10884,7 @@ jr_006_7537:
     xor a
     ld bc, $6c01
     ld bc, $014A
-    call nz, RST_00
+    call nz, $0000
     ld [hl], b
     ld bc, $01c1
     ld bc, $694a
@@ -12568,7 +12569,7 @@ jr_006_7d24:
     nop
     add d
     nop
-    jp nz, $2100
+    jp nz, MBC1RomBank
 
     nop
     cpl

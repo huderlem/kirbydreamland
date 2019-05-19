@@ -1583,7 +1583,7 @@ jr_00b_48bd:
     nop
     ldh a, [$b6]
     ld bc, $00f0
-    call nz, RST_00
+    call nz, $0000
     ld [$00c2], sp
     nop
     nop
@@ -1599,7 +1599,7 @@ jr_00b_48bd:
     nop
     ldh a, [$ba]
     ld bc, $f8f0
-    call nz, RST_20
+    call nz, $0020
     ldh a, [$c2]
     jr nz, jr_00b_48e9
 
@@ -1749,7 +1749,7 @@ jr_00b_4989:
 
 jr_00b_498d:
     nop
-    call nc, RST_20
+    call nc, $0020
 
 jr_00b_4991:
     ld [$20d2], sp
@@ -2050,7 +2050,7 @@ jr_00b_4b19:
 
 jr_00b_4b1d:
     nop
-    call nc, RST_20
+    call nc, $0020
     ld [$20d2], sp
     ldh a, [$f8]
     adc b
@@ -3968,7 +3968,7 @@ jr_00b_543d:
     nop
     nop
     db $f4
-    jp nc, RST_00
+    jp nc, $0000
 
     inc b
     ld a, [c]
@@ -4025,7 +4025,7 @@ jr_00b_543d:
     nop
     nop
     db $f4
-    jp nc, RST_00
+    jp nc, $0000
 
     inc b
     ld a, [c]
@@ -4043,7 +4043,7 @@ jr_00b_543d:
     nop
     nop
     add hl, bc
-    jp nz, RST_00
+    jp nz, $0000
 
     pop af
     db $ec
@@ -4074,7 +4074,7 @@ jr_00b_54f5:
 
 jr_00b_54f9:
     rst $28
-    jp nz, RST_20
+    jp nz, $0020
 
     rst $38
     and d
@@ -4126,7 +4126,7 @@ jr_00b_5501:
     ld [$00da], sp
     nop
     nop
-    jp z, RST_00
+    jp z, $0000
 
     ld hl, sp-$46
     nop
@@ -4162,7 +4162,7 @@ jr_00b_5555:
     nop
     nop
     db $f4
-    jp nc, RST_00
+    jp nc, $0000
 
     inc b
     ld a, [c]

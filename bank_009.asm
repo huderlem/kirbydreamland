@@ -8570,7 +8570,7 @@ jr_009_672a:
     push hl
     ld c, b
     db $e3
-    jp nc, LCDCInterrupt
+    jp nc, $0048
 
     pop hl
     ld e, b

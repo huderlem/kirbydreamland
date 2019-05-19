@@ -1,8 +1,9 @@
 SECTION "ROM Bank $001", ROMX[$4000], BANK[$1]
 
+Call_001_4000:
     ldh a, [$8e]
     bit 6, a
-    call z, $08dc
+    call z, Call_000_8dc
     ld a, [$d05c]
     cp $98
     jr c, jr_001_401c
@@ -65,7 +66,7 @@ jr_001_4057:
     ld a, [$d05d]
     sub $10
     ld [$d05f], a
-    call $0819
+    call Call_000_819
     and a
     jr z, jr_001_4081
 
@@ -81,14 +82,14 @@ jr_001_4057:
     cp $08
     jr nz, jr_001_40a4
 
-    call $1248
+    call Call_000_1248
     jr c, jr_001_40a4
 
 jr_001_4081:
     ld a, [$d05d]
     sub $01
     ld [$d05f], a
-    call $0819
+    call Call_000_819
     and a
     jr z, jr_001_40e1
 
@@ -112,7 +113,7 @@ jr_001_40a4:
     bit 6, a
     jr nz, jr_001_40d5
 
-    call $11c9
+    call Call_000_11c9
     ldh a, [$92]
     and $0c
     jr nz, jr_001_40d5
@@ -251,11 +252,12 @@ jr_001_416f:
     ret
 
 
+Call_001_417c:
     xor a
     ld [$d063], a
     ldh a, [$8e]
     bit 6, a
-    call z, $08dc
+    call z, Call_000_8dc
     ld a, [$d05c]
     cp $08
     jr nz, jr_001_4193
@@ -316,7 +318,7 @@ jr_001_41d4:
     ld a, [$d05d]
     sub $10
     ld [$d05f], a
-    call $0819
+    call Call_000_819
     and a
     jr z, jr_001_41fe
 
@@ -332,14 +334,14 @@ jr_001_41d4:
     cp $07
     jr nz, jr_001_4221
 
-    call $1248
+    call Call_000_1248
     jr c, jr_001_4221
 
 jr_001_41fe:
     ld a, [$d05d]
     sub $01
     ld [$d05f], a
-    call $0819
+    call Call_000_819
     and a
     jr z, jr_001_4250
 
@@ -363,7 +365,7 @@ jr_001_4221:
     bit 6, a
     jr nz, jr_001_4245
 
-    call $11c9
+    call Call_000_11c9
     ldh a, [$92]
     and $0c
     jr nz, jr_001_4245
@@ -466,37 +468,30 @@ jr_001_42ba:
     and a
     ret
 
-
+Call_001_42bf:
     ldh a, [$8b]
     bit 7, a
-    jr z, jr_001_4301
-
+    jr z, Jump_001_4301
     ldh a, [$8d]
     bit 6, a
-    jr z, jr_001_4301
-
+    jr z, Jump_001_4301
     ldh a, [$8e]
     bit 7, a
-    jr nz, jr_001_4301
-
+    jr nz, Jump_001_4301
     ldh a, [$95]
     and $60
     jp nz, Jump_001_4301
-
     ld hl, $ff8e
     bit 2, [hl]
     jp nz, Jump_001_4301
-
     bit 4, [hl]
-    jr nz, jr_001_4301
-
+    jr nz, Jump_001_4301
     ldh a, [$92]
     bit 2, a
-    jr nz, jr_001_4301
-
+    jr nz, Jump_001_4301
     set 4, a
     ldh [$92], a
-    call $08dc
+    call Call_000_8dc
     ld hl, $ff8d
     res 7, [hl]
     res 0, [hl]
@@ -507,7 +502,6 @@ jr_001_42ba:
 
 
 Jump_001_4301:
-jr_001_4301:
     ld hl, $ff92
     res 4, [hl]
     ldh a, [$8e]
@@ -732,7 +726,7 @@ jr_001_446a:
 Jump_001_447d:
     xor a
     ld [$d06a], a
-    call $11c9
+    call Call_000_11c9
     call $384e
     jr nc, jr_001_4492
 
@@ -767,7 +761,7 @@ jr_001_44a6:
     push bc
     push hl
     push de
-    call $0483
+    call Call_000_483
     pop de
     pop hl
     pop bc
@@ -1128,7 +1122,7 @@ jr_001_46ef:
     set 6, [hl]
     ld a, $50
     ld [$d07e], a
-    jp $03b3
+    jp Jump_000_3b3
 
 
 jr_001_46fc:
@@ -1136,7 +1130,7 @@ jr_001_46fc:
     res 6, [hl]
     ld a, $14
     ld [$d07e], a
-    jp $03b3
+    jp Jump_000_3b3
 
 
 Jump_001_4709:
@@ -1153,7 +1147,7 @@ jr_001_4709:
     ld [$d07e], a
     ld a, [$d04d]
     ldh [$8c], a
-    jp $03b3
+    jp Jump_000_3b3
 
 
 jr_001_4726:
@@ -1173,7 +1167,7 @@ jr_001_4726:
     ldh [$8c], a
     ld a, [$d065]
     cp $16
-    jp nc, $03b3
+    jp nc, Jump_000_3b3
 
     ld c, a
     inc a
@@ -1195,8 +1189,8 @@ jr_001_4726:
 
 
 jr_001_4765:
-    call $038f
-    jp $03b3
+    call Call_000_38f
+    jp Jump_000_3b3
 
 
 Jump_001_476b:
@@ -1205,7 +1199,7 @@ Jump_001_476b:
     and $03
     ld [$d04d], a
     ldh [$8c], a
-    jr jr_001_4783
+    jr Jump_001_4783
 
 Jump_001_4778:
     ld a, [$d04d]
@@ -1215,7 +1209,6 @@ Jump_001_4778:
     ldh [$8e], a
 
 Jump_001_4783:
-jr_001_4783:
     ldh a, [$8e]
     bit 4, a
     jr z, jr_001_47ab
@@ -1245,7 +1238,7 @@ jr_001_47ab:
     cp $01
     jr nz, jr_001_47bf
 
-    call $08dc
+    call Call_000_8dc
     ldh a, [$92]
     res 7, a
     ldh [$92], a
@@ -1285,11 +1278,11 @@ jr_001_47bf:
     ld [$d094], a
 
 jr_001_47fe:
-    call $0917
+    call Call_000_917
     call $139b
     ld hl, $ff91
     bit 6, [hl]
-    call nz, $06ec
+    call nz, Call_000_6ec
     ld hl, $d3e1
     ld a, [hl+]
     or [hl]
@@ -1411,7 +1404,7 @@ jr_001_481d:
     ld a, [$d3ba]
     ld c, a
     ld b, $00
-    call $21dc
+    call Call_000_21dc
     pop bc
     ret
 

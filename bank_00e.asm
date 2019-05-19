@@ -4895,7 +4895,7 @@ jr_00e_54c9:
     ld b, h
     nop
     rst $38
-    jp RST_00
+    jp $0000
 
 
     dec h

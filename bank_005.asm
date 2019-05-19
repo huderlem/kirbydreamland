@@ -639,6 +639,7 @@ jr_005_4318:
     jp $241f
 
 
+Call_005_432c:
     call Call_005_4336
     call Call_005_4379
     call Call_005_43a4
@@ -1404,7 +1405,7 @@ Jump_005_479c:
     call $1e96
     pop de
     ld a, $0a
-    jp $1de0
+    jp Call_000_1de0
 
 
 Call_005_47b5:
@@ -1447,6 +1448,7 @@ jr_005_47e2:
     ret
 
 
+Call_005_47e4:
     call Call_005_489b
     ld_long a, $ff8e
     bit 4, a
@@ -2019,18 +2021,16 @@ jr_005_4a77:
     ld [hl], a
     ret
 
-
+Call_005_4abe:
     ld c, $80
     ld b, $0a
     ld hl, $4acc
-
 jr_005_4ac5:
     ld a, [hl+]
     ld [c], a
     inc c
     dec b
     jr nz, jr_005_4ac5
-
     ret
 
 
@@ -2044,25 +2044,21 @@ jr_005_4ad2:
 
     ret
 
-
+Call_005_4ad6:
     ld hl, $c000
-
 jr_005_4ad9:
     xor a
     ld [hl+], a
     ld a, $e0
     cp h
     jr nz, jr_005_4ad9
-
     ld hl, $ff8a
-
 jr_005_4ae3:
     xor a
     ld [hl+], a
     ld a, l
     cp $97
     jr nz, jr_005_4ae3
-
     ld a, $01
     ld [$d051], a
     ld [$d052], a
@@ -2093,12 +2089,11 @@ jr_005_4ae3:
     inc a
     ld [hl+], a
     inc a
-
 jr_005_4b2e:
     ld [hl], a
     ret
 
-
+Call_005_4b30:
     ld hl, $4b3a
     ld de, $dc00
     call $20da
@@ -2366,6 +2361,8 @@ jr_005_4c27:
     ld [hl], l
     ld l, d
     rst $38
+
+Call_005_4c4a:
     ld a, $80
     ldh [rNR52], a
     ld a, $77
@@ -2379,12 +2376,10 @@ jr_005_4c27:
     ld hl, $de06
     ld b, $14
     ld a, $aa
-
 jr_005_4c68:
     ld [hl+], a
     dec b
     jr nz, jr_005_4c68
-
     ld hl, $7aa9
     call Call_005_5305
     ld a, $ff
@@ -2405,7 +2400,6 @@ jr_005_4c68:
     ld a, $24
     ld [$ded4], a
     ret
-
 
 Call_005_4c9e:
     ld e, a

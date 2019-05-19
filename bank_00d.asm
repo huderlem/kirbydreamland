@@ -10974,7 +10974,7 @@ jr_00d_6f3f:
     ld b, h
     nop
     rst $38
-    jp RST_00
+    jp $0000
 
 
     dec h
@@ -12418,7 +12418,7 @@ jr_00d_755e:
     ld b, h
     nop
     rst $38
-    jp RST_00
+    jp $0000
 
 
     dec h

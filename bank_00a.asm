@@ -4374,7 +4374,7 @@ jr_00a_533c:
     pop af
     dec de
     dec e
-    jp $2100
+    jp MBC1RomBank
 
 
     ld de, $0f0f
@@ -11860,7 +11860,7 @@ jr_00a_7372:
     ld b, h
     nop
     rst $38
-    jp RST_00
+    jp $0000
 
 
     dec h
