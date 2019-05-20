@@ -91,7 +91,7 @@ jr_005_406c:
 
 jr_005_4075:
     ld a, [hl]
-    call $3168
+    call Call_3168
     dec d
     jr nz, jr_005_4075
 
@@ -862,7 +862,7 @@ jr_005_4466:
 
     ld a, [$d40c]
     add a
-    call $3168
+    call Call_3168
     ld a, [$d086]
     and a
     ret z
@@ -918,7 +918,7 @@ jr_005_44c5:
 
     ld a, [$d40c]
     add a
-    call $3168
+    call Call_3168
     ld a, [$d40d]
     ld e, a
     ld a, [$d40e]
@@ -995,7 +995,7 @@ jr_005_453b:
 
     ld a, [$d40c]
     add a
-    call $3168
+    call Call_3168
     ld a, [$d40d]
     ld e, a
     ld a, [$d40e]

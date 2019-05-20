@@ -143,7 +143,7 @@ Jump_006_4100:
     sub b
     ld c, a
     ld b, $00
-    ld hl, $388e
+    ld hl, Unk388e
     add hl, bc
     push hl
     ld bc, $0005
@@ -584,7 +584,7 @@ Jump_006_43fc:
     ld a, [hl+]
     ld [$d3de], a
     bit 7, a
-    jp nz, $3d2d
+    jp nz, Jump_000_3d2d
 
     bit 0, a
     call nz, Call_006_44f4
@@ -1042,7 +1042,7 @@ jr_006_4731:
     ld_long a, $ff91
     res 6, a
     ld_long $ff91, a
-    call $3d92
+    call Call_000_3d92
     ld_long a, $ff8f
     set 4, a
     ld_long $ff8f, a

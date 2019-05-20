@@ -689,7 +689,7 @@ Jump_001_4410:
     call $1e96
     xor a
     ld [$d066], a
-    call $375d
+    call Call_375D
     jp Jump_001_4590
 
 
@@ -727,7 +727,7 @@ Jump_001_447d:
     xor a
     ld [$d06a], a
     call Call_000_11c9
-    call $384e
+    call Call_000_384e
     jr nc, jr_001_4492
 
     ld hl, $ff95
@@ -1292,7 +1292,7 @@ jr_001_47fe:
     and $07
     jr nz, jr_001_481d
 
-    call $37a7
+    call Call_000_37a7
 
 jr_001_481d:
     jp $0246
@@ -1798,7 +1798,7 @@ jr_001_4a71:
     call $3076
     pop bc
     ld a, $02
-    call $3168
+    call Call_3168
     ld a, $0e
     call $1e96
     ret
@@ -2118,7 +2118,7 @@ jr_001_4c10:
 jr_001_4c2f:
     ld a, [$d40c]
     add a
-    call $3168
+    call Call_3168
     ld hl, $436c
 
 jr_001_4c39:
