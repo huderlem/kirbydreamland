@@ -341,20 +341,20 @@ Jump_000_3b3:
     adc $00
     ld [$d078], a
     bit 7, a
-    jr nz, .jr_000_0426
+    jr nz, jr_000_0426
     cp d
-    jr c, .jr_000_0426
+    jr c, jr_000_0426
     ld a, [$d078]
     bit 7, a
-    jr nz, .jr_000_0426
+    jr nz, jr_000_0426
     ld a, d
     ld [$d078], a
     ld a, [$d079]
     cp e
-    jr c, .jr_000_0426
+    jr c, jr_000_0426
     ld a, e
     ld [$d079], a
-    jr .jr_000_0426
+    jr jr_000_0426
 .jr_000_03f2:
     ld a, $fe
     ld d, a
@@ -371,7 +371,7 @@ Jump_000_3b3:
     jr nz, .jr_000_0411
 .jr_000_040c:
     ld [$d078], a
-    jr .jr_000_0426
+    jr jr_000_0426
 .jr_000_0411:
     cp d
     jr z, .jr_000_0416
@@ -382,11 +382,11 @@ Jump_000_3b3:
     ld a, [$d079]
     cp e
     jr z, .jr_000_0422
-    jr nc, .jr_000_0426
+    jr nc, jr_000_0426
 .jr_000_0422:
     ld a, e
     ld [$d079], a
-.jr_000_0426:
+jr_000_0426:
     ld a, [$d078]
     bit 7, a
     jr z, .jr_000_0455
@@ -1087,10 +1087,10 @@ Call_000_08b3:
     ld a, [$d074]
     sbc $00
     ld [$d074], a
-    jr c, .jr_000_08cb
+    jr c, Call_000_8cb
     bit 7, a
     ret z
-.jr_000_08cb:
+Call_000_8cb:
     xor a
     ld [$d075], a
     ld [$d074], a
@@ -3904,6 +3904,7 @@ VBlank:
     ld hl, $ff91
     res 2, [hl]
     jr .jr_000_1d53
+Call_000_1dc3:
     push hl
     ld hl, $ff8c
 .jr_000_1dc7:
@@ -4869,6 +4870,7 @@ jr_000_234e:
     adc $00
     ld [hl], a
     pop de
+Call_000_23af:
     ld a, [wLoadedROMBank]
     push af
     ld a, [$d3f0]
@@ -5493,7 +5495,7 @@ Call_000_2708:
     ld hl, $d190
     add hl, de
     bit 0, [hl]
-    jr nz, .jr_000_2755
+    jr nz, Call_000_2755
     ld hl, $d140
     add hl, bc
     ld a, [hl]
@@ -5519,7 +5521,8 @@ Call_000_2708:
     ld [hl+], a
     ld [hl], $00
     ret
-.jr_000_2755:
+
+Call_000_2755:
     ld hl, $d0a0
     call Call_000_2771
     ld hl, $d0d0
@@ -7050,6 +7053,8 @@ Call_000_3059:
     ret nz
     ld a, [$d03c]
     jp Call_000_1eb4
+
+Call_000_3076:
     ld a, [$d053]
     swap a
     ld b, a
@@ -7643,8 +7648,26 @@ Call_000_3329:
 
 Unk3408:
     db $01, $02, $04, $08, $10, $20, $40, $80
-    db $C5, $06, $08, $87, $BA, $38, $01, $92, $3F, $CB, $11, $05, $20, $F5, $79, $C1
-    db $C9, $05, $00, $00, $00, $04, $00, $00, $00, $69, $08, $08, $00, $54, $41, $69
+
+Call_000_3410:
+    push bc
+    ld b, $08
+.jr_000_3413
+    add a
+    cp d
+    jr c, .jr_000_3418
+    sub d
+.jr_000_3418
+    ccf
+    rl c
+    dec b
+    jr nz, .jr_000_3413
+    ld a, c
+    pop bc
+    ret
+
+Unk3421:
+    db $05, $00, $00, $00, $04, $00, $00, $00, $69, $08, $08, $00, $54, $41, $69
     db $08, $08, $00, $72, $41, $69, $08, $08, $01, $72, $41, $69, $08, $08, $02, $72
     db $41, $69, $08, $08, $03, $72, $41, $69, $08, $08, $04, $72, $41, $69, $08, $08
     db $05, $72, $41, $49, $08, $08, $05, $72, $41, $69, $08, $08, $06, $72, $41, $49
