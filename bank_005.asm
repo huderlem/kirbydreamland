@@ -2021,44 +2021,44 @@ jr_005_4a77:
     ld [hl], a
     ret
 
-Call_005_4abe:
+WriteDMACodeToHRAM: ; 0x5f7
+; Initializes registers hPushOAM - hFarCallTempA
     ld c, $80
-    ld b, $0a
-    ld hl, $4acc
-jr_005_4ac5:
-    ld a, [hl+]
-    ld [c], a
+    ld b, $a  ; number of bytes to load
+    ld hl, DMARoutine
+.loop
+    ld a, [hli]
+    ld [$ff00+c], a  ; add register c to $ff00, and store register a into the resulting address
     inc c
     dec b
-    jr nz, jr_005_4ac5
+    jr nz, .loop
     ret
 
-
-    ld a, $c0
-    ldh [rDMA], a
+DMARoutine:
+; This routine is initially loaded into hPushOAM - hFarCallTempA by WriteDMACodeToHRAM.
+    ld a, wOAMBuffer >> 8
+    ld [rDMA], a   ; start DMA
     ld a, $28
-
-jr_005_4ad2:
+.waitLoop               ; wait for DMA to finish
     dec a
-    jr nz, jr_005_4ad2
-
+    jr nz, .waitLoop
     ret
 
-Call_005_4ad6:
-    ld hl, $c000
-jr_005_4ad9:
+InitRAM:
+    ld hl, wRAMStart
+.clearWRAMLoop:
     xor a
     ld [hl+], a
     ld a, $e0
     cp h
-    jr nz, jr_005_4ad9
-    ld hl, $ff8a
-jr_005_4ae3:
+    jr nz, .clearWRAMLoop
+    ld hl, hLCDC
+.clearHRAMLoop:
     xor a
     ld [hl+], a
     ld a, l
-    cp $97
-    jr nz, jr_005_4ae3
+    cp (hRam96 + 1) & $ff
+    jr nz, .clearHRAMLoop
     ld a, $01
     ld [$d051], a
     ld [$d052], a
@@ -2089,14 +2089,14 @@ jr_005_4ae3:
     inc a
     ld [hl+], a
     inc a
-jr_005_4b2e:
     ld [hl], a
     ret
 
 Call_005_4b30:
+; TODO: nop-ing this function results in title-screen music alterations.
     ld hl, $4b3a
     ld de, $dc00
-    call $20da
+    call HAL_Decompress
     ret
 
 
@@ -2204,7 +2204,8 @@ jr_005_4ba1:
     db $ec
     ld d, d
     cp b
-    jr nz, jr_005_4b2e
+    db $20
+    db $88
 
     ld a, [c]
     ld e, h
@@ -2362,7 +2363,7 @@ jr_005_4c27:
     ld l, d
     rst $38
 
-Call_005_4c4a:
+InitSoundEngine:
     ld a, $80
     ldh [rNR52], a
     ld a, $77
@@ -2686,25 +2687,22 @@ jr_005_4e09:
     ret
 
 
+HandleTimer:
     ld b, $07
-
-jr_005_4e0d:
+.jr_005_4e0d:
     ld h, $de
     ld a, $52
     add b
     ld l, a
     ld a, [hl]
     and a
-    jr z, jr_005_4e52
-
+    jr z, .jr_005_4e52
     ld a, b
     cp $04
     ld a, $1a
-    jr c, jr_005_4e20
-
+    jr c, .jr_005_4e20
     ld a, $2e
-
-jr_005_4e20:
+.jr_005_4e20:
     ld [$df80], a
     ld h, $de
     ld a, $5a
@@ -2741,23 +2739,19 @@ jr_005_4e20:
     ld [hl], d
     pop hl
     ld [hl], e
-
-jr_005_4e52:
+.jr_005_4e52:
     dec b
     bit 7, b
-    jr z, jr_005_4e0d
-
+    jr z, .jr_005_4e0d
     ld b, $03
-
-jr_005_4e59:
+.jr_005_4e59:
     ld h, $de
     ld a, $52
     add b
     ld l, a
     ld a, [hl]
     and a
-    jr nz, jr_005_4e6e
-
+    jr nz, .jr_005_4e6e
     ld a, $ce
     add b
     ld l, a
@@ -2765,14 +2759,11 @@ jr_005_4e59:
     add $fc
     ld l, a
     ld [hl], $00
-
-jr_005_4e6e:
+.jr_005_4e6e:
     dec b
     bit 7, b
-    jr z, jr_005_4e59
-
+    jr z, .jr_005_4e59
     call Call_005_4d1b
-
 Call_005_4e76:
     ld de, $de2e
     ld a, [$de03]

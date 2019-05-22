@@ -1821,7 +1821,7 @@ Call_001_4bb4:
     cp $10
     jr nz, .jr_001_4be1
     xor a
-    ld [$d095], a
+    ld [wClearSpritesOffset], a
     ld hl, $d3bf
     res 0, [hl]
     res 3, [hl]
@@ -2006,11 +2006,11 @@ Call_001_4d3f:
     ld [$d078], a
     ld [$d079], a
     ld [$d064], a
-    ld [$d095], a
+    ld [wClearSpritesOffset], a
     call Call_000_21fb
     call Call_000_139b
     call Call_000_2e9c
-    call Call_000_1e67
+    call StopTimer
     call Call_000_0670
     ld a, [$d03d]
     cp $ff

@@ -34,18 +34,18 @@ InitGame:
     ldh [rLCDC], a
     di
     ld sp, $fffe
-    ld a, Bank(Call_005_4ad6)
+    ld a, Bank(InitRAM)
     ld [wLoadedROMBank], a
     ld [MBC1RomBank], a
-    call Call_005_4ad6
-    call Call_005_4abe
-    call Call_000_193b
-    call Call_000_21bb
+    call InitRAM
+    call WriteDMACodeToHRAM
+    call ClearSprites
+    call InitRamFuncD099
     call Call_005_4b30
-    ld a, Bank(Call_005_4c4a)
+    ld a, Bank(InitSoundEngine)
     ld [wLoadedROMBank], a
     ld [MBC1RomBank], a
-    call Call_005_4c4a
+    call InitSoundEngine
     ld a, $01
     ld [wLoadedROMBank], a
     ld [MBC1RomBank], a
@@ -142,7 +142,7 @@ Jump_000_01f2:
 
 Func_000_246:
     xor a
-    ld [$d095], a
+    ld [wClearSpritesOffset], a
     ld a, [wLoadedROMBank]
     push af
     ld a, Bank(Call_005_432c)
@@ -155,7 +155,7 @@ Func_000_246:
     ld [MBC1RomBank], a
     call Call_000_319d
     call Call_000_2e9c
-    call Call_000_193b
+    call ClearSprites
     ld hl, $ff95
     bit 3, [hl]
     jr z, .jr_000_0280
@@ -197,9 +197,9 @@ Func_000_246:
     jr nz, .jr_000_02b9
     push hl
     xor a
-    ld [$d095], a
+    ld [wClearSpritesOffset], a
     call Call_000_2e9c
-    call Call_000_193b
+    call ClearSprites
     pop hl
     ldh a, [$94]
     bit 5, a
@@ -559,9 +559,9 @@ jr_000_0548:
     call Call_000_1def
     push bc
     xor a
-    ld [$d095], a
+    ld [wClearSpritesOffset], a
     call Call_000_2e9c
-    call Call_000_193b
+    call ClearSprites
     pop bc
     ld a, [$d094]
     cp $01
@@ -640,7 +640,7 @@ jr_000_0566:
     ld [$d078], a
     ld [$d079], a
     ld [$d064], a
-    ld [$d095], a
+    ld [wClearSpritesOffset], a
     ld a, $20
     ld [$d07c], a
     ld a, $0e
@@ -659,8 +659,8 @@ jr_000_0566:
     call Call_000_21fb
     call Call_000_139b
     call Call_000_2e9c
-    call Call_000_193b
-    call Call_000_1e67
+    call ClearSprites
+    call StopTimer
     call Call_000_0670
     ld a, $08
     ldh [$8c], a
@@ -693,9 +693,9 @@ Call_000_0648:
     ldh [$90], a
 .jr_000_0655:
     xor a
-    ld [$d095], a
+    ld [wClearSpritesOffset], a
     call Call_000_2e9c
-    call Call_000_193b
+    call ClearSprites
     ld hl, $ff8c
     set 6, [hl]
 .jr_000_0664:
@@ -772,7 +772,7 @@ ReadJoypad:
     ldh [$8c], a
     ei
     call Call_000_0648
-    call Call_000_1e74
+    call StartTimer
     jp InitGame
 .noSoftReset:
     ld a, [$d050]
@@ -3146,7 +3146,7 @@ Jump_000_18ff:
     ld a, [hl]
     cp $80
     jr z, .jr_000_1933
-    ld a, [$d095]
+    ld a, [wClearSpritesOffset]
     ld e, a
     ld d, $c0
 .jr_000_1919:
@@ -3169,7 +3169,7 @@ Jump_000_18ff:
     bit 0, a
     jr z, .jr_000_1919
     ld a, e
-    ld [$d095], a
+    ld [wClearSpritesOffset], a
 .jr_000_1933:
     pop af
     ld [wLoadedROMBank], a
@@ -3177,31 +3177,34 @@ Jump_000_18ff:
     ret
 
 
-Call_000_193b:
-    ld a, [$d096]
+ClearSprites:
+; Clears all OAM sprites after a specified offset.
+; If [wClearAllSprites] == $ff, then all sprites are cleared.
+; Otherwise, start clearing at offset in [wClearSpritesOffset].
+    ld a, [wClearAllSprites]
     inc a
-    jr nz, .jr_000_194d
-    ld a, $a0
+    jr nz, .startAtOffset ; $ff indicates that all OAM sprites should be cleared
+    ld a, wOAMBufferEnd - wOAMBuffer
     ld c, a
-    ld [$d096], a
+    ld [wClearAllSprites], a
     xor a
-    ld [$d095], a
-    jr .jr_000_1955
-.jr_000_194d:
-    ld a, [$d095]
-    ld [$d096], a
-    ld c, $a0
-.jr_000_1955:
+    ld [wClearSpritesOffset], a
+    jr .copyOamData
+.startAtOffset:
+    ld a, [wClearSpritesOffset]
+    ld [wClearAllSprites], a
+    ld c, wOAMBufferEnd - wOAMBuffer
+.copyOamData:
     ld l, a
-    ld h, $c0
-    ld de, $0004
-    ld b, $00
-.jr_000_195d:
+    ld h, wOAMBuffer >> 8
+    ld de, 4 ; size of a single OAM sprite
+    ld b, 0
+.copyLoop:
     ld [hl], b
     add hl, de
     ld a, l
     cp c
-    jr nz, .jr_000_195d
+    jr nz, .copyLoop
     ret
 
 
@@ -3305,8 +3308,8 @@ Call_000_19f9:
     push hl
     ld a, $ff
     ld [$d03d], a
-    ld [$d096], a
-    call Call_000_1e74
+    ld [wClearAllSprites], a
+    call StartTimer
     ld hl, $38b1
     ld a, [$d03b]
     add a
@@ -3336,7 +3339,7 @@ Call_000_19f9:
     ld h, d
     ld l, e
     ld de, $c100
-    call Call_000_20c1
+    call Decompress
     pop hl
     ld a, [hl+]
     ld [$d03f], a
@@ -3478,21 +3481,21 @@ Call_000_19f9:
     ld hl, $4000
     ld de, $8000
     ld c, $02
-    call Call_000_20c1
+    call Decompress
     ld hl, $4855
     ld de, $9670
     ld c, $02
-    call Call_000_20c1
+    call Decompress
     jr .jr_000_1b66
 .jr_000_1b50:
     ld hl, $488d
     ld de, $8000
     ld c, $0a
-    call Call_000_20c1
+    call Decompress
     ld hl, $50f3
     ld de, $9670
     ld c, $0a
-    call Call_000_20c1
+    call Decompress
 .jr_000_1b66:
     pop de
     pop hl
@@ -3525,7 +3528,7 @@ Call_000_19f9:
     ld l, c
     ld a, [$d06b]
     ld c, a
-    call Call_000_20c1
+    call Decompress
     ld a, [$d06c]
     ld c, a
     add a
@@ -3543,7 +3546,7 @@ Call_000_19f9:
     ld h, d
     ld l, e
     ld de, $c600
-    call Call_000_20c1
+    call Decompress
     ld hl, $ff91
     bit 5, [hl]
     jr z, .jump_000_1bc2
@@ -3602,7 +3605,7 @@ InitWindow:
 
 
 Call_000_1c0a:
-    call Call_000_1e74
+    call StartTimer
     ld c, $40
     ld hl, $9c00
     ld a, $7f
@@ -3632,7 +3635,7 @@ Call_000_1c0a:
     ld [$9c0a], a
     ld [$9c30], a
     ld [$9c31], a
-    jp Call_000_1e67
+    jp StopTimer
 
 
 Call_000_1c52:
@@ -3915,9 +3918,9 @@ Call_000_1dc3:
     push hl
     push af
     xor a
-    ld [$d095], a
+    ld [wClearSpritesOffset], a
     call Call_000_2e9c
-    call Call_000_193b
+    call ClearSprites
     pop af
     pop hl
     dec a
@@ -4015,10 +4018,10 @@ Timer:
     push hl
     ld a, [wLoadedROMBank]
     push af
-    ld a, $05
+    ld a, Bank(HandleTimer)
     ld [wLoadedROMBank], a
     ld [MBC1RomBank], a
-    call $4e0b
+    call HandleTimer
     pop af
     ld [wLoadedROMBank], a
     ld [MBC1RomBank], a
@@ -4029,8 +4032,8 @@ Timer:
     reti
 
 
-Call_000_1e67:
-    ld a, $00
+StopTimer:
+    ld a, TACF_STOP
     ldh [rTAC], a
     ldh a, [hLCDC]
     set 7, a
@@ -4039,19 +4042,19 @@ Call_000_1e67:
     ret
 
 
-Call_000_1e74:
-    ld hl, $ff8a
-    res 7, [hl]
+StartTimer:
+    ld hl, hLCDC
+    res 7, [hl] ; turn off LCDC
     ld hl, $ff91
     set 3, [hl]
-.jr_000_1e7e:
+.waitVBlank:
     bit 3, [hl]
-    jr nz, .jr_000_1e7e
-    ld a, $00
+    jr nz, .waitVBlank
+    ld a, TACF_STOP
     ldh [rTAC], a
-    ld a, $bc
+    ld a, 188
     ldh [rTMA], a
-    ld a, $04
+    ld a, TACF_START | TACF_4KHZ ; This timer will fire at ~60.24 times per second
     ldh [rTAC], a
     ret
 
@@ -4373,26 +4376,34 @@ Unk20B9:
     db $40, $80, $C0, $00, $02, $01, $00, $00
 
 
-Call_000_20c1:
+Decompress:
+; Decompresses a compressed data stream.
+; Input:  hl = source data
+;          c = bank of source data
+;         de = destination to store the decompressed data
     ld a, [wLoadedROMBank]
     push af
     ld a, c
     ld [wLoadedROMBank], a
     ld [MBC1RomBank], a
     ld [MBC1RomBank], a
-    call Call_000_20da
+    call HAL_Decompress
     pop af
     ld [wLoadedROMBank], a
     ld [MBC1RomBank], a
     ret
 
 
-Call_000_20da:
+HAL_Decompress:
+; HAL Laboratory used this decompression technique in many of their games.
+; For more information, see the exhal tool: https://github.com/devinacker/exhal
+; Input: hl = source data
+;        de = destination to store the decompressed data
     ld a, e
-    ld [$d097], a
+    ld [wDestGfxAddress], a
     ld a, d
-    ld [$d098], a
-.jump_000_20e2:
+    ld [wDestGfxAddress + 1], a
+.loadNextGfx:
     ld a, [hl]
     cp $ff
     ret z
@@ -4418,7 +4429,7 @@ Call_000_20da:
     and $1f
     ld c, a
     ld b, $00
-    inc c
+    inc c ; bc = [0] + 1
 .jr_000_2104:
     inc b
     inc c
@@ -4426,54 +4437,54 @@ Call_000_20da:
     bit 7, a
     jr nz, .jr_000_2154
     cp $20
-    jr z, .jr_000_2124
+    jr z, .action_repeatSingleByte
     cp $40
-    jr z, .jr_000_2131
+    jr z, .action_repeatTwoBytes
     cp $60
     jr z, .jr_000_2146
 .jr_000_2117:
     dec c
     jr nz, .jr_000_211e
     dec b
-    jp z, .jump_000_20e2
+    jp z, .loadNextGfx
 .jr_000_211e:
     ld a, [hl+]
-    call $d099
+    call wRAMFuncD099
     jr .jr_000_2117
-.jr_000_2124:
+.action_repeatSingleByte:
     ld a, [hl+]
-.jr_000_2125:
+.repeatSingleByte:
     dec c
-    jr nz, .jr_000_212c
+    jr nz, .loadSingleByte
     dec b
-    jp z, .jump_000_20e2
-.jr_000_212c:
-    call $d099
-    jr .jr_000_2125
-.jr_000_2131:
+    jp z, .loadNextGfx
+.loadSingleByte:
+    call wRAMFuncD099
+    jr .repeatSingleByte
+.action_repeatTwoBytes:
     dec c
     jr nz, .jr_000_2138
     dec b
     jp z, .jump_000_2142
 .jr_000_2138:
     ld a, [hl+]
-    call $d099
+    call wRAMFuncD099
     ld a, [hl-]
-    call $d099
-    jr .jr_000_2131
+    call wRAMFuncD099
+    jr .action_repeatTwoBytes
 .jump_000_2142:
     inc hl
     inc hl
-    jr .jump_000_20e2
+    jr .loadNextGfx
 .jr_000_2146:
     ld a, [hl+]
 .jr_000_2147:
     dec c
     jr nz, .jr_000_214e
     dec b
-    jp z, .jump_000_20e2
+    jp z, .loadNextGfx
 .jr_000_214e:
-    call $d099
+    call wRAMFuncD099
     inc a
     jr .jr_000_2147
 .jr_000_2154:
@@ -4482,10 +4493,10 @@ Call_000_20da:
     ld a, [hl+]
     ld l, [hl]
     ld h, a
-    ld a, [$d097]
+    ld a, [wDestGfxAddress]
     add l
     ld l, a
-    ld a, [$d098]
+    ld a, [wDestGfxAddress + 1]
     adc h
     ld h, a
     pop af
@@ -4538,34 +4549,42 @@ Call_000_20da:
     pop hl
     inc hl
     inc hl
-    jp .jump_000_20e2
+    jp .loadNextGfx
 
 
 Call_000_21a5:
-    ld a, $cb
-    ld [$d099], a
-    ld [$d09c], a
-    ld a, $37
-    ld [$d09a], a
-    ld [$d09d], a
-    call Call_000_20da
-    jp Call_000_21bb
+    ld a, $cb ; cb instruction prefix
+    ld [wRAMFuncD099 + 0], a
+    ld [wRAMFuncD099 + 3], a
+    ld a, $37 ; swap a
+    ld [wRAMFuncD099 + 1], a
+    ld [wRAMFuncD099 + 4], a
+    call HAL_Decompress
+    jp InitRamFuncD099
 
 
-Call_000_21bb:
-    ld hl, $d099
+InitRamFuncD099:
+; TODO: There is some self-modifying code in RAM. What is it used for?
+; Initializes to the following routine:
+;   nop
+;   nop
+;   ld (de), a
+;   inc de
+;   ret
+;
+    ld hl, wRAMFuncD099
     xor a
-    ld [hl+], a
-    ld [hl+], a
+    ld [hl+], a ; nop
+    ld [hl+], a ; nop
     ld a, $12
-    ld [hl+], a
+    ld [hl+], a ; ld (de), a
     xor a
     ld [hl+], a
     ld [hl+], a
     ld a, $13
-    ld [hl+], a
+    ld [hl+], a ; inc de
     ld a, $c9
-    ld [hl], a
+    ld [hl], a ; ret
     ret
 
 
@@ -4614,8 +4633,8 @@ Call_000_21e6:
 Call_000_21fb:
     ld [$d3f2], a
     ld a, $ff
-    ld [$d096], a
-    call Call_000_193b
+    ld [wClearAllSprites], a
+    call ClearSprites
     ld a, [wLoadedROMBank]
     push af
     ld a, [$d039]

@@ -2,36 +2,36 @@ SECTION "ROM Bank $006", ROMX[$4000], BANK[$6]
 
 Call_006_4000:
     ld a, $ff
-    ld [$d096], a
-    call $193b
-    call $1e74
+    ld [wClearAllSprites], a
+    call ClearSprites
+    call StartTimer
     xor a
-    ld [$d095], a
+    ld [wClearSpritesOffset], a
     ld [$d053], a
     ld [$d081], a
     ld [wBGP], a
     ld a, $00
     ld [$d055], a
-    ld hl, $4000
-    ld de, $8000
-    ld c, $02
-    call $20c1
+    ld hl, KirbySpriteGfx
+    ld de, _VRAM
+    ld c, Bank(KirbySpriteGfx)
+    call Decompress
     ld hl, $4000
     ld de, $8800
     ld c, $0a
-    call $20c1
+    call Decompress
     ld hl, $42ac
     ld de, $9000
     ld c, $0a
-    call $20c1
+    call Decompress
     ld hl, $77e9
     ld de, $8e00
     ld c, $02
-    call $20c1
+    call Decompress
     ld hl, $4000
     ld de, $9800
     ld c, $03
-    call $20c1
+    call Decompress
     ld a, $05
     call $1eb4
     ld a, $01
@@ -122,8 +122,8 @@ jr_006_40b0:
 
 Call_006_40e4:
     ld a, $ff
-    ld [$d096], a
-    call $193b
+    ld [wClearAllSprites], a
+    call ClearSprites
     xor a
     ld_long $ff90, a
     ld [$d3f1], a
@@ -179,11 +179,11 @@ jr_006_411c:
 
 jr_006_4142:
     ld a, $ff
-    ld [$d096], a
+    ld [wClearAllSprites], a
     call $231e
     call Call_000_0648
     call Call_000_1c0a
-    call $1e74
+    call StartTimer
     call Call_006_4285
     ld d, $00
     ld a, [$d03b]
@@ -203,7 +203,7 @@ jr_006_4142:
     ld h, d
     ld l, e
     ld de, $c600
-    call $20c1
+    call Decompress
     ld a, $32
     ld_long $ff8f, a
     ld a, $15
@@ -236,8 +236,8 @@ jr_006_4142:
     ld a, [$d087]
     ld [$d086], a
     xor a
-    ld [$d095], a
-    call $193b
+    ld [wClearSpritesOffset], a
+    call ClearSprites
     pop hl
     ld a, [hl+]
     ld [$d03e], a
@@ -287,11 +287,11 @@ jr_006_421e:
     add hl, bc
     call $1964
     xor a
-    ld [$d095], a
+    ld [wClearSpritesOffset], a
     call $21fb
     call $139b
     call Call_000_2329
-    call $193b
+    call ClearSprites
     ld a, [$d03b]
     cp $04
     jr nz, jr_006_424a
@@ -350,22 +350,22 @@ Call_006_4285:
     ld hl, $4000
     ld de, $8000
     ld c, $02
-    call $20c1
+    call Decompress
     ld hl, $4855
     ld de, $9670
     ld c, $02
-    call $20c1
+    call Decompress
     jr jr_006_42b9
 
 jr_006_42a3:
     ld hl, $488d
     ld de, $8000
     ld c, $0a
-    call $20c1
+    call Decompress
     ld hl, $50f3
     ld de, $9670
     ld c, $0a
-    call $20c1
+    call Decompress
 
 jr_006_42b9:
     ld d, $00
@@ -399,14 +399,14 @@ jr_006_42d1:
     ld l, c
     ld a, [$d06b]
     ld c, a
-    call $20c1
+    call Decompress
     ret
 
 
 Call_006_42e8:
     push hl
     xor a
-    ld [$d095], a
+    ld [wClearSpritesOffset], a
     ld [$d053], a
     ld [$d055], a
     inc a
@@ -414,16 +414,16 @@ Call_006_42e8:
     ld [$d052], a
     ld hl, $ff94
     set 1, [hl]
-    call $193b
-    call $1e74
+    call ClearSprites
+    call StartTimer
     ld hl, $4000
     ld de, $8000
     ld c, $02
-    call $20c1
+    call Decompress
     ld hl, $4855
     ld de, $9670
     ld c, $02
-    call $20c1
+    call Decompress
     ld a, [$d03b]
     ld c, a
     add a
@@ -447,7 +447,7 @@ Call_006_42e8:
     ld l, c
     ld a, [$d06b]
     ld c, a
-    call $20c1
+    call Decompress
     ld a, [$d03b]
     cp $04
     jr z, jr_006_435b
@@ -455,11 +455,11 @@ Call_006_42e8:
     ld hl, $77e9
     ld de, $8e00
     ld c, $02
-    call $20c1
+    call Decompress
     ld hl, $5cdd
     ld de, $8800
     ld c, $03
-    call $20c1
+    call Decompress
 
 jr_006_435b:
     ld a, [$d03b]
@@ -479,7 +479,7 @@ jr_006_435b:
     ld h, d
     ld l, e
     ld de, $9800
-    call $20c1
+    call Decompress
     xor a
     call $21fb
     call $1e67
@@ -690,11 +690,11 @@ Call_006_4485:
     add hl, bc
     call $1964
     ld a, $ff
-    ld [$d096], a
+    ld [wClearAllSprites], a
     call Call_006_444f
     xor a
     call $21fb
-    call $193b
+    call ClearSprites
     call $2e9c
     ld a, [$d03b]
     cp $04
@@ -875,10 +875,10 @@ jr_006_45b5:
 
 jr_006_45f6:
     xor a
-    ld [$d095], a
+    ld [wClearSpritesOffset], a
     call $2e9c
     call $139b
-    call $193b
+    call ClearSprites
     ld_long a, $ff8c
     set 6, a
     ld_long $ff8c, a
@@ -1061,17 +1061,17 @@ jr_006_4731:
 jr_006_4757:
     call Call_000_0648
     call $1c01
-    call $1e74
+    call StartTimer
     ld a, $0a
     call $21fb
     ld hl, $4665
     ld de, $9800
     ld c, $03
-    call $20c1
+    call Decompress
     ld hl, $41c7
     ld de, $8e00
     ld c, $03
-    call $20c1
+    call Decompress
     ld a, $03
     call $1eb4
     xor a
@@ -1080,7 +1080,7 @@ jr_006_4757:
     call $1e67
     call $0670
     xor a
-    ld [$d095], a
+    ld [wClearSpritesOffset], a
     call $2e9c
     ld bc, $0118
 
@@ -1110,7 +1110,7 @@ jr_006_47b0:
     set 0, [hl]
     call Call_000_0648
     call $1c01
-    call $1e74
+    call StartTimer
     call $231e
     inc a
     ld [$d051], a
@@ -1118,20 +1118,20 @@ jr_006_47b0:
     ld a, $0b
     call $21fb
     ld a, $ff
-    ld [$d096], a
-    call $193b
+    ld [wClearAllSprites], a
+    call ClearSprites
     ld hl, $77e9
     ld de, $8e00
     ld c, $02
-    call $20c1
+    call Decompress
     ld hl, $5cdd
     ld de, $8800
     ld c, $03
-    call $20c1
+    call Decompress
     ld hl, $46b5
     ld de, $9800
     ld c, $03
-    call $20c1
+    call Decompress
     xor a
     ld [$d06b], a
     ld [$d053], a
@@ -1199,14 +1199,14 @@ Jump_006_485e:
     ld a, $3c
     call $1dc3
     call Call_000_0648
-    call $1e74
+    call StartTimer
     jp $0156
 
 
 Jump_006_486c:
     ld a, $ff
-    ld [$d096], a
-    call $193b
+    ld [wClearAllSprites], a
+    call ClearSprites
     call Call_000_0648
     ld a, $ff
     call $1e96
@@ -1226,23 +1226,23 @@ Jump_006_486c:
     xor a
     ld [$d053], a
     ld [$d055], a
-    call $1e74
+    call StartTimer
     ld hl, $41c7
     ld de, $8e00
     ld c, $03
-    call $20c1
+    call Decompress
     ld hl, $4fcf
     ld de, $8000
     ld c, $03
-    call $20c1
+    call Decompress
     ld hl, $5894
     ld de, $9000
     ld c, $03
-    call $20c1
+    call Decompress
     ld hl, $42c8
     ld de, $9800
     ld c, $03
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
     ld de, $00c8
@@ -1264,30 +1264,30 @@ jr_006_48e0:
     xor a
     ld_long $ff90, a
     ld a, $ff
-    ld [$d096], a
-    call $193b
+    ld [wClearAllSprites], a
+    call ClearSprites
     call Call_000_0648
-    call $1e74
+    call StartTimer
     ld hl, $4000
     ld de, $8000
     ld c, $02
-    call $20c1
+    call Decompress
     ld hl, $4855
     ld de, $9670
     ld c, $02
-    call $20c1
+    call Decompress
     ld hl, $6c49
     ld de, $8800
     ld c, $02
-    call $20c1
+    call Decompress
     ld hl, $777c
     ld de, $c600
     ld c, $06
-    call $20c1
+    call Decompress
     ld hl, $71e2
     ld de, $c100
     ld c, $06
-    call $20c1
+    call Decompress
     ld a, $04
     call $21fb
     call Call_006_5098
@@ -1316,29 +1316,29 @@ jr_006_495b:
     jr nz, jr_006_4959
 
     ld a, $ff
-    ld [$d096], a
-    call $193b
+    ld [wClearAllSprites], a
+    call ClearSprites
     call Call_000_0648
     ld a, $05
     call $21fb
     call Call_006_5098
-    call $1e74
+    call StartTimer
     ld hl, $41c7
     ld de, $8e00
     ld c, $03
-    call $20c1
+    call Decompress
     ld hl, $4fcf
     ld de, $8000
     ld c, $03
-    call $20c1
+    call Decompress
     ld hl, $5894
     ld de, $9000
     ld c, $03
-    call $20c1
+    call Decompress
     ld hl, $42c8
     ld de, $9800
     ld c, $03
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
     ld de, $0200
@@ -1358,7 +1358,7 @@ jr_006_49b7:
     jr nz, jr_006_49b5
 
     call Call_000_0648
-    call $1e74
+    call StartTimer
     ld a, $06
     call $21fb
     call Call_006_5098
@@ -1466,10 +1466,10 @@ jr_006_4a3e:
 
 Jump_006_4a65:
     ld a, $ff
-    ld [$d096], a
-    call $193b
+    ld [wClearAllSprites], a
+    call ClearSprites
     call Call_000_0648
-    call $1e74
+    call StartTimer
     ld a, $07
     call $21fb
 
@@ -1785,7 +1785,7 @@ Jump_006_4c5c:
     ldh [rOBP0], a
     ld a, $05
     call $1dc3
-    call $1e74
+    call StartTimer
     xor a
     ld [wBGP], a
     ld a, $08
@@ -1799,7 +1799,7 @@ Jump_006_4c5c:
     ld hl, $437a
     ld de, $9800
     ld c, $03
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
     ld de, $0144
@@ -1819,14 +1819,14 @@ jr_006_4cba:
     jr nz, jr_006_4cb8
 
     call Call_000_0648
-    call $1e74
+    call StartTimer
     ld a, $09
     call $21fb
     call Call_006_5098
     ld hl, $441d
     ld de, $9800
     ld c, $03
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
     ld de, $0190
@@ -1853,7 +1853,7 @@ jr_006_4cf3:
 
 jr_006_4d06:
     call Call_000_0648
-    call $1e74
+    call StartTimer
     call $231e
     ld a, [$d039]
     and a
@@ -1872,51 +1872,51 @@ jr_006_4d06:
     ld hl, $4000
     ld de, $9000
     ld c, $0d
-    call $20c1
+    call Decompress
     ld hl, $45c0
     ld de, $9800
     ld c, $0d
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
-    call $1e74
+    call StartTimer
     ld a, $0d
     call $21fb
     call Call_006_5098
     ld hl, $46fb
     ld de, $9000
     ld c, $0d
-    call $20c1
+    call Decompress
     ld hl, $4cb4
     ld de, $9800
     ld c, $0d
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
-    call $1e74
+    call StartTimer
     ld a, $0e
     call $21fb
     call Call_006_5098
     ld hl, $4dc0
     ld de, $9000
     ld c, $0d
-    call $20c1
+    call Decompress
     ld hl, $535c
     ld de, $9800
     ld c, $0d
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
     ld de, $00ec
     call Call_006_5086
     call Call_000_0648
-    call $1e74
+    call StartTimer
     ld a, $01
     ld [$d03b], a
     call Call_006_4275
@@ -1926,34 +1926,34 @@ jr_006_4d06:
     ld hl, $543e
     ld de, $9000
     ld c, $0d
-    call $20c1
+    call Decompress
     ld hl, $5987
     ld de, $9800
     ld c, $0d
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
-    call $1e74
+    call StartTimer
     ld a, $10
     call $21fb
     call Call_006_5098
     ld hl, $5a89
     ld de, $9000
     ld c, $0d
-    call $20c1
+    call Decompress
     ld hl, $5fd2
     ld de, $9800
     ld c, $0d
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
-    call $1e74
+    call StartTimer
     ld a, $02
     ld [$d03b], a
     call Call_006_4275
@@ -1963,34 +1963,34 @@ jr_006_4d06:
     ld hl, $6063
     ld de, $9000
     ld c, $0d
-    call $20c1
+    call Decompress
     ld hl, $6553
     ld de, $9800
     ld c, $0d
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
-    call $1e74
+    call StartTimer
     ld a, $12
     call $21fb
     call Call_006_5098
     ld hl, $6658
     ld de, $9000
     ld c, $0d
-    call $20c1
+    call Decompress
     ld hl, $6b80
     ld de, $9800
     ld c, $0d
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
-    call $1e74
+    call StartTimer
     ld a, $03
     ld [$d03b], a
     call Call_006_4275
@@ -2000,34 +2000,34 @@ jr_006_4d06:
     ld hl, $6c7c
     ld de, $9000
     ld c, $0d
-    call $20c1
+    call Decompress
     ld hl, $717d
     ld de, $9800
     ld c, $0d
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
-    call $1e74
+    call StartTimer
     ld a, $14
     call $21fb
     call Call_006_5098
     ld hl, $729b
     ld de, $9000
     ld c, $0d
-    call $20c1
+    call Decompress
     ld hl, $779c
     ld de, $9800
     ld c, $0d
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
-    call $1e74
+    call StartTimer
     xor a
     ld [$d03b], a
     call Call_006_4285
@@ -2037,17 +2037,17 @@ jr_006_4d06:
     ld hl, $4000
     ld de, $9000
     ld c, $0e
-    call $20c1
+    call Decompress
     ld hl, $78cc
     ld de, $9800
     ld c, $0d
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
-    call $1e74
+    call StartTimer
     ld a, $01
     ld [$d03b], a
     call Call_006_4285
@@ -2057,17 +2057,17 @@ jr_006_4d06:
     ld hl, $4582
     ld de, $9000
     ld c, $0e
-    call $20c1
+    call Decompress
     ld hl, $4ac6
     ld de, $9800
     ld c, $0e
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
-    call $1e74
+    call StartTimer
     ld a, $02
     ld [$d03b], a
     call Call_006_4285
@@ -2077,17 +2077,17 @@ jr_006_4d06:
     ld hl, $4bf3
     ld de, $9000
     ld c, $0e
-    call $20c1
+    call Decompress
     ld hl, $511e
     ld de, $9800
     ld c, $0e
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
-    call $1e74
+    call StartTimer
     ld a, $03
     ld [$d03b], a
     call Call_006_4285
@@ -2097,32 +2097,32 @@ jr_006_4d06:
     ld hl, $5206
     ld de, $9000
     ld c, $0e
-    call $20c1
+    call Decompress
     ld hl, $5707
     ld de, $9800
     ld c, $0e
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
-    call $1e74
+    call StartTimer
     ld hl, $6c49
     ld de, $8800
     ld c, $02
-    call $20c1
+    call Decompress
     ld a, $19
     call $21fb
     call Call_006_5098
     ld hl, $5820
     ld de, $9000
     ld c, $0e
-    call $20c1
+    call Decompress
     ld hl, $5be1
     ld de, $9800
     ld c, $0e
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
     ld de, $01a0
@@ -2149,7 +2149,7 @@ jr_006_500b:
 
 jr_006_501e:
     call Call_000_0648
-    call $1e74
+    call StartTimer
     ld a, $ff
     call $1eb4
     ld a, $1a
@@ -2158,11 +2158,11 @@ jr_006_501e:
     ld hl, $5cbf
     ld de, $8000
     ld c, $0e
-    call $20c1
+    call Decompress
     ld hl, $6cce
     ld de, $9800
     ld c, $0e
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
 
@@ -2180,11 +2180,11 @@ Jump_006_5055:
     ld hl, $6dd9
     ld de, $8000
     ld c, $0e
-    call $20c1
+    call Decompress
     ld hl, $7e4a
     ld de, $9800
     ld c, $0e
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
 
@@ -2222,9 +2222,9 @@ Call_006_5098:
     ld a, [$d06c]
     push af
     xor a
-    ld [$d095], a
+    ld [wClearSpritesOffset], a
     call $2e9c
-    call $193b
+    call ClearSprites
     pop af
     ld [$d06c], a
     pop af
@@ -7096,31 +7096,31 @@ Jump_006_5f00:
 
 Jump_006_6386:
     call Call_000_0648
-    call $1e74
+    call StartTimer
     call $231e
     call $1c01
     xor a
     ld [$d053], a
     ld [$d055], a
     ld a, $ff
-    ld [$d096], a
-    call $193b
+    ld [wClearAllSprites], a
+    call ClearSprites
     ld hl, $4855
     ld de, $9670
     ld c, $02
-    call $20c1
+    call Decompress
     ld hl, $7b0d
     ld de, $8800
     ld c, $06
-    call $20c1
+    call Decompress
     ld hl, $41c7
     ld de, $8e00
     ld c, $03
-    call $20c1
+    call Decompress
     ld hl, $4541
     ld de, $9800
     ld c, $03
-    call $20c1
+    call Decompress
     xor a
     ld [$d06b], a
     dec a
@@ -7374,14 +7374,14 @@ jr_006_652f:
 Jump_006_655e:
     pop hl
     call Call_000_0648
-    call $1e74
+    call StartTimer
     ld a, $02
     call $21fb
     call $1c01
     ld hl, $44c9
     ld de, $9800
     ld c, $03
-    call $20c1
+    call Decompress
     call $1e67
     call $0670
     xor a
