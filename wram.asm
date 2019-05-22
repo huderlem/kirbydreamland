@@ -13,7 +13,12 @@ SECTION "WRAM Bank 1", WRAMX
 wLoadedROMBank:: ; $d02c
 	ds 1
 
-	ds $53
+	ds 13
+
+wExtraGameEnabled:: ; $d03a
+	ds 1 
+
+	ds $45
 
 wBGP:: ; $d080
 	ds 1

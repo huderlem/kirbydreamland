@@ -446,7 +446,7 @@ Call_001_42bf:
     and $f3
     ldh [$92], a
     ld a, $04
-    call Call_000_1e96
+    call PlaySE
     jr .jr_001_437c
 .jr_001_4361:
     ldh a, [$8d]
@@ -553,7 +553,7 @@ Call_001_42bf:
     xor a
     ld [$d064], a
     ld a, $01
-    call Call_000_1e96
+    call PlaySE
     xor a
     ld [$d066], a
     call Call_375D
@@ -601,7 +601,7 @@ Call_001_42bf:
     cp $01
     jr nz, .jr_001_44a6
     ld a, $ff
-    call Call_000_1e96
+    call PlaySE
 .jr_001_44a6:
     ldh a, [$8e]
     ld c, a
@@ -654,7 +654,7 @@ Call_001_42bf:
     ld a, $09
     ld [$d07d], a
     ld a, $ff
-    call Call_000_1e96
+    call PlaySE
     xor a
     ld [$d094], a
     ld [$d064], a
@@ -801,7 +801,7 @@ Call_001_42bf:
     push af
     push bc
     ld a, $1f
-    call Call_000_1e96
+    call PlaySE
     pop bc
     pop af
 .jr_001_4638:
@@ -990,7 +990,7 @@ Jump_001_4783:
     set 2, a
     ldh [$8e], a
     ld a, $ff
-    call Call_000_1e96
+    call PlaySE
 .jr_001_47ab:
     ld a, [$d094]
     cp $01
@@ -1499,7 +1499,7 @@ Call_000_4a1c:
     ld a, $02
     call Call_3168
     ld a, $0e
-    call Call_000_1e96
+    call PlaySE
     ret
 
 
@@ -1883,7 +1883,7 @@ Call_001_4c87:
     set 5, a
     ld [$d1a0], a
     ld a, $15
-    call Call_000_1e96
+    call PlaySE
     ld de, $4162
     ld hl, $41dc
     ld bc, $0000
@@ -1916,7 +1916,7 @@ Call_001_4ced:
     srl a
     ld [$d086], a
     ld a, $15
-    call Call_000_1e96
+    call PlaySE
     ld a, $5a
     ld [$d3f5], a
     ld a, [$d1a0]
@@ -2016,7 +2016,7 @@ Call_001_4d3f:
     cp $ff
     ret z
     ld [$d03c], a
-    call Call_000_1eb4
+    call PlaySong
     ld a, $ff
     ld [$d03d], a
     ret

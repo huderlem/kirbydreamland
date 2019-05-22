@@ -1,6 +1,6 @@
 SECTION "ROM Bank $006", ROMX[$4000], BANK[$6]
 
-Call_006_4000:
+ExecuteTitlescreen:
     ld a, $ff
     ld [wClearAllSprites], a
     call ClearSprites
@@ -16,73 +16,65 @@ Call_006_4000:
     ld de, _VRAM
     ld c, Bank(KirbySpriteGfx)
     call Decompress
-    ld hl, $4000
-    ld de, $8800
-    ld c, $0a
+    ld hl, TitlescreenGfx1
+    ld de, _VRAM + $800
+    ld c, Bank(TitlescreenGfx1)
     call Decompress
-    ld hl, $42ac
-    ld de, $9000
-    ld c, $0a
+    ld hl, TitlescreenGfx2
+    ld de, _VRAM + $1000
+    ld c, Bank(TitlescreenGfx2)
     call Decompress
-    ld hl, $77e9
-    ld de, $8e00
-    ld c, $02
+    ld hl, FontGfx
+    ld de, _VRAM + $e00
+    ld c, Bank(FontGfx)
     call Decompress
-    ld hl, $4000
-    ld de, $9800
-    ld c, $03
+    ld hl, TitlescreenTilemap
+    ld de, _SCRN0
+    ld c, Bank(TitlescreenTilemap)
     call Decompress
     ld a, $05
-    call $1eb4
+    call PlaySong
     ld a, $01
-    call $21fb
-    call $1e67
+    call Call_000_21fb
+    call StopTimer
     xor a
     ld_long $ff90, a
     ld a, $04
     ld_long $ff8f, a
-    call Call_006_40a0
+    call TryDrawExtraGameText
     ld a, $01
-    call $1dc3
-    call $0670
+    call Call_000_1dc3
+    call Call_000_0670
     ld a, $08
     ld [$d050], a
-
-jr_006_407a:
+.checkInput:
     ld a, $01
-    call $1dc3
+    call Call_000_1dc3
     ld_long a, $ff8b
-    cp $86
-    jp z, Jump_006_6386
-
-    cp $45
-    jr nz, jr_006_4093
-
-    ld a, $01
-    ld [$d03a], a
-    call Call_006_40a0
-
-jr_006_4093:
+    cp PADF_DOWN | PADF_SELECT | PADF_B
+    jp z, ExecuteConfigurationModeScreen
+    cp PADF_UP | PADF_SELECT | PADF_A
+    jr nz, .noExtraGame
+    ld a, 1
+    ld [wExtraGameEnabled], a
+    call TryDrawExtraGameText
+.noExtraGame:
     ld_long a, $ff8b
-    and $08
-    jr z, jr_006_407a
-
+    and PADF_START
+    jr z, .checkInput
     ld a, $1b
-    call $1e96
+    call PlaySE
     ret
 
-
-Call_006_40a0:
-    ld a, [$d03a]
+TryDrawExtraGameText:
+    ld a, [wExtraGameEnabled]
     and a
     ret z
-
-    ld bc, $9945
-    ld de, $40ca
+    ld bc, _SCRN0 + $145
+    ld de, ExtraGameText
     ld hl, $cb00
-    ld a, $0a
-
-jr_006_40b0:
+    ld a, 10
+.loop:
     push af
     ld a, b
     ld [hl+], a
@@ -94,8 +86,7 @@ jr_006_40b0:
     inc bc
     pop af
     dec a
-    jr nz, jr_006_40b0
-
+    jr nz, .loop
     xor a
     ld [$cb1e], a
     ld_long a, $ff91
@@ -103,15 +94,11 @@ jr_006_40b0:
     ld_long $ff91, a
     ret
 
+ExtraGameText:
+    db "EXTRA GAME"
 
-    db $e4
-    ld a, c
-    ld a, [c]
-    ldh a, [$e0]
-    nop
-    and $e0
-    db $ec
-    db $e4
+
+Call_006_40d4:
     ld a, $01
     ld [$d039], a
     ld a, $06
@@ -166,9 +153,9 @@ jr_006_411c:
     ld_long $ff8d, a
     call Call_000_0648
     ld a, $ff
-    call $1e96
+    call PlaySE
     ld a, $ff
-    call $1eb4
+    call PlaySong
     pop hl
     ld_long a, $ff95
     bit 7, a
@@ -242,7 +229,7 @@ jr_006_4142:
     ld a, [hl+]
     ld [$d03e], a
     push hl
-    call $1e67
+    call StopTimer
     call $19c9
     call $19f9
     pop hl
@@ -288,7 +275,7 @@ jr_006_421e:
     call $1964
     xor a
     ld [wClearSpritesOffset], a
-    call $21fb
+    call Call_000_21fb
     call $139b
     call Call_000_2329
     call ClearSprites
@@ -316,11 +303,11 @@ jr_006_424a:
     jr z, jr_006_4263
 
     ld a, [$d03c]
-    call $1eb4
+    call PlaySong
 
 jr_006_4263:
     call Call_000_1570
-    call $1e67
+    call StopTimer
     call Call_000_0670
     call Call_000_8dc
     ret
@@ -452,9 +439,9 @@ Call_006_42e8:
     cp $04
     jr z, jr_006_435b
 
-    ld hl, $77e9
-    ld de, $8e00
-    ld c, $02
+    ld hl, FontGfx
+    ld de, _VRAM + $e00
+    ld c, Bank(FontGfx)
     call Decompress
     ld hl, $5cdd
     ld de, $8800
@@ -481,13 +468,13 @@ jr_006_435b:
     ld de, $9800
     call Decompress
     xor a
-    call $21fb
-    call $1e67
-    call $0670
+    call Call_000_21fb
+    call StopTimer
+    call Call_000_0670
     pop hl
     ld a, [hl]
     ld [$d03c], a
-    call $1eb4
+    call PlaySong
     ld a, [$d03b]
     add a
     ld e, a
@@ -662,7 +649,7 @@ Call_006_4485:
     call $19c9
     call Call_000_0648
     ld a, $ff
-    call $1e96
+    call PlaySE
     pop hl
     xor a
     ld [$d053], a
@@ -693,7 +680,7 @@ Call_006_4485:
     ld [wClearAllSprites], a
     call Call_006_444f
     xor a
-    call $21fb
+    call Call_000_21fb
     call ClearSprites
     call $2e9c
     ld a, [$d03b]
@@ -705,11 +692,11 @@ Call_006_4485:
     jr nz, jr_006_44eb
 
     ld a, $12
-    call $1eb4
+    call PlaySong
 
 jr_006_44eb:
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     pop hl
     pop af
     ret
@@ -824,7 +811,7 @@ jr_006_4591:
 
 Call_006_459e:
     ld a, $21
-    call $1e96
+    call PlaySE
     xor a
     ld [$d067], a
     ld [$d068], a
@@ -887,7 +874,7 @@ jr_006_45f6:
     jr z, jr_006_45b5
 
     ld a, $18
-    call $1e96
+    call PlaySE
     ld_long a, $ff93
     and $fa
     ld_long $ff93, a
@@ -909,9 +896,9 @@ jr_006_462f:
     xor a
     ld [$d086], a
     ld a, $15
-    call $1e96
+    call PlaySE
     ld a, $ff
-    call $1eb4
+    call PlaySong
     ld hl, $d3df
     xor a
     ld [hl+], a
@@ -950,11 +937,11 @@ jr_006_4678:
     ld_long $ff95, a
     call Call_000_2329
     ld a, $01
-    call $1dc3
+    call Call_000_1dc3
     ld a, $3b
     call Call_000_1de0
     ld a, $07
-    call $1eb4
+    call PlaySong
     ld hl, $ff94
     set 5, [hl]
     call Call_000_2317
@@ -981,7 +968,7 @@ jr_006_46c2:
 
 jr_006_46c7:
     ld a, $01
-    call $1dc3
+    call Call_000_1dc3
     pop bc
     dec b
     jr nz, jr_006_46b6
@@ -1036,7 +1023,7 @@ jr_006_46c7:
     jr z, jr_006_4731
 
     ld a, [$d03c]
-    call $1eb4
+    call PlaySong
 
 jr_006_4731:
     ld_long a, $ff91
@@ -1063,7 +1050,7 @@ jr_006_4757:
     call $1c01
     call StartTimer
     ld a, $0a
-    call $21fb
+    call Call_000_21fb
     ld hl, $4665
     ld de, $9800
     ld c, $03
@@ -1073,12 +1060,12 @@ jr_006_4757:
     ld c, $03
     call Decompress
     ld a, $03
-    call $1eb4
+    call PlaySong
     xor a
     ld [$d053], a
     ld [$d055], a
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     xor a
     ld [wClearSpritesOffset], a
     call $2e9c
@@ -1116,13 +1103,13 @@ jr_006_47b0:
     ld [$d051], a
     ld [$d052], a
     ld a, $0b
-    call $21fb
+    call Call_000_21fb
     ld a, $ff
     ld [wClearAllSprites], a
     call ClearSprites
-    ld hl, $77e9
-    ld de, $8e00
-    ld c, $02
+    ld hl, FontGfx
+    ld de, _VRAM + $e00
+    ld c, Bank(FontGfx)
     call Decompress
     ld hl, $5cdd
     ld de, $8800
@@ -1139,9 +1126,9 @@ jr_006_47b0:
 
 Jump_006_4800:
     ld a, $04
-    call $1eb4
-    call $1e67
-    call $0670
+    call PlaySong
+    call StopTimer
+    call Call_000_0670
 
 jr_006_480b:
     ld hl, $ff8c
@@ -1191,13 +1178,13 @@ jr_006_483e:
     set 5, [hl]
     call Call_006_40e4
     ld a, [$d03c]
-    call $1eb4
+    call PlaySong
     jp $01e6
 
 
 Jump_006_485e:
     ld a, $3c
-    call $1dc3
+    call Call_000_1dc3
     call Call_000_0648
     call StartTimer
     jp $0156
@@ -1209,16 +1196,16 @@ Jump_006_486c:
     call ClearSprites
     call Call_000_0648
     ld a, $ff
-    call $1e96
+    call PlaySE
     ld a, $ff
-    call $1eb4
+    call PlaySong
     xor a
     ld_long $ff90, a
     inc a
     ld [$d051], a
     ld [$d052], a
     ld a, $03
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     call $1c01
     ld a, $04
@@ -1243,8 +1230,8 @@ Jump_006_486c:
     ld de, $9800
     ld c, $03
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld de, $00c8
     ld hl, $ff8c
 
@@ -1289,7 +1276,7 @@ jr_006_48e0:
     ld c, $06
     call Decompress
     ld a, $04
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     ld a, $12
     ld [$d03f], a
@@ -1297,8 +1284,8 @@ jr_006_48e0:
     ld [$d040], a
     ld hl, $c104
     call $1964
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld de, $01b0
     ld hl, $ff8c
 
@@ -1320,7 +1307,7 @@ jr_006_495b:
     call ClearSprites
     call Call_000_0648
     ld a, $05
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     call StartTimer
     ld hl, $41c7
@@ -1339,8 +1326,8 @@ jr_006_495b:
     ld de, $9800
     ld c, $03
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld de, $0200
     ld hl, $ff8c
 
@@ -1360,7 +1347,7 @@ jr_006_49b7:
     call Call_000_0648
     call StartTimer
     ld a, $06
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     xor a
     ld_long $ff8f, a
@@ -1389,8 +1376,8 @@ jr_006_49e7:
     jr nz, jr_006_49e5
 
     push de
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     pop de
     ld hl, $9be0
     ld_long a, $ff91
@@ -1471,7 +1458,7 @@ Jump_006_4a65:
     call Call_000_0648
     call StartTimer
     ld a, $07
-    call $21fb
+    call Call_000_21fb
 
 Call_006_4a78:
     call Call_006_5098
@@ -1544,19 +1531,19 @@ jr_006_4aba:
     set 1, [hl]
     ld a, $90
     ld [$d05b], a
-    call $1e67
+    call StopTimer
     ld a, $40
     ld [wBGP], a
     ld a, $40
     ldh [rOBP0], a
     ld a, $05
-    call $1dc3
+    call Call_000_1dc3
     ld a, $90
     ld [wBGP], a
     ld a, $80
     ldh [rOBP0], a
     ld a, $05
-    call $1dc3
+    call Call_000_1dc3
     ld a, $e1
     ld [wBGP], a
 
@@ -1564,9 +1551,9 @@ Call_006_4b00:
     ld a, $d0
     ldh [rOBP0], a
     ld a, $05
-    call $1dc3
+    call Call_000_1dc3
     ld a, $0b
-    call $1eb4
+    call PlaySong
     ld a, $98
     ld [$d06b], a
     ld a, $1f
@@ -1772,24 +1759,24 @@ Jump_006_4c5c:
     ld a, $d0
     ldh [rOBP0], a
     ld a, $05
-    call $1dc3
+    call Call_000_1dc3
     ld a, $40
     ld [wBGP], a
     ld a, $80
     ldh [rOBP0], a
     ld a, $05
-    call $1dc3
+    call Call_000_1dc3
     ld a, $00
     ld [wBGP], a
     ld a, $40
     ldh [rOBP0], a
     ld a, $05
-    call $1dc3
+    call Call_000_1dc3
     call StartTimer
     xor a
     ld [wBGP], a
     ld a, $08
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     ld hl, $ffff
     res 1, [hl]
@@ -1800,8 +1787,8 @@ Jump_006_4c5c:
     ld de, $9800
     ld c, $03
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld de, $0144
     ld hl, $ff8c
 
@@ -1821,14 +1808,14 @@ jr_006_4cba:
     call Call_000_0648
     call StartTimer
     ld a, $09
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     ld hl, $441d
     ld de, $9800
     ld c, $03
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld de, $0190
     call Call_006_5086
     ld de, $01a4
@@ -1862,12 +1849,12 @@ jr_006_4d06:
     jp z, Jump_006_5055
 
     ld a, $01
-    call $1eb4
+    call PlaySong
     xor a
     ld [$d03b], a
     call Call_006_4275
     ld a, $0c
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     ld hl, $4000
     ld de, $9000
@@ -1877,14 +1864,14 @@ jr_006_4d06:
     ld de, $9800
     ld c, $0d
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
     call StartTimer
     ld a, $0d
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     ld hl, $46fb
     ld de, $9000
@@ -1894,14 +1881,14 @@ jr_006_4d06:
     ld de, $9800
     ld c, $0d
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
     call StartTimer
     ld a, $0e
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     ld hl, $4dc0
     ld de, $9000
@@ -1911,8 +1898,8 @@ jr_006_4d06:
     ld de, $9800
     ld c, $0d
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld de, $00ec
     call Call_006_5086
     call Call_000_0648
@@ -1921,7 +1908,7 @@ jr_006_4d06:
     ld [$d03b], a
     call Call_006_4275
     ld a, $0f
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     ld hl, $543e
     ld de, $9000
@@ -1931,14 +1918,14 @@ jr_006_4d06:
     ld de, $9800
     ld c, $0d
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
     call StartTimer
     ld a, $10
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     ld hl, $5a89
     ld de, $9000
@@ -1948,8 +1935,8 @@ jr_006_4d06:
     ld de, $9800
     ld c, $0d
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
@@ -1958,7 +1945,7 @@ jr_006_4d06:
     ld [$d03b], a
     call Call_006_4275
     ld a, $11
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     ld hl, $6063
     ld de, $9000
@@ -1968,14 +1955,14 @@ jr_006_4d06:
     ld de, $9800
     ld c, $0d
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
     call StartTimer
     ld a, $12
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     ld hl, $6658
     ld de, $9000
@@ -1985,8 +1972,8 @@ jr_006_4d06:
     ld de, $9800
     ld c, $0d
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
@@ -1995,7 +1982,7 @@ jr_006_4d06:
     ld [$d03b], a
     call Call_006_4275
     ld a, $13
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     ld hl, $6c7c
     ld de, $9000
@@ -2005,14 +1992,14 @@ jr_006_4d06:
     ld de, $9800
     ld c, $0d
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
     call StartTimer
     ld a, $14
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     ld hl, $729b
     ld de, $9000
@@ -2022,8 +2009,8 @@ jr_006_4d06:
     ld de, $9800
     ld c, $0d
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
@@ -2032,7 +2019,7 @@ jr_006_4d06:
     ld [$d03b], a
     call Call_006_4285
     ld a, $15
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     ld hl, $4000
     ld de, $9000
@@ -2042,8 +2029,8 @@ jr_006_4d06:
     ld de, $9800
     ld c, $0d
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
@@ -2052,7 +2039,7 @@ jr_006_4d06:
     ld [$d03b], a
     call Call_006_4285
     ld a, $16
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     ld hl, $4582
     ld de, $9000
@@ -2062,8 +2049,8 @@ jr_006_4d06:
     ld de, $9800
     ld c, $0e
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
@@ -2072,7 +2059,7 @@ jr_006_4d06:
     ld [$d03b], a
     call Call_006_4285
     ld a, $17
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     ld hl, $4bf3
     ld de, $9000
@@ -2082,8 +2069,8 @@ jr_006_4d06:
     ld de, $9800
     ld c, $0e
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
@@ -2092,7 +2079,7 @@ jr_006_4d06:
     ld [$d03b], a
     call Call_006_4285
     ld a, $18
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     ld hl, $5206
     ld de, $9000
@@ -2102,8 +2089,8 @@ jr_006_4d06:
     ld de, $9800
     ld c, $0e
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld de, $01a0
     call Call_006_5086
     call Call_000_0648
@@ -2113,7 +2100,7 @@ jr_006_4d06:
     ld c, $02
     call Decompress
     ld a, $19
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     ld hl, $5820
     ld de, $9000
@@ -2123,8 +2110,8 @@ jr_006_4d06:
     ld de, $9800
     ld c, $0e
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld de, $01a0
     call Call_006_5086
     ld de, $012c
@@ -2151,9 +2138,9 @@ jr_006_501e:
     call Call_000_0648
     call StartTimer
     ld a, $ff
-    call $1eb4
+    call PlaySong
     ld a, $1a
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     ld hl, $5cbf
     ld de, $8000
@@ -2163,8 +2150,8 @@ jr_006_501e:
     ld de, $9800
     ld c, $0e
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
 
 jr_006_504d:
     ld de, $0000
@@ -2173,9 +2160,9 @@ jr_006_504d:
 
 Jump_006_5055:
     ld a, $ff
-    call $1eb4
+    call PlaySong
     ld a, $1b
-    call $21fb
+    call Call_000_21fb
     call Call_006_5098
     ld hl, $6dd9
     ld de, $8000
@@ -2185,8 +2172,8 @@ Jump_006_5055:
     ld de, $9800
     ld c, $0e
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
 
 jr_006_507e:
     ld de, $0000
@@ -7094,7 +7081,7 @@ Jump_006_5f00:
     rst $38
     rst $38
 
-Jump_006_6386:
+ExecuteConfigurationModeScreen:
     call Call_000_0648
     call StartTimer
     call $231e
@@ -7134,8 +7121,8 @@ jr_006_63db:
     dec a
     jr nz, jr_006_63db
 
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     ld a, [$d08a]
     call Call_006_652f
     ld hl, $ff8c
@@ -7196,7 +7183,7 @@ Jump_006_6440:
     pop hl
     ld a, $0c
     ld [$d050], a
-    jp Call_006_4000
+    jp ExecuteTitlescreen
 
 
 Jump_006_6449:
@@ -7226,7 +7213,7 @@ Jump_006_645a:
 jr_006_6463:
     ld [$d06b], a
     ld a, $1a
-    call $1e96
+    call PlaySE
 
 Call_006_646b:
 Jump_006_646b:
@@ -7376,14 +7363,14 @@ Jump_006_655e:
     call Call_000_0648
     call StartTimer
     ld a, $02
-    call $21fb
+    call Call_000_21fb
     call $1c01
     ld hl, $44c9
     ld de, $9800
     ld c, $03
     call Decompress
-    call $1e67
-    call $0670
+    call StopTimer
+    call Call_000_0670
     xor a
     ld [$d06b], a
     ld hl, $d067
@@ -7433,7 +7420,7 @@ jr_006_65bf:
     ld [$d06b], a
     call Call_006_66cb
     ld a, $1a
-    call $1e96
+    call PlaySE
     jr jr_006_658a
 
 jr_006_65ce:
@@ -7441,7 +7428,7 @@ jr_006_65ce:
     ld [$d06b], a
     call Call_006_66cb
     ld a, $1a
-    call $1e96
+    call PlaySE
     jr jr_006_658a
 
 jr_006_65dc:
@@ -7503,7 +7490,7 @@ jr_006_6627:
 
 
 Jump_006_6630:
-    jp Jump_006_6386
+    jp ExecuteConfigurationModeScreen
 
 
 Jump_006_6633:
@@ -7514,15 +7501,15 @@ Jump_006_6633:
     ld [$d06b], a
     call Call_006_66cb
     ld a, $1a
-    call $1e96
+    call PlaySE
     jp Jump_006_658a
 
 
 Jump_006_6648:
     ld a, $ff
-    call $1eb4
+    call PlaySong
     ld a, $ff
-    call $1e96
+    call PlaySE
     jp Jump_006_658a
 
 
@@ -7532,13 +7519,13 @@ Jump_006_6655:
     jr nz, jr_006_6664
 
     ld a, [$d067]
-    call $1eb4
+    call PlaySong
     jp Jump_006_658a
 
 
 jr_006_6664:
     ld a, [$d068]
-    call $1e96
+    call PlaySE
     jp Jump_006_658a
 
 
@@ -9359,7 +9346,7 @@ jr_006_6e96:
     inc e
     add hl, de
     inc e
-    call nz, Call_006_4000
+    call nz, ExecuteTitlescreen
     nop
     inc e
     add e

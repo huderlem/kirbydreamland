@@ -69,21 +69,21 @@ InitGame:
     ei
     xor a
     ldh [$8c], a
-    ld [$d03a], a
-    ld a, Bank(Call_006_4000)
+    ld [wExtraGameEnabled], a
+    ld a, Bank(ExecuteTitlescreen)
     ld [wLoadedROMBank], a
     ld [MBC1RomBank], a
     ld a, $05
     ld [$d08a], a
     ld a, $06
     ld [$d088], a
-    call Call_006_4000
+    call ExecuteTitlescreen
     ld a, $0c
     ld [$d050], a
     ld a, [$d08a]
     ld [$d089], a
     call Call_000_231e
-    ld a, [$d03a]
+    ld a, [wExtraGameEnabled]
     ld [$d039], a
     ld a, Bank(Call_006_40e4)
     ld [wLoadedROMBank], a
@@ -259,12 +259,12 @@ Call_000_0326:
     jr z, .jr_000_0354
     res 5, [hl]
     ld a, $15
-    call Call_000_1e96
+    call PlaySE
     ld a, [$d02d]
     cp $09
     jr nz, .jr_000_0359
     ld a, [$d03c]
-    call Call_000_1eb4
+    call PlaySong
     xor a
     ld [$d3df], a
     ld [$d3e0], a
@@ -273,7 +273,7 @@ Call_000_0326:
     jr .jr_000_0359
 .jr_000_0354:
     ld a, $14
-    call Call_000_1e96
+    call PlaySE
 .jr_000_0359:
     ldh a, [$8e]
     set 6, a
@@ -526,7 +526,7 @@ Call_000_483:
     ret
 .jr_000_0510:
     ld a, $07
-    call Call_000_1e96
+    call PlaySE
     ld hl, $ff93
     bit 4, [hl]
     jr nz, jr_000_0566
@@ -668,7 +668,7 @@ jr_000_0566:
     cp $ff
     jr z, .jr_000_0641
     ld [$d03c], a
-    call Call_000_1eb4
+    call PlaySong
     ld a, $ff
     ld [$d03d], a
 .jr_000_0641:
@@ -1735,7 +1735,7 @@ Jump_000_0caf:
     bit 4, a
     jp z, .jump_000_0ece
     ld a, $01
-    call Call_000_1e96
+    call PlaySE
     ld a, [$d04f]
     or $01
     ld [$d04f], a
@@ -1798,7 +1798,7 @@ Jump_000_0caf:
     ld [$d3be], a
     push de
     ld a, $03
-    call Call_000_1e96
+    call PlaySE
     pop de
     jp .jump_000_0ece
 .jr_000_0e1b:
@@ -1877,7 +1877,7 @@ Jump_000_0caf:
     jr nz, .jump_000_0ec8
     push de
     ld a, $1e
-    call Call_000_1e96
+    call PlaySE
     call Call_000_37b1
     pop de
     ldh a, [$8d]
@@ -4066,7 +4066,7 @@ Call_000_1e8f:
     ret
 
 
-Call_000_1e96:
+PlaySE:
     push bc
     ld [$d02e], a
     ld c, a
@@ -4084,7 +4084,7 @@ Call_000_1e96:
     ret
 
 
-Call_000_1eb4:
+PlaySong:
     push bc
     ld c, a
     cp $05
@@ -4631,6 +4631,7 @@ Call_000_21e6:
 
 
 Call_000_21fb:
+; This has something to do with loading a group of sprites that animate and have some sort of behavior logic.
     ld [$d3f2], a
     ld a, $ff
     ld [wClearAllSprites], a
@@ -7071,7 +7072,7 @@ Call_000_3059:
     cp $78
     ret nz
     ld a, [$d03c]
-    jp Call_000_1eb4
+    jp PlaySong
 
 Call_000_3076:
     ld a, [$d053]
@@ -7786,7 +7787,7 @@ Call_000_37a7:
 
 Call_000_37ac:
     ld a, $05
-    call Call_000_1e96
+    call PlaySE
 Call_000_37b1:
     ld a, [$d414]
     and a

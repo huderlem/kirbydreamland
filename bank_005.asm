@@ -121,7 +121,7 @@ jr_005_4090:
     ld hl, $ff93
     set 1, [hl]
     ld a, $02
-    call $1e96
+    call PlaySE
     ld hl, $d3be
     bit 0, [hl]
     jp nz, Jump_005_4761
@@ -830,12 +830,12 @@ jr_005_4448:
     xor a
     ld [$d069], a
     ld a, $06
-    call $1e96
+    call PlaySE
     jr jr_005_4458
 
 jr_005_4453:
     ld a, $08
-    call $1e96
+    call PlaySE
 
 jr_005_4458:
     ld a, [$d40b]
@@ -1189,7 +1189,7 @@ jr_005_460f:
     ld a, $81
     ld [$d3bf], a
     ld a, $20
-    call $1e96
+    call PlaySE
     jp $21ce
 
 
@@ -1208,7 +1208,7 @@ Jump_005_4647:
 jr_005_465c:
     ld [$d089], a
     ld a, $16
-    call $1e96
+    call PlaySE
     jp $21ce
 
 
@@ -1222,7 +1222,7 @@ jr_005_4667:
     ld hl, $d1a0
     set 4, [hl]
     ld a, $02
-    call $1eb4
+    call PlaySong
     jp Jump_005_470e
 
 
@@ -1233,7 +1233,7 @@ jr_005_4684:
     set 5, [hl]
     res 6, [hl]
     ld a, $09
-    call $1e96
+    call PlaySE
     ld hl, $d1a0
     set 4, [hl]
     ld a, $fc
@@ -1241,14 +1241,14 @@ jr_005_4684:
     ld a, $03
     ld [$d3e0], a
     ld a, $09
-    call $1eb4
+    call PlaySong
     jp Jump_005_470e
 
 
 Jump_005_46ad:
     call Call_005_47c0
     ld a, $09
-    call $1e96
+    call PlaySE
     call Call_005_47b5
     call Call_005_470e
     ld a, [$d086]
@@ -1268,7 +1268,7 @@ jr_005_46c3:
 Jump_005_46ca:
     call Call_005_47c0
     ld a, $09
-    call $1e96
+    call PlaySE
     call Call_005_47b5
     call Call_005_470e
     call Call_005_479c
@@ -1279,7 +1279,7 @@ Jump_005_46de:
     ld hl, $ff94
     set 2, [hl]
     ld a, $0c
-    call $1e96
+    call PlaySE
     ld hl, $d140
     add hl, bc
     ld a, [hl]
@@ -1298,7 +1298,7 @@ Jump_005_4704:
     ld hl, $ff94
     set 2, [hl]
     ld a, $09
-    call $1e96
+    call PlaySE
 
 Call_005_470e:
 Jump_005_470e:
@@ -1319,7 +1319,7 @@ Jump_005_471b:
 
 jr_005_4723:
     ld a, $09
-    call $1e96
+    call PlaySE
     ld a, [$d06b]
     and a
     jr z, jr_005_4730
@@ -1386,7 +1386,7 @@ jr_005_4782:
 jr_005_4791:
     call $3768
     ld a, $09
-    call $1eb4
+    call PlaySong
     jp $21ce
 
 
@@ -1402,7 +1402,7 @@ Jump_005_479c:
     ld [$d086], a
     push de
     ld a, $0b
-    call $1e96
+    call PlaySE
     pop de
     ld a, $0a
     jp Call_000_1de0
