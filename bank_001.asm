@@ -4,7 +4,7 @@ Call_001_4000:
     ldh a, [$8e]
     bit 6, a
     call z, Call_000_8dc
-    ld a, [$d05c]
+    ld a, [wPlayerScreenXCoord]
     cp $98
     jr c, .jr_001_401c
     call Call_000_8cb
@@ -33,7 +33,7 @@ Call_001_4000:
     bit 5, a
     jp nz, .jump_001_40e1
     inc e
-    ld a, [$d05c]
+    ld a, [wPlayerScreenXCoord]
     add $0d
     ld [$d05e], a
     call Call_000_0784
@@ -51,7 +51,7 @@ Call_001_4000:
     call Call_000_1ccb
     ld a, c
     ld [$d05e], a
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     sub $10
     ld [$d05f], a
     call Call_000_819
@@ -68,7 +68,7 @@ Call_001_4000:
     call Call_000_1248
     jr c, .jr_001_40a4
 .jr_001_4081:
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     sub $01
     ld [$d05f], a
     call Call_000_819
@@ -139,7 +139,7 @@ Call_001_4000:
     ld a, [$d042]
     inc a
     ld d, a
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     cp d
     jr nz, .jr_001_4117
 .jr_001_4115:
@@ -147,7 +147,7 @@ Call_001_4000:
 .jr_001_4117:
     ld a, [$d062]
     ld b, a
-    ld a, [$d05c]
+    ld a, [wPlayerScreenXCoord]
     add b
     cp $98
     jr nc, .jr_001_4149
@@ -156,7 +156,7 @@ Call_001_4000:
     sub b
     jr c, .jr_001_4133
     call Call_000_1268
-    ld a, [$d05c]
+    ld a, [wPlayerScreenXCoord]
     xor a
     ld [$d063], a
     ret
@@ -196,7 +196,7 @@ Call_001_4000:
 .jr_001_416f:
     call Call_000_8cb
     ld a, $98
-    ld [$d05c], a
+    ld [wPlayerScreenXCoord], a
     xor a
     ld [$d063], a
     ret
@@ -208,7 +208,7 @@ Call_001_417c:
     ldh a, [$8e]
     bit 6, a
     call z, Call_000_8dc
-    ld a, [$d05c]
+    ld a, [wPlayerScreenXCoord]
     cp $08
     jr nz, .jr_001_4193
     call Call_000_8cb
@@ -233,7 +233,7 @@ Call_001_417c:
     bit 5, a
     jp nz, .jr_001_4250
     inc e
-    ld a, [$d05c]
+    ld a, [wPlayerScreenXCoord]
     add $03
     ld [$d05e], a
     call Call_000_0784
@@ -253,7 +253,7 @@ Call_001_417c:
     call Call_000_1ccb
     ld a, c
     ld [$d05e], a
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     sub $10
     ld [$d05f], a
     call Call_000_819
@@ -270,7 +270,7 @@ Call_001_417c:
     call Call_000_1248
     jr c, .jr_001_4221
 .jr_001_41fe:
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     sub $01
     ld [$d05f], a
     call Call_000_819
@@ -327,7 +327,7 @@ Call_001_417c:
     ldh a, [$91]
     bit 7, a
     jr nz, .jr_001_4280
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     cp $01
     jr nz, .jr_001_4280
     ld a, [$d053]
@@ -336,7 +336,7 @@ Call_001_417c:
 .jr_001_427e:
     ld c, $08
 .jr_001_4280:
-    ld a, [$d05c]
+    ld a, [wPlayerScreenXCoord]
     sub c
     ld [$d062], a
     sub b
@@ -344,7 +344,7 @@ Call_001_417c:
     ld a, [$d063]
     ld [$d062], a
     call Call_000_1272
-    ld a, [$d05c]
+    ld a, [wPlayerScreenXCoord]
     cp $08
     jr z, .jr_001_42a1
     and a
@@ -595,7 +595,7 @@ Call_001_42bf:
 .jr_001_4492:
     ldh a, [$8b]
     ld b, a
-    bit 6, a
+    bit PADB_UP, a
     jp z, .jr_001_452a
     ld a, [$d02e]
     cp $01
@@ -612,7 +612,7 @@ Call_001_42bf:
     push bc
     push hl
     push de
-    call Call_000_483
+    call TryDoorWarp
     pop de
     pop hl
     pop bc
@@ -1449,7 +1449,7 @@ Call_000_4a1c:
     ld l, a
     ld h, $00
     call Call_000_2e96
-    ld hl, $d051
+    ld hl, wStageScrollTileX
     add [hl]
     dec a
     ld d, a
@@ -1462,7 +1462,7 @@ Call_000_4a1c:
     ld l, a
     ld h, $00
     call Call_000_2e96
-    ld hl, $d052
+    ld hl, wStageScrollTileY
     add [hl]
     dec a
     ld e, a
@@ -1562,12 +1562,12 @@ Call_000_4ac1:
     add hl, bc
     ld a, [hl]
     sub $08
-    ld [$d05c], a
+    ld [wPlayerScreenXCoord], a
     ld hl, $d150
     add hl, bc
     ld a, [hl]
     sub $08
-    ld [$d05d], a
+    ld [wPlayerScreenYCoord], a
     ret
 
 
@@ -1970,12 +1970,12 @@ Call_001_4d3f:
     ld bc, $0000
     ld a, [$d03f]
     ld b, a
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     dec a
     ld e, a
     call Call_000_1c52
     ld h, $00
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     dec a
     ld l, a
     add hl, bc

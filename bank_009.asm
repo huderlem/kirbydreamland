@@ -2149,7 +2149,7 @@ jr_009_48b6:
     pop hl
     ld [hl], d
     ld c, c
-    ld [$d03b], a
+    ld [wCurStage], a
     inc b
     and [hl]
     ld c, c
@@ -3648,7 +3648,7 @@ jr_009_5084:
     nop
     ld c, l
     ld e, h
-    ld [$d052], a
+    ld [wStageScrollTileY], a
     ld de, $50b2
     ld bc, $4000
     pop hl
@@ -3970,7 +3970,7 @@ jr_009_51e7:
     ld [$5e4d], sp
     ld [c], a
     ld sp, hl
-    ld [$d052], a
+    ld [wStageScrollTileY], a
     ld de, $5265
     ld bc, $58b8
     pop hl
@@ -10674,7 +10674,7 @@ jr_009_7057:
     inc b
     ld [hl], b
     ld [hl], b
-    ld [$d03e], a
+    ld [wCurStageScreen], a
     ld [$708c], sp
     jp hl
 

@@ -12,9 +12,9 @@ ExecuteTitlescreen:
     ld [wBGP], a
     ld a, $00
     ld [$d055], a
-    ld hl, KirbySpriteGfx
+    ld hl, NormalGameSpritesGfx
     ld de, _VRAM
-    ld c, Bank(KirbySpriteGfx)
+    ld c, Bank(NormalGameSpritesGfx)
     call Decompress
     ld hl, TitlescreenGfx1
     ld de, _VRAM + $800
@@ -56,7 +56,7 @@ ExecuteTitlescreen:
     cp PADF_UP | PADF_SELECT | PADF_A
     jr nz, .noExtraGame
     ld a, 1
-    ld [wExtraGameEnabled], a
+    ld [wExtraGameSelected], a
     call TryDrawExtraGameText
 .noExtraGame:
     ld_long a, $ff8b
@@ -67,7 +67,7 @@ ExecuteTitlescreen:
     ret
 
 TryDrawExtraGameText:
-    ld a, [wExtraGameEnabled]
+    ld a, [wExtraGameSelected]
     and a
     ret z
     ld bc, _SCRN0 + $145
@@ -100,7 +100,7 @@ ExtraGameText:
 
 Call_006_40d4:
     ld a, $01
-    ld [$d039], a
+    ld [wExtraGameEnabled], a
     ld a, $06
     ld [wLoadedROMBank], a
     ld [MBC1RomBank], a
@@ -120,9 +120,7 @@ Call_006_40e4:
     ld [hl+], a
     ld [hl], a
     ld [$d3be], a
-    ld a, [$d03b]
-
-Jump_006_4100:
+    ld a, [wCurStage]
     ld b, a
     add a
     add a
@@ -159,12 +157,10 @@ jr_006_411c:
     pop hl
     ld_long a, $ff95
     bit 7, a
-    jr nz, jr_006_4142
-
-    call $1c01
+    jr nz, .jr_006_4142
+    call InitWindow
     call Call_006_42e8
-
-jr_006_4142:
+.jr_006_4142:
     ld a, $ff
     ld [wClearAllSprites], a
     call $231e
@@ -173,13 +169,13 @@ jr_006_4142:
     call StartTimer
     call Call_006_4285
     ld d, $00
-    ld a, [$d03b]
+    ld a, [wCurStage]
     ld c, a
     add a
     add c
     ld b, $00
     ld c, a
-    ld hl, $20a2
+    ld hl, Unk20A2
     add hl, bc
     ld a, [hl+]
     ld c, a
@@ -189,7 +185,7 @@ jr_006_4142:
     ld e, a
     ld h, d
     ld l, e
-    ld de, $c600
+    ld de, wMetatileDefinitions
     call Decompress
     ld a, $32
     ld_long $ff8f, a
@@ -227,21 +223,21 @@ jr_006_4142:
     call ClearSprites
     pop hl
     ld a, [hl+]
-    ld [$d03e], a
+    ld [wCurStageScreen], a
     push hl
     call StopTimer
     call $19c9
     call $19f9
     pop hl
     ld a, [hl+]
-    ld [$d051], a
+    ld [wStageScrollTileX], a
     ld a, [hl+]
-    ld [$d052], a
+    ld [wStageScrollTileY], a
     ld a, [hl+]
-    ld [$d05c], a
+    ld [wPlayerScreenXCoord], a
     ld a, [hl+]
-    ld [$d05d], a
-    ld a, [$d03b]
+    ld [wPlayerScreenYCoord], a
+    ld a, [wCurStage]
     ld e, a
     ld d, $00
     ld hl, $4270
@@ -260,13 +256,13 @@ Jump_006_4203:
     jr z, jr_006_421e
 
     ld a, $33
-    ld [$d051], a
+    ld [wStageScrollTileX], a
     ld a, $01
-    ld [$d052], a
+    ld [wStageScrollTileY], a
     ld a, $48
-    ld [$d05c], a
+    ld [wPlayerScreenXCoord], a
     ld a, $70
-    ld [$d05d], a
+    ld [wPlayerScreenYCoord], a
     ld bc, $0032
 
 jr_006_421e:
@@ -279,7 +275,7 @@ jr_006_421e:
     call $139b
     call Call_000_2329
     call ClearSprites
-    ld a, [$d03b]
+    ld a, [wCurStage]
     cp $04
     jr nz, jr_006_424a
 
@@ -298,7 +294,7 @@ jr_006_424a:
     bit 7, a
     jr z, jr_006_4263
 
-    ld a, [$d03b]
+    ld a, [wCurStage]
     cp $04
     jr z, jr_006_4263
 
@@ -319,44 +315,41 @@ jr_006_4263:
     ld [de], a
 
 Call_006_4275:
-    ld a, [$d039]
+    ld a, [wExtraGameEnabled]
     push af
     xor a
-    ld [$d039], a
+    ld [wExtraGameEnabled], a
     call Call_006_4285
     pop af
-    ld [$d039], a
+    ld [wExtraGameEnabled], a
     ret
 
 
 Call_006_4285:
-    ld a, [$d039]
+    ld a, [wExtraGameEnabled]
     and a
-    jr nz, jr_006_42a3
-
-    ld hl, $4000
-    ld de, $8000
-    ld c, $02
+    jr nz, .loadExtraGameSprites
+    ld hl, NormalGameSpritesGfx
+    ld de, _VRAM + $0
+    ld c, Bank(NormalGameSpritesGfx)
     call Decompress
-    ld hl, $4855
-    ld de, $9670
-    ld c, $02
+    ld hl, NormalGameStatusBarGfx
+    ld de, _VRAM + $1670
+    ld c, Bank(NormalGameStatusBarGfx)
     call Decompress
-    jr jr_006_42b9
-
-jr_006_42a3:
-    ld hl, $488d
-    ld de, $8000
-    ld c, $0a
+    jr .continue
+.loadExtraGameSprites:
+    ld hl, ExtraGameSpritesGfx
+    ld de, _VRAM + $0
+    ld c, Bank(ExtraGameSpritesGfx)
     call Decompress
     ld hl, $50f3
     ld de, $9670
     ld c, $0a
     call Decompress
-
-jr_006_42b9:
+.continue:
     ld d, $00
-    ld a, [$d03b]
+    ld a, [wCurStage]
     ld c, a
     add a
     add a
@@ -364,13 +357,11 @@ jr_006_42b9:
     ld c, a
     ld b, $00
     ld hl, $2070
-    ld a, [$d039]
+    ld a, [wExtraGameEnabled]
     and a
-    jr z, jr_006_42d1
-
+    jr z, .jr_006_42d1
     ld hl, $2089
-
-jr_006_42d1:
+.jr_006_42d1:
     add hl, bc
     ld a, [hl+]
     ld [$d06b], a
@@ -397,8 +388,8 @@ Call_006_42e8:
     ld [$d053], a
     ld [$d055], a
     inc a
-    ld [$d051], a
-    ld [$d052], a
+    ld [wStageScrollTileX], a
+    ld [wStageScrollTileY], a
     ld hl, $ff94
     set 1, [hl]
     call ClearSprites
@@ -411,7 +402,7 @@ Call_006_42e8:
     ld de, $9670
     ld c, $02
     call Decompress
-    ld a, [$d03b]
+    ld a, [wCurStage]
     ld c, a
     add a
     add a
@@ -435,7 +426,7 @@ Call_006_42e8:
     ld a, [$d06b]
     ld c, a
     call Decompress
-    ld a, [$d03b]
+    ld a, [wCurStage]
     cp $04
     jr z, jr_006_435b
 
@@ -449,7 +440,7 @@ Call_006_42e8:
     call Decompress
 
 jr_006_435b:
-    ld a, [$d03b]
+    ld a, [wCurStage]
     ld c, a
     add a
     add c
@@ -475,7 +466,7 @@ jr_006_435b:
     ld a, [hl]
     ld [$d03c], a
     call PlaySong
-    ld a, [$d03b]
+    ld a, [wCurStage]
     add a
     ld e, a
     ld d, $00
@@ -524,7 +515,7 @@ Jump_006_43bf:
     call Call_006_444f
     ld hl, $ff90
     res 4, [hl]
-    ld a, [$d03b]
+    ld a, [wCurStage]
     add a
     ld c, a
     ld b, $00
@@ -534,7 +525,7 @@ Jump_006_43bf:
     ld c, a
     ld a, [hl+]
     ld b, a
-    ld a, [$d03e]
+    ld a, [wCurStageScreen]
     add a
     ld l, a
     ld h, $00
@@ -587,7 +578,7 @@ Jump_006_43fc:
     bit 3, a
     jr z, jr_006_4440
 
-    ld hl, $d03b
+    ld hl, wCurStage
     inc [hl]
     call Call_006_40e4
     jp $3d32
@@ -602,7 +593,7 @@ jr_006_4440:
     jr jr_006_43ec
 
 Call_006_444f:
-    ld a, [$d03b]
+    ld a, [wCurStage]
     add a
     ld c, a
     ld b, $00
@@ -612,7 +603,7 @@ Call_006_444f:
     ld c, a
     ld a, [hl+]
     ld b, a
-    ld a, [$d03e]
+    ld a, [wCurStageScreen]
     add a
     ld l, a
     ld h, $00
@@ -644,7 +635,7 @@ Call_006_4473:
 Call_006_4485:
     push af
     ld a, [hl+]
-    ld [$d03e], a
+    ld [wCurStageScreen], a
     push hl
     call $19c9
     call Call_000_0648
@@ -655,18 +646,18 @@ Call_006_4485:
     ld [$d053], a
     ld [$d055], a
     ld a, [hl+]
-    ld [$d051], a
+    ld [wStageScrollTileX], a
     ld a, [hl+]
-    ld [$d052], a
+    ld [wStageScrollTileY], a
     push hl
     call $19f9
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     dec a
     ld b, a
     ld a, [$d03f]
     ld e, a
     call $1c52
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     dec a
     ld l, a
     ld h, $00
@@ -683,11 +674,11 @@ Call_006_4485:
     call Call_000_21fb
     call ClearSprites
     call $2e9c
-    ld a, [$d03b]
+    ld a, [wCurStage]
     cp $04
     jr nz, jr_006_44eb
 
-    ld a, [$d03e]
+    ld a, [wCurStageScreen]
     and a
     jr nz, jr_006_44eb
 
@@ -775,7 +766,7 @@ jr_006_4557:
     ld a, [$d053]
     and $f0
     ld [$d057], a
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     dec a
     jr z, jr_006_456e
 
@@ -789,12 +780,12 @@ jr_006_456e:
     ld hl, $c100
     add hl, bc
     ld b, $00
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     dec a
     ld c, a
     add hl, bc
     call $12b4
-    ld hl, $d052
+    ld hl, wStageScrollTileY
     dec [hl]
     ld_long a, $ff8c
     set 5, a
@@ -911,11 +902,11 @@ jr_006_462f:
     res 4, a
     res 5, a
     ld [$d1a0], a
-    ld a, [$d03b]
+    ld a, [wCurStage]
     cp $04
     jr nz, jr_006_4678
 
-    ld a, [$d03e]
+    ld a, [wCurStageScreen]
     ld b, $00
     ld c, a
     ld hl, $474d
@@ -980,7 +971,7 @@ jr_006_46c7:
     jr z, jr_006_4757
 
     ld [$d089], a
-    ld a, [$d03b]
+    ld a, [wCurStage]
     add a
     ld c, a
     ld b, $00
@@ -990,7 +981,7 @@ jr_006_46c7:
     ld c, a
     ld a, [hl+]
     ld b, a
-    ld a, [$d03e]
+    ld a, [wCurStageScreen]
     ld h, a
     add a
     add a
@@ -999,26 +990,26 @@ jr_006_46c7:
     ld h, $00
     add hl, bc
     ld a, [hl+]
-    ld [$d03e], a
+    ld [wCurStageScreen], a
     push hl
     call $19c9
     call Call_000_0648
     call $19f9
     pop hl
     ld a, [hl+]
-    ld [$d051], a
+    ld [wStageScrollTileX], a
     ld a, [hl+]
-    ld [$d052], a
+    ld [wStageScrollTileY], a
     ld a, [hl+]
-    ld [$d05c], a
+    ld [wPlayerScreenXCoord], a
     ld a, [hl+]
-    ld [$d05d], a
+    ld [wPlayerScreenYCoord], a
     xor a
     ld_long $ff8d, a
     ld_long $ff8e, a
     ld_long $ff92, a
     call $139b
-    ld a, [$d03b]
+    ld a, [wCurStage]
     cp $04
     jr z, jr_006_4731
 
@@ -1047,7 +1038,7 @@ jr_006_4731:
 
 jr_006_4757:
     call Call_000_0648
-    call $1c01
+    call InitWindow
     call StartTimer
     ld a, $0a
     call Call_000_21fb
@@ -1096,12 +1087,12 @@ jr_006_47b0:
     ld hl, $ff95
     set 0, [hl]
     call Call_000_0648
-    call $1c01
+    call InitWindow
     call StartTimer
     call $231e
     inc a
-    ld [$d051], a
-    ld [$d052], a
+    ld [wStageScrollTileX], a
+    ld [wStageScrollTileY], a
     ld a, $0b
     call Call_000_21fb
     ld a, $ff
@@ -1202,12 +1193,12 @@ Jump_006_486c:
     xor a
     ld_long $ff90, a
     inc a
-    ld [$d051], a
-    ld [$d052], a
+    ld [wStageScrollTileX], a
+    ld [wStageScrollTileY], a
     ld a, $03
     call Call_000_21fb
     call Call_006_5098
-    call $1c01
+    call InitWindow
     ld a, $04
     ld_long $ff8f, a
     xor a
@@ -1268,7 +1259,7 @@ jr_006_48e0:
     ld c, $02
     call Decompress
     ld hl, $777c
-    ld de, $c600
+    ld de, wMetatileDefinitions
     ld c, $06
     call Decompress
     ld hl, $71e2
@@ -1842,16 +1833,16 @@ jr_006_4d06:
     call Call_000_0648
     call StartTimer
     call $231e
-    ld a, [$d039]
+    ld a, [wExtraGameEnabled]
     and a
     ld a, $01
-    ld [$d039], a
+    ld [wExtraGameEnabled], a
     jp z, Jump_006_5055
 
     ld a, $01
     call PlaySong
     xor a
-    ld [$d03b], a
+    ld [wCurStage], a
     call Call_006_4275
     ld a, $0c
     call Call_000_21fb
@@ -1905,7 +1896,7 @@ jr_006_4d06:
     call Call_000_0648
     call StartTimer
     ld a, $01
-    ld [$d03b], a
+    ld [wCurStage], a
     call Call_006_4275
     ld a, $0f
     call Call_000_21fb
@@ -1942,7 +1933,7 @@ jr_006_4d06:
     call Call_000_0648
     call StartTimer
     ld a, $02
-    ld [$d03b], a
+    ld [wCurStage], a
     call Call_006_4275
     ld a, $11
     call Call_000_21fb
@@ -1979,7 +1970,7 @@ jr_006_4d06:
     call Call_000_0648
     call StartTimer
     ld a, $03
-    ld [$d03b], a
+    ld [wCurStage], a
     call Call_006_4275
     ld a, $13
     call Call_000_21fb
@@ -2016,7 +2007,7 @@ jr_006_4d06:
     call Call_000_0648
     call StartTimer
     xor a
-    ld [$d03b], a
+    ld [wCurStage], a
     call Call_006_4285
     ld a, $15
     call Call_000_21fb
@@ -2036,7 +2027,7 @@ jr_006_4d06:
     call Call_000_0648
     call StartTimer
     ld a, $01
-    ld [$d03b], a
+    ld [wCurStage], a
     call Call_006_4285
     ld a, $16
     call Call_000_21fb
@@ -2056,7 +2047,7 @@ jr_006_4d06:
     call Call_000_0648
     call StartTimer
     ld a, $02
-    ld [$d03b], a
+    ld [wCurStage], a
     call Call_006_4285
     ld a, $17
     call Call_000_21fb
@@ -2076,7 +2067,7 @@ jr_006_4d06:
     call Call_000_0648
     call StartTimer
     ld a, $03
-    ld [$d03b], a
+    ld [wCurStage], a
     call Call_006_4285
     ld a, $18
     call Call_000_21fb
@@ -7085,7 +7076,7 @@ ExecuteConfigurationModeScreen:
     call Call_000_0648
     call StartTimer
     call $231e
-    call $1c01
+    call InitWindow
     xor a
     ld [$d053], a
     ld [$d055], a
@@ -7364,7 +7355,7 @@ Jump_006_655e:
     call StartTimer
     ld a, $02
     call Call_000_21fb
-    call $1c01
+    call InitWindow
     ld hl, $44c9
     ld de, $9800
     ld c, $03
@@ -9437,7 +9428,7 @@ jr_006_6ece:
     push bc
     nop
     ld l, e
-    jp Jump_006_4100
+    db $c3, $00, $41
 
 
     ld b, d
@@ -12687,7 +12678,7 @@ jr_006_7db3:
     ld a, [hl]
     ld b, $3c
     inc a
-    jr jr_006_7dfd
+    db $18, $18
 
     sbc c
     jr jr_006_7d80
@@ -12702,534 +12693,6 @@ jr_006_7db3:
 
 jr_006_7def:
     nop
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
 
-jr_006_7dfd:
-    rst $38
-    rst $38
-    rst $38
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    nop
-    nop
-    nop
-    ld [bc], a
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    jr nz, jr_006_7f48
-
-jr_006_7f48:
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    nop
-    nop
-    add b
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    rst $38
-    cp a
-    rst $38
-    rst $38
-    rst $38
-    rst $38
+; free space padding
+INCBIN "baserom.gb", $1bdf0, $1c000 - $1bdf0

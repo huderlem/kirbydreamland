@@ -1285,13 +1285,13 @@ Jump_005_46de:
     ld a, [hl]
     ld [$d0a1], a
     sub $08
-    ld [$d05c], a
+    ld [wPlayerScreenXCoord], a
     ld hl, $d150
     add hl, bc
     ld a, [hl]
     ld [$d0d1], a
     sub $08
-    ld [$d05d], a
+    ld [wPlayerScreenYCoord], a
     jr jr_005_470e
 
 Jump_005_4704:
@@ -1364,11 +1364,11 @@ jr_005_4761:
     ld [$d3df], a
     ld a, $03
     ld [$d3e0], a
-    ld a, [$d03e]
+    ld a, [wCurStageScreen]
     cp $07
     jr nz, jr_005_4791
 
-    ld a, [$d03b]
+    ld a, [wCurStage]
     cp $02
     jr z, jr_005_4782
 
@@ -1660,7 +1660,7 @@ Call_005_48ea:
     ld l, a
     ld h, $00
     call $2e96
-    ld hl, $d051
+    ld hl, wStageScrollTileX
     add [hl]
     dec a
     ld d, a
@@ -1673,7 +1673,7 @@ Call_005_48ea:
     ld l, a
     ld h, $00
     call $2e96
-    ld hl, $d052
+    ld hl, wStageScrollTileY
     add [hl]
     dec a
     ld e, a
@@ -1980,7 +1980,7 @@ jr_005_4a77:
     ld a, [$d053]
     and $0f
     ld b, a
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     dec a
     swap a
     ld d, a
@@ -2005,7 +2005,7 @@ jr_005_4a77:
     ld a, [$d055]
     and $0f
     ld b, a
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     dec a
     swap a
     ld d, a
@@ -2060,13 +2060,13 @@ InitRAM:
     cp (hRam96 + 1) & $ff
     jr nz, .clearHRAMLoop
     ld a, $01
-    ld [$d051], a
-    ld [$d052], a
+    ld [wStageScrollTileX], a
+    ld [wStageScrollTileY], a
     ld [$d074], a
     ld a, $30
-    ld [$d05c], a
+    ld [wPlayerScreenXCoord], a
     ld a, $00
-    ld [$d05d], a
+    ld [wPlayerScreenYCoord], a
     ld a, $ff
     ld [$d096], a
     ld [$d03d], a

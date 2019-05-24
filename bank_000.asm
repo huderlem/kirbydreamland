@@ -69,7 +69,7 @@ InitGame:
     ei
     xor a
     ldh [$8c], a
-    ld [wExtraGameEnabled], a
+    ld [wExtraGameSelected], a
     ld a, Bank(ExecuteTitlescreen)
     ld [wLoadedROMBank], a
     ld [MBC1RomBank], a
@@ -83,8 +83,8 @@ InitGame:
     ld a, [$d08a]
     ld [$d089], a
     call Call_000_231e
-    ld a, [wExtraGameEnabled]
-    ld [$d039], a
+    ld a, [wExtraGameSelected]
+    ld [wExtraGameEnabled], a
     ld a, Bank(Call_006_40e4)
     ld [wLoadedROMBank], a
     ld [MBC1RomBank], a
@@ -166,7 +166,7 @@ Func_000_246:
     jr c, .jr_000_0280
     res 3, [hl]
 .jr_000_0280:
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     cp $88
     jp nc, Jump_000_1385
     ld a, [$d086]
@@ -437,35 +437,35 @@ jr_000_0426:
     jp Jump_001_4783
 
 
-Call_000_483:
-    ld hl, $3b3d
-.jr_000_0486:
-    ld a, [$d03b]
+TryDoorWarp:
+    ld hl, DoorWarps
+.next:
+    ld a, [wCurStage]
     ld b, a
     ld a, [hl+]
     cp b
-    jr z, .jr_000_0497
+    jr z, .checkStageScreen
     cp $ff
     ret z
-    ld bc, $0008
+    ld bc, 8
     add hl, bc
-    jr .jr_000_0486
-.jr_000_0497:
-    ld a, [$d03e]
+    jr .next
+.checkStageScreen:
+    ld a, [wCurStageScreen]
     ld b, a
     ld a, [hl+]
     cp b
     jr z, .jr_000_04a5
-    ld bc, $0007
+    ld bc, 7
     add hl, bc
-    jr .jr_000_0486
+    jr .next
 .jr_000_04a5:
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     ld b, a
     ld a, [$d053]
     and $0f
     ld c, a
-    ld a, [$d05c]
+    ld a, [wPlayerScreenXCoord]
     add c
     and $f0
     swap a
@@ -482,16 +482,16 @@ Call_000_483:
     ld a, [hl+]
     cp b
     jr z, .jr_000_04cd
-    ld bc, $0006
+    ld bc, 6
     add hl, bc
-    jr .jr_000_0486
+    jr .next
 .jr_000_04cd:
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     ld b, a
     ld a, [$d055]
     and $0f
     ld c, a
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     add c
     add $0a
     and $f0
@@ -501,44 +501,44 @@ Call_000_483:
     ld a, [hl+]
     cp b
     jr z, .jr_000_04ed
-    ld bc, $0005
+    ld bc, 5
     add hl, bc
-    jr .jr_000_0486
+    jr .next
 .jr_000_04ed:
     ld a, [hl+]
-    ld [$d03e], a
+    ld [wCurStageScreen], a
     push hl
-    ld a, [$d03b]
+    ld a, [wCurStage]
     cp $04
-    jr c, .jr_000_0510
-    ld a, [$d03e]
+    jr c, .notSpecialWarp
+    ld a, [wCurStageScreen]
     ld c, a
     ld b, $00
     ld hl, $d043
     add hl, bc
     ld a, [hl]
     cp $01
-    jr nz, .jr_000_0510
+    jr nz, .notSpecialWarp
     xor a
-    ld [$d03e], a
+    ld [wCurStageScreen], a
     pop hl
     ld a, $ff
     ret
-.jr_000_0510:
+.notSpecialWarp:
     ld a, $07
     call PlaySE
     ld hl, $ff93
     bit 4, [hl]
-    jr nz, jr_000_0566
+    jr nz, .jr_000_0566
     ldh a, [$95]
     bit 5, a
-    jr nz, jr_000_0548
+    jr nz, .jr_000_0548
     ld hl, $ff8e
     ld a, [hl]
     and $88
-    jr z, jr_000_0566
+    jr z, .jr_000_0566
     bit 2, [hl]
-    jr nz, jr_000_0566
+    jr nz, .jr_000_0566
     set 2, [hl]
     ld a, [$d3be]
     and $f9
@@ -548,11 +548,10 @@ Call_000_483:
     ld a, [hl]
     bit 7, a
     push af
-Call_000_0541:
     call z, Call_000_380a
     pop af
     call nz, Call_000_385b
-jr_000_0548:
+.jr_000_0548:
     call Call_000_139b
     ld b, $13
 .jr_000_054d:
@@ -565,10 +564,10 @@ jr_000_0548:
     pop bc
     ld a, [$d094]
     cp $01
-    jr z, jr_000_0566
+    jr z, .jr_000_0566
     dec b
     jr nz, .jr_000_054d
-jr_000_0566:
+.jr_000_0566:
     xor a
     ld [$d082], a
     ld [$d083], a
@@ -611,17 +610,17 @@ jr_000_0566:
     ld [$d055], a
     ld a, d
     inc a
-    ld [$d051], a
+    ld [wStageScrollTileX], a
     ld a, e
     inc a
-    ld [$d052], a
+    ld [wStageScrollTileY], a
     ld a, [hl+]
     swap a
     add $08
-    ld [$d05c], a
+    ld [wPlayerScreenXCoord], a
     ld a, [hl+]
     swap a
-    ld [$d05d], a
+    ld [wPlayerScreenYCoord], a
     ldh a, [$8f]
     or $13
     ldh [$8f], a
@@ -802,7 +801,7 @@ Call_000_6ec:
     bit 4, [hl]
     jr nz, .jr_000_0708
     ld hl, $ff91
-    ld a, [$d05c]
+    ld a, [wPlayerScreenXCoord]
     cp $45
     jr c, .jr_000_070e
     cp $4b
@@ -814,7 +813,7 @@ Call_000_6ec:
 .jr_000_070e:
     bit 7, [hl]
     jr nz, .jr_000_0720
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     cp $01
     jr nz, .jr_000_0720
     ld a, [$d053]
@@ -838,7 +837,7 @@ Call_000_6ec:
     jr z, .jr_000_0708
     inc a
     ld b, a
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     cp b
     jr z, .jr_000_0759
 .jr_000_0747:
@@ -859,7 +858,7 @@ Call_000_6ec:
 Call_000_0763:
     push bc
     push de
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     sub $01
     ld l, a
     ld h, $00
@@ -884,7 +883,7 @@ Call_000_0763:
 Call_000_0784:
     push bc
     push de
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     sub $01
     ld l, a
     ld h, $00
@@ -923,7 +922,7 @@ Call_000_07b5:
     ld a, c
 jr_000_07bf:
     ld [$d05f], a
-    ld a, [$d05c]
+    ld a, [wPlayerScreenXCoord]
     add $08
     ld [$d05e], a
     jp Call_000_07cd
@@ -1202,13 +1201,13 @@ jr_000_0998:
     ldh a, [$90]
     bit 5, a
     jr z, jr_000_09c0
-    ld a, [$d03b]
+    ld a, [wCurStage]
     cp $02
     jr z, jr_000_09b0
     cp $04
     jr nz, jr_000_09c0
 jr_000_09b0:
-    ld a, [$d03e]
+    ld a, [wCurStageScreen]
     cp $07
     jr nz, jr_000_09c0
     ldh a, [$92]
@@ -1240,7 +1239,7 @@ Jump_000_09de:
     ldh a, [$90]
     bit 5, a
     jp nz, Jump_000_0ab8
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     ld [$d05f], a
     call Call_000_0763
     ld d, $00
@@ -1264,7 +1263,7 @@ jr_000_0a13:
     dec a
     dec a
     ld [$d05f], a
-    ld a, [$d05c]
+    ld a, [wPlayerScreenXCoord]
     add $03
     ld [$d05e], a
     call Call_000_07cd
@@ -1282,7 +1281,7 @@ jr_000_0a13:
     set 6, a
     ldh [$93], a
 .jr_000_0a3f:
-    ld a, [$d05c]
+    ld a, [wPlayerScreenXCoord]
     add $0c
     ld [$d05e], a
     call Call_000_07cd
@@ -1299,7 +1298,7 @@ jr_000_0a13:
     set 6, a
     ldh [$93], a
 .jr_000_0a63:
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     cp $10
     jp z, Jump_000_0a9e
     jp c, Jump_000_0a9e
@@ -1362,7 +1361,7 @@ jr_000_0abc:
     bit 4, a
     jr nz, .jr_000_0ad6
     ld c, $4c
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     cp $01
     jr nz, .jr_000_0ad8
     ld a, [$d055]
@@ -1371,7 +1370,7 @@ jr_000_0abc:
 .jr_000_0ad6:
     ld c, $10
 .jr_000_0ad8:
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     sub c
     ld [$d060], a
     sub b
@@ -1379,7 +1378,7 @@ jr_000_0abc:
     ld a, [$d061]
     ld [$d060], a
     call Call_000_127d
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     cp $08
     jp nz, Jump_000_0bba
 .jr_000_0af3:
@@ -1413,13 +1412,13 @@ jr_000_0abc:
     dec c
     dec b
     jr nz, .jr_000_0b25
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     cp $10
     jp nc, Jump_000_0baf
     jp Jump_000_0bba
 
 .jr_000_0b3a:
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     cp $10
     jr z, .jr_000_0af3
     ld a, [$d061]
@@ -1428,7 +1427,7 @@ jr_000_0abc:
     ld a, b
     ld [$d060], a
     call Call_000_127d
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     cp $10
     jp nz, Jump_000_0baf
     call Call_000_0c85
@@ -1440,7 +1439,7 @@ jr_000_0abc:
     jr Jump_000_0baf
 
 .jr_000_0b68:
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     ld c, a
     cp $01
     jr z, .jr_000_0b3a
@@ -1453,7 +1452,7 @@ jr_000_0abc:
     ld a, [$d053]
     and $f0
     ld [$d057], a
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     dec a
     jr z, .jr_000_0b8e
     dec a
@@ -1465,12 +1464,12 @@ jr_000_0abc:
     ld hl, $c100
     add hl, bc
     ld b, $00
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     dec a
     ld c, a
     add hl, bc
     call Call_000_12b4
-    ld hl, $d052
+    ld hl, wStageScrollTileY
     dec [hl]
     ldh a, [$8c]
     set 5, a
@@ -1495,7 +1494,7 @@ Jump_000_0bba:
     inc hl
     or [hl]
     jr nz, .jr_000_0be0
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     add $18
     call Call_000_07a7
     cp $07
@@ -1504,7 +1503,7 @@ Jump_000_0bba:
     ldh a, [$8e]
     bit 6, a
     jp z, Jump_000_0caf
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     cp $71
     jp nc, Jump_000_0caf
     dec a
@@ -1624,10 +1623,10 @@ Jump_000_0caf:
     ldh [$90], a
     bit 5, a
     jp nz, .jump_000_0ee0
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     cp $71
     jp nc, .jump_000_0ee0
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     ld [$d05f], a
     call Call_000_0763
     ld d, $00
@@ -1650,7 +1649,7 @@ Jump_000_0caf:
     call Call_000_1ccb
     ld a, c
     ld [$d05f], a
-    ld a, [$d05c]
+    ld a, [wPlayerScreenXCoord]
     add $03
     ld [$d05e], a
     call Call_000_07cd
@@ -1671,7 +1670,7 @@ Jump_000_0caf:
     set 7, a
     ldh [$93], a
 .jr_000_0d24:
-    ld a, [$d05c]
+    ld a, [wPlayerScreenXCoord]
     add $0c
     ld [$d05e], a
     call Call_000_07cd
@@ -1939,7 +1938,7 @@ Jump_000_0caf:
     ld a, [$d040]
     sub $07
     ld d, a
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     cp d
     jr nz, .jr_000_0f3b
 .jr_000_0f31:
@@ -1949,7 +1948,7 @@ Jump_000_0caf:
     jr z, .jr_000_0f3b
     ld c, $80
 .jr_000_0f3b:
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     add b
     ld b, a
     ld a, c
@@ -1959,7 +1958,7 @@ Jump_000_0caf:
     ld a, [$d040]
     cp $08
     jp nz, .jump_000_1021
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     cp $90
     jp c, .jump_000_1021
     jp .jump_000_0f92
@@ -1972,7 +1971,7 @@ Jump_000_0caf:
     sub b
     ld [$d060], a
     call nz, Call_000_1288
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     ld b, a
     ld a, [$d040]
     sub b
@@ -1990,7 +1989,7 @@ Jump_000_0caf:
     inc c
     dec b
     jr nz, .jr_000_0f80
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     cp $90
     jp nz, .jump_000_1019
 .jump_000_0f92:
@@ -2016,13 +2015,13 @@ Jump_000_0caf:
     call Call_000_1288
     ld a, [$d040]
     sub $07
-    ld [$d052], a
+    ld [wStageScrollTileY], a
     jr .jump_000_1019
 .jr_000_0fc3:
     ld a, [$d040]
     sub $08
     ld c, a
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     cp c
     jr z, .jr_000_0fa9
     jr nc, .jump_000_0f92
@@ -2044,7 +2043,7 @@ Jump_000_0caf:
     ld a, [$d053]
     and $f0
     ld [$d057], a
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     add $08
     ld e, a
     ld a, [$d03f]
@@ -2053,7 +2052,7 @@ Jump_000_0caf:
     ld hl, $c100
     add hl, bc
     ld b, $00
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     dec a
     ld c, a
     add hl, bc
@@ -2061,7 +2060,7 @@ Jump_000_0caf:
     ldh a, [$8c]
     set 5, a
     ldh [$8c], a
-    ld hl, $d052
+    ld hl, wStageScrollTileY
     inc [hl]
 .jump_000_1019:
     ld hl, $d055
@@ -2082,7 +2081,7 @@ Jump_000_0caf:
     inc hl
     or [hl]
     ret nz
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     sub $08
     call Call_000_07b5
     cp $08
@@ -2094,7 +2093,7 @@ Call_000_1046:
     push bc
     push de
     ld hl, $c100
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     dec a
     ld b, a
     ld a, [$d03f]
@@ -2102,7 +2101,7 @@ Call_000_1046:
     call Call_000_1c52
     add hl, bc
     ld b, $00
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     ld c, a
     add hl, bc
     pop de
@@ -2128,7 +2127,7 @@ Call_000_1062:
     inc c
     dec b
     jr nz, .jr_000_1072
-    ld a, [$d05c]
+    ld a, [wPlayerScreenXCoord]
     cp $98
     jp nz, .jump_000_1102
 .jr_000_1084:
@@ -2140,7 +2139,7 @@ Call_000_1062:
     call Call_000_1268
     ld a, [$d042]
     inc a
-    ld [$d051], a
+    ld [wStageScrollTileX], a
     jr .jump_000_1102
 .jr_000_109b:
     ldh a, [$91]
@@ -2149,7 +2148,7 @@ Call_000_1062:
     ld a, [$d042]
     inc a
     ld c, a
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     cp c
     jr z, .jr_000_1084
 .jr_000_10ac:
@@ -2172,7 +2171,7 @@ Call_000_1062:
     ld b, $00
     ld c, $0a
     add hl, bc
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     add $0b
     ld c, a
     ld a, [$d03f]
@@ -2185,7 +2184,7 @@ Call_000_1062:
     ldh a, [$8c]
     set 5, a
     ldh [$8c], a
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     ld b, a
     ld a, [$d03f]
     cp b
@@ -2194,9 +2193,9 @@ Call_000_1062:
     bit 7, a
     jr z, .jr_000_10fe
     xor a
-    ld [$d051], a
+    ld [wStageScrollTileX], a
 .jr_000_10fe:
-    ld hl, $d051
+    ld hl, wStageScrollTileX
     inc [hl]
 .jump_000_1102:
     ld hl, $d053
@@ -2232,12 +2231,12 @@ Call_000_110b:
     dec c
     dec b
     jr nz, .jr_000_112c
-    ld a, [$d05c]
+    ld a, [wPlayerScreenXCoord]
     cp $08
     jp nc, .jump_000_11be
     ret
 .jr_000_113f:
-    ld a, [$d05c]
+    ld a, [wPlayerScreenXCoord]
     cp $08
     jp z, $42a1
     ld a, [$d063]
@@ -2247,13 +2246,13 @@ Call_000_110b:
     ld [$d062], a
     call Call_000_1272
     ld a, $01
-    ld [$d051], a
+    ld [wStageScrollTileX], a
     jp .jump_000_11be
 .jr_000_115d:
     ldh a, [$91]
     bit 7, a
     jr nz, .jr_000_116d
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     cp $01
     jr z, .jr_000_113f
     jp c, $42a1
@@ -2267,7 +2266,7 @@ Call_000_110b:
     ld a, [$d055]
     and $f0
     ld [$d058], a
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     cp $01
     jr nz, .jr_000_11ac
     ldh a, [$91]
@@ -2275,12 +2274,12 @@ Call_000_110b:
     jr z, .jr_000_11ac
     ld a, [$d03f]
     inc a
-    ld [$d051], a
+    ld [wStageScrollTileX], a
     call Call_000_1046
     dec hl
     dec hl
     ld a, [$d03f]
-    ld [$d051], a
+    ld [wStageScrollTileX], a
     call Call_000_1292
     ldh a, [$8c]
     set 5, a
@@ -2294,7 +2293,7 @@ Call_000_110b:
     ldh a, [$8c]
     set 5, a
     ldh [$8c], a
-    ld hl, $d051
+    ld hl, wStageScrollTileX
     dec [hl]
 .jump_000_11be:
     ld hl, $d063
@@ -2334,10 +2333,10 @@ Call_000_11de:
     jr .jr_000_123f
 .jr_000_11f1:
     ld a, $14
-    ld [$d051], a
+    ld [wStageScrollTileX], a
 .jr_000_11f6:
     ld c, $1e
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     cp c
     jr z, .jr_000_11f1
     ld a, [$d053]
@@ -2356,7 +2355,7 @@ Call_000_11de:
     ld [$d058], a
     ld hl, $c100
     ld b, $00
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     bit 7, a
     jr z, .jr_000_122b
     cpl
@@ -2375,7 +2374,7 @@ Call_000_11de:
     ldh a, [$8c]
     set 5, a
     ldh [$8c], a
-    ld hl, $d051
+    ld hl, wStageScrollTileX
     inc [hl]
 .jr_000_123f:
     ld a, [$d053]
@@ -2385,7 +2384,7 @@ Call_000_11de:
 
 
 Call_000_1248:
-    ld hl, $d05d
+    ld hl, wPlayerScreenYCoord
     ld a, [$d055]
     and $0f
     add [hl]
@@ -2393,7 +2392,7 @@ Call_000_1248:
     jr nz, .jr_000_1266
     scf
     ret
-    ld hl, $d05d
+    ld hl, wPlayerScreenYCoord
     ld a, [$d055]
     and $0f
     add [hl]
@@ -2407,7 +2406,7 @@ Call_000_1248:
 
 
 Call_000_1268:
-    ld hl, $d05c
+    ld hl, wPlayerScreenXCoord
     ld a, [$d062]
     ld b, a
     add [hl]
@@ -2416,7 +2415,7 @@ Call_000_1268:
 
 
 Call_000_1272:
-    ld hl, $d05c
+    ld hl, wPlayerScreenXCoord
     ld a, [$d062]
     ld b, a
     ld a, [hl]
@@ -2426,7 +2425,7 @@ Call_000_1272:
 
 
 Call_000_127d:
-    ld hl, $d05d
+    ld hl, wPlayerScreenYCoord
     ld a, [$d060]
     ld b, a
     ld a, [hl]
@@ -2436,7 +2435,7 @@ Call_000_127d:
 
 
 Call_000_1288:
-    ld hl, $d05d
+    ld hl, wPlayerScreenYCoord
     ld a, [$d060]
     ld b, a
     add [hl]
@@ -2473,7 +2472,7 @@ Call_000_12b4:
     ld de, $cb00
     ld a, [$d03f]
     ld b, a
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     add $0a
     sub b
     jr c, .jr_000_12cb
@@ -2501,7 +2500,7 @@ Call_000_12b4:
     jr z, .jr_000_1316
     push bc
     push de
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     ld c, a
     ldh a, [$8c]
     bit 2, a
@@ -2545,7 +2544,7 @@ Call_000_131a:
     ld h, $00
     add hl, hl
     add hl, hl
-    ld bc, $c600
+    ld bc, wMetatileDefinitions
     add hl, bc
     ld a, [$d057]
     ld [$d06b], a
@@ -2629,10 +2628,10 @@ Call_000_139b:
     ret nz
     ld a, $01
     ld [MBC1RomBank], a
-    ld a, [$d05c]
+    ld a, [wPlayerScreenXCoord]
     add $08
     ld [$d0a1], a
-    ld a, [$d05d]
+    ld a, [wPlayerScreenYCoord]
     add $08
     ld [$d0d1], a
     ld de, $157a
@@ -3273,7 +3272,7 @@ Call_000_19c9:
     and $08
     ldh [$90], a
     ld hl, $38b1
-    ld a, [$d03b]
+    ld a, [wCurStage]
     add a
     ld c, a
     ld b, $00
@@ -3284,7 +3283,7 @@ Call_000_19c9:
     ld b, a
     ld h, b
     ld l, c
-    ld a, [$d03e]
+    ld a, [wCurStageScreen]
     add a
     add a
     add a
@@ -3311,7 +3310,7 @@ Call_000_19f9:
     ld [wClearAllSprites], a
     call StartTimer
     ld hl, $38b1
-    ld a, [$d03b]
+    ld a, [wCurStage]
     add a
     ld c, a
     ld b, $00
@@ -3322,7 +3321,7 @@ Call_000_19f9:
     ld b, a
     ld h, b
     ld l, c
-    ld a, [$d03e]
+    ld a, [wCurStageScreen]
     add a
     add a
     add a
@@ -3385,10 +3384,10 @@ Call_000_19f9:
     inc hl
     ld a, [hl]
     ld [$d042], a
-    ld a, [$d03b]
+    ld a, [wCurStage]
     cp $04
     jp nz, .jump_000_1bc2
-    ld a, [$d03e]
+    ld a, [wCurStageScreen]
     and a
     jr nz, .jr_000_1b09
     ldh a, [$90]
@@ -3475,26 +3474,26 @@ Call_000_19f9:
     push af
     push hl
     push de
-    ld a, [$d039]
+    ld a, [wExtraGameEnabled]
     and a
-    jr nz, .jr_000_1b50
-    ld hl, $4000
-    ld de, $8000
-    ld c, $02
+    jr nz, .loadExtraGameSprites
+    ld hl, NormalGameSpritesGfx
+    ld de, _VRAM + $0
+    ld c, Bank(NormalGameSpritesGfx)
     call Decompress
-    ld hl, $4855
-    ld de, $9670
-    ld c, $02
+    ld hl, NormalGameStatusBarGfx
+    ld de, _VRAM + $1670
+    ld c, Bank(NormalGameStatusBarGfx)
     call Decompress
     jr .jr_000_1b66
-.jr_000_1b50:
-    ld hl, $488d
-    ld de, $8000
-    ld c, $0a
+.loadExtraGameSprites:
+    ld hl, ExtraGameSpritesGfx
+    ld de, _VRAM + $0
+    ld c, Bank(ExtraGameSpritesGfx)
     call Decompress
-    ld hl, $50f3
-    ld de, $9670
-    ld c, $0a
+    ld hl, ExtraGameStatusBarGfx
+    ld de, _VRAM + $1670
+    ld c, Bank(ExtraGameStatusBarGfx)
     call Decompress
 .jr_000_1b66:
     pop de
@@ -3508,7 +3507,7 @@ Call_000_19f9:
     ld b, $00
     ld c, a
     ld hl, Unk2070
-    ld a, [$d039]
+    ld a, [wExtraGameEnabled]
     and a
     jr z, .jr_000_1b7c
     ld hl, Unk2089
@@ -3545,13 +3544,13 @@ Call_000_19f9:
     ld e, a
     ld h, d
     ld l, e
-    ld de, $c600
+    ld de, wMetatileDefinitions
     call Decompress
     ld hl, $ff91
     bit 5, [hl]
     jr z, .jump_000_1bc2
     ld hl, $1bcf
-    ld a, [$d03e]
+    ld a, [wCurStageScreen]
     ld c, a
     ld b, $00
     add hl, bc
@@ -4361,19 +4360,43 @@ Call_000_1fb2:
 
 
 Unk2070:
-    db $02, $49, $52, $E0, $8A, $02, $52, $66, $E0, $8A, $02, $5B, $2C, $E0, $8A, $02, $63, $EE, $E0, $8A, $02, $6C, $49, $00, $88
+    db $02, $49, $52, $E0, $8A
+    db $02, $52, $66, $E0, $8A
+    db $02, $5B, $2C, $E0, $8A
+    db $02, $63, $EE, $E0, $8A
+    db $02, $6C, $49, $00, $88
 
 Unk2089:
-    db $0A, $51, $F5, $E0, $8A, $0A, $5B, $0B, $E0, $8A, $0A, $63, $C1, $E0, $8A, $0A, $6C, $79, $E0, $8A, $02, $6C, $49, $00, $88
+    db $0A, $51, $F5, $E0, $8A
+    db $0A, $5B, $0B, $E0, $8A
+    db $0A, $63, $C1, $E0, $8A
+    db $0A, $6C, $79, $E0, $8A
+    db $02, $6C, $49, $00, $88
 
 Unk20A2:
-    db $03, $46, $E0, $03, $4A, $C3, $03, $48, $D9, $03, $4C, $FF, $06, $77, $7C
+    db $03
+    bigdw $46E0
+
+    db $03
+    bigdw $4AC3
+
+    db $03
+    bigdw $48D9
+
+    db $03
+    bigdw $4CFF
+
+    db $06
+    bigdw $777C
+
 
 Unk20B1:
-    db $00, $40, $C0, $00, $01, $00, $00, $00
+    db $00, $40, $C0, $00
+    db $01, $00, $00, $00
 
 Unk20B9:
-    db $40, $80, $C0, $00, $02, $01, $00, $00
+    db $40, $80, $C0, $00
+    db $02, $01, $00, $00
 
 
 Decompress:
@@ -4638,7 +4661,7 @@ Call_000_21fb:
     call ClearSprites
     ld a, [wLoadedROMBank]
     push af
-    ld a, [$d039]
+    ld a, [wExtraGameEnabled]
     and a
     ld a, $07
     jr z, .jr_000_2214
@@ -4659,18 +4682,18 @@ Call_000_21fb:
     bit 1, [hl]
     jr z, .jr_000_223a
     ld hl, $413a
-    ld a, [$d03b]
+    ld a, [wCurStage]
     jr .jr_000_2249
 .jr_000_223a:
     ld hl, $4000
-    ld a, [$d03b]
+    ld a, [wCurStage]
     ld e, a
     add hl, de
     add hl, de
     ld a, [hl+]
     ld h, [hl]
     ld l, a
-    ld a, [$d03e]
+    ld a, [wCurStageScreen]
 .jr_000_2249:
     ld e, a
     add hl, de
@@ -4733,13 +4756,13 @@ Call_000_21fb:
 .jr_000_22c5:
     call Call_000_3199
     ld hl, $d3ed
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     cp [hl]
     jr nz, .jr_000_22c5
 .jr_000_22d1:
     call Call_000_3199
     ld hl, $d3ee
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     cp [hl]
     jr nz, .jr_000_22d1
 .jr_000_22dd:
@@ -5250,7 +5273,7 @@ Call_000_2447:
     ld a, [$d053]
     and $0f
     ld e, a
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     dec a
     ld l, a
     ld h, $00
@@ -5282,7 +5305,7 @@ Call_000_2447:
     ld a, [$d055]
     and $0f
     ld e, a
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     dec a
     ld l, a
     ld h, $00
@@ -5981,7 +6004,7 @@ Call_29b7:
 .jr_000_29d4:
     call Call_000_2ce5
     ret c
-    ld a, [$d039]
+    ld a, [wExtraGameEnabled]
     and a
     ld a, $04
     jr z, .jr_000_29e2
@@ -6080,7 +6103,7 @@ Call_29b7:
     ld a, [$d3da]
     ld [hl], a
 .jump_000_2a80:
-    ld a, [$d039]
+    ld a, [wExtraGameEnabled]
     and a
     ld a, $08
     jr z, .jr_000_2a8a
@@ -6266,7 +6289,7 @@ Call_000_2b26:
     and $f0
     or e
     ld e, a
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     add $0e
     cp e
     jr c, .jr_000_2bc7
@@ -6297,7 +6320,7 @@ Call_000_2b26:
     and $f0
     or e
     ld e, a
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     add $0c
     cp e
     jr c, .jr_000_2bc7
@@ -6395,7 +6418,7 @@ Call_000_2b26:
     ld hl, $ff94
     bit 1, [hl]
     jr z, .jr_000_2c96
-    ld a, [$d03b]
+    ld a, [wCurStage]
     cp $04
     jr z, .jr_000_2c94
     ld hl, $d140
@@ -6525,7 +6548,7 @@ Call_000_2d2d:
     ld a, [$d053]
     and $0f
     ld d, a
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     dec a
     swap a
     ld e, a
@@ -6608,7 +6631,7 @@ Call_000_2d2d:
     ld a, [$d055]
     and $0f
     ld d, a
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     dec a
     swap a
     ld e, a
@@ -7079,7 +7102,7 @@ Call_000_3076:
     swap a
     ld b, a
     inc d
-    ld hl, $d051
+    ld hl, wStageScrollTileX
     ld a, d
     sub [hl]
     add b
@@ -7090,7 +7113,7 @@ Call_000_3076:
     swap a
     ld b, a
     inc e
-    ld hl, $d052
+    ld hl, wStageScrollTileY
     ld a, e
     sub [hl]
     add b
@@ -7294,14 +7317,14 @@ jr_000_319f:
 
 Call_000_31b7:
     ld hl, $d3ed
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     cp [hl]
     jr z, .jr_000_31c4
     jr nc, .jr_000_31d2
     jr .jr_000_3220
 .jr_000_31c4:
     ld hl, $d3ee
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     cp [hl]
     ret z
     jp nc, .jump_000_3271
@@ -7316,7 +7339,7 @@ Call_000_31b7:
     and a
     jr z, .jr_000_31f0
     call Call_000_330f
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     add $0b
     cp [hl]
     jr c, .jr_000_31fa
@@ -7329,14 +7352,14 @@ Call_000_31b7:
     ld [$d3e9], a
     jr .jr_000_3200
 .jr_000_31fa:
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     ld [$d3ed], a
 .jr_000_3200:
     ld a, [$d3ea]
     add $03
     ld [$d3ea], a
     call Call_000_330f
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     sub e
     jr nc, .jr_000_3212
     xor a
@@ -7359,7 +7382,7 @@ Call_000_31b7:
     and a
     jr z, .jr_000_324d
     call Call_000_330f
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     sub $03
     jr nc, .jr_000_3239
     xor a
@@ -7376,7 +7399,7 @@ Call_000_31b7:
     ld [$d3ea], a
     jr .jr_000_3253
 .jr_000_324d:
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     ld [$d3ed], a
 .jr_000_3253:
     ld a, [$d3e9]
@@ -7385,7 +7408,7 @@ Call_000_31b7:
     sub $03
     ld [$d3e9], a
     call Call_000_330f
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     add e
     cp [hl]
     jr c, .jr_000_3253
@@ -7404,7 +7427,7 @@ Call_000_31b7:
     and a
     jr z, .jr_000_328f
     call Call_000_331c
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     add $09
     cp [hl]
     jr c, .jr_000_3299
@@ -7417,14 +7440,14 @@ Call_000_31b7:
     ld [$d3eb], a
     jr .jr_000_329f
 .jr_000_3299:
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     ld [$d3ee], a
 .jr_000_329f:
     ld a, [$d3ec]
     add $03
     ld [$d3ec], a
     call Call_000_331c
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     sub e
     jr nc, .jr_000_32b1
     xor a
@@ -7447,7 +7470,7 @@ Call_000_31b7:
     and a
     jr z, .jr_000_32ec
     call Call_000_331c
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     sub $03
     jr nc, .jr_000_32d8
     xor a
@@ -7464,7 +7487,7 @@ Call_000_31b7:
     ld [$d3ec], a
     jr .jr_000_32f2
 .jr_000_32ec:
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     ld [$d3ee], a
 .jr_000_32f2:
     ld a, [$d3eb]
@@ -7473,7 +7496,7 @@ Call_000_31b7:
     sub $03
     ld [$d3eb], a
     call Call_000_331c
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     add e
     cp [hl]
     jr c, .jr_000_32f2
@@ -7518,7 +7541,7 @@ Call_000_3329:
     ld_long a, $ff91
     bit 7, a
     jr nz, .jr_000_3350
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     sub $03
     jr nc, .jr_000_3345
     xor a
@@ -7527,14 +7550,14 @@ Call_000_3329:
     jr z, .jr_000_3349
     ret nc
 .jr_000_3349:
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     add $0b
     cp d
     ret c
 .jr_000_3350:
     ld a, [hl+]
     ld e, a
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     sub $03
     jr nc, .jr_000_335a
     xor a
@@ -7543,7 +7566,7 @@ Call_000_3329:
     jr z, .jr_000_335e
     ret nc
 .jr_000_335e:
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     add $09
     cp e
     ret c
@@ -7806,7 +7829,7 @@ jr_000_37b9:
     ld a, [$d053]
     and $0f
     ld b, a
-    ld a, [$d051]
+    ld a, [wStageScrollTileX]
     dec a
     swap a
     ld d, a
@@ -7831,7 +7854,7 @@ jr_000_37b9:
     ld a, [$d055]
     and $0f
     ld b, a
-    ld a, [$d052]
+    ld a, [wStageScrollTileY]
     dec a
     swap a
     ld d, a
@@ -7927,7 +7950,119 @@ jr_000_388a:
     ret
 
 Unk388e:
-    INCBIN "baserom.gb", $388e, $3d2d - $388e
+    db $00, $01, $01, $28, $3C, $00, $01
+    db $00, $01, $01, $28, $58, $00, $0C
+    db $00, $01, $01, $28, $32, $00, $06
+    db $00, $01, $01, $48, $41, $00, $00
+    db $00, $01, $01, $28, $70, $00, $11
+
+Unk38b1:
+    dw Unk38bb
+    dw Unk38e3
+    dw Unk3963
+    dw Unk39a3
+    dw Unk39f3
+
+Unk38bb:
+    INCBIN "baserom.gb", $38bb, $38E3 - $38bb
+
+Unk38e3:
+    INCBIN "baserom.gb", $38E3, $3963 - $38E3
+
+Unk3963:
+    INCBIN "baserom.gb", $3963, $39A3 - $3963
+
+Unk39a3:
+    INCBIN "baserom.gb", $39A3, $39F3 - $39A3
+
+Unk39f3:
+    INCBIN "baserom.gb", $39F3, $3a43 - $39F3
+
+Unk3a43:
+    dw Unk3a4d
+    dw Unk3a66
+    dw Unk3ab1
+    dw Unk3ad9
+    dw Unk3b0b
+
+Unk3a4d:
+    INCBIN "baserom.gb", $3a4d, $3a66 - $3a4d
+
+Unk3a66:
+    INCBIN "baserom.gb", $3a66, $3ab1 - $3a66
+
+Unk3ab1:
+    INCBIN "baserom.gb", $3ab1, $3ad9 - $3ab1
+
+Unk3ad9:
+    INCBIN "baserom.gb", $3ad9, $3b0b - $3ad9
+
+Unk3b0b:
+    INCBIN "baserom.gb", $3b0b, $3b3d - $3b0b
+
+DoorWarps:
+; 0: stage
+; 1: stage screen
+; 2: metatile x coord
+; 3: metatile y coord
+; 4: destination stage screen
+; 5-8: not straightforward. some are obviously dest coords, but they don't match the source coords
+    db $00, $00, $2C, $07, $01, $04, $00, $04, $05
+    db $00, $01, $09, $06, $00, $27, $00, $04, $06
+    db $00, $02, $4A, $08, $03, $02, $20, $04, $06
+    db $00, $03, $09, $06, $04, $00, $00, $01, $03
+    db $01, $00, $08, $08, $01, $00, $08, $01, $05
+    db $01, $01, $02, $03, $02, $00, $00, $04, $07
+    db $01, $01, $09, $0B, $03, $00, $00, $03, $07
+    db $01, $02, $05, $08, $01, $00, $00, $01, $02
+    db $01, $03, $16, $08, $04, $01, $00, $04, $03
+    db $01, $04, $08, $0C, $05, $00, $00, $03, $03
+    db $01, $04, $0D, $04, $07, $00, $00, $03, $05
+    db $01, $05, $03, $0A, $06, $00, $0A, $07, $05
+    db $01, $06, $08, $04, $07, $00, $00, $03, $05
+    db $01, $09, $0C, $05, $0A, $00, $00, $04, $07
+    db $01, $09, $14, $10, $0B, $00, $00, $02, $06
+    db $01, $0A, $05, $08, $09, $07, $00, $04, $04
+    db $01, $0B, $0C, $04, $0C, $00, $08, $03, $07
+    db $01, $0C, $02, $05, $0C, $02, $08, $06, $07
+    db $01, $0C, $09, $10, $0C, $00, $00, $01, $04
+    db $01, $0C, $03, $09, $0C, $02, $01, $06, $05
+    db $01, $0C, $09, $07, $0C, $00, $03, $02, $05
+    db $01, $0C, $0A, $04, $0D, $00, $00, $02, $07
+    db $01, $0D, $0C, $05, $0E, $00, $00, $04, $05
+    db $02, $00, $75, $06, $01, $00, $01, $04, $04
+    db $02, $01, $23, $06, $02, $00, $00, $04, $02
+    db $02, $01, $2B, $0F, $03, $00, $00, $03, $03
+    db $02, $02, $09, $15, $01, $18, $00, $04, $04
+    db $02, $03, $2D, $07, $04, $00, $00, $02, $03
+    db $02, $03, $43, $05, $05, $00, $10, $02, $07
+    db $02, $04, $03, $04, $03, $2A, $00, $04, $06
+    db $03, $00, $60, $07, $01, $00, $00, $02, $07
+    db $03, $01, $44, $08, $02, $00, $18, $04, $05
+    db $03, $02, $05, $10, $03, $00, $00, $04, $05
+    db $03, $02, $07, $06, $04, $00, $10, $02, $05
+    db $03, $03, $2D, $05, $04, $00, $10, $02, $05
+    db $03, $04, $04, $00, $05, $00, $00, $04, $01
+    db $03, $05, $2F, $04, $06, $00, $00, $04, $05
+    db $03, $06, $38, $08, $07, $02, $1E, $04, $05
+    db $03, $07, $09, $03, $08, $00, $00, $04, $03
+    db $03, $07, $07, $07, $09, $00, $00, $04, $05
+    db $03, $08, $06, $63, $09, $00, $00, $04, $05
+    db $04, $00, $34, $04, $01, $00, $00, $03, $06
+    db $04, $00, $35, $04, $01, $00, $00, $03, $06
+    db $04, $00, $34, $08, $02, $00, $07, $03, $05
+    db $04, $00, $35, $08, $02, $00, $07, $03, $05
+    db $04, $00, $3A, $04, $03, $00, $00, $03, $04
+    db $04, $00, $3B, $04, $03, $00, $00, $03, $04
+    db $04, $00, $3A, $08, $04, $00, $00, $04, $03
+    db $04, $00, $3B, $08, $04, $00, $00, $04, $03
+    db $04, $00, $37, $05, $05, $04, $00, $02, $03
+    db $04, $00, $38, $05, $05, $04, $00, $02, $03
+    db $04, $01, $24, $05, $06, $00, $00, $01, $03
+    db $04, $02, $1C, $04, $08, $00, $00, $04, $03
+    db $04, $03, $04, $0D, $07, $00, $00, $02, $06
+    db $04, $04, $03, $31, $09, $00, $00, $02, $06
+    db $FF
 
 Jump_000_3d2d:
     ld hl, $ff94
