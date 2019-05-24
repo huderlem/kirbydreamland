@@ -19,6 +19,8 @@ Set up the repository.
 	git clone https://github.com/huderlem/kirbydreamland
 	cd kirbydreamland
 
+This project is incomplete and requires the user to provide an original Kirby's Dream Land ROM.  Name this file `baserom.gb` and place it in the root `kirbydreamland` directory.
+
 To build `kirbydreamland.gb`:
 
 	make
