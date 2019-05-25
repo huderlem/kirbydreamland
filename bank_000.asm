@@ -3272,7 +3272,7 @@ Call_000_19c9:
     ldh a, [$90]
     and $08
     ldh [$90], a
-    ld hl, StageMetatiles
+    ld hl, StageMaps
     ld a, [wCurStage]
     add a
     ld c, a
@@ -3310,7 +3310,7 @@ Call_000_19f9:
     ld [$d03d], a
     ld [wClearAllSprites], a
     call StartTimer
-    ld hl, StageMetatiles
+    ld hl, StageMaps
     ld a, [wCurStage]
     add a
     ld c, a
@@ -7958,216 +7958,216 @@ Unk388e:
     db $00, $01, $01, $48, $41, $00, $00
     db $00, $01, $01, $28, $70, $00, $11
 
-StageMetatiles:
-    dw GreenGreensMetatiles
-    dw CasteLololoMetatiles
-    dw FloatIslandsMetatiles
-    dw BubblyCloudsMetatiles
-    dw MtDededeMetatiles
+StageMaps:
+    dw GreenGreensMaps
+    dw CasteLololoMaps
+    dw FloatIslandsMaps
+    dw BubblyCloudsMaps
+    dw MtDededeMaps
 
-GreenGreensMetatiles:
-    db $03
-    bigdw $6da3
+GreenGreensMaps:
+    db Bank(MetatileMap_GreenGreensScreen0)
+    bigdw MetatileMap_GreenGreensScreen0
     db $6E, $08, $00, $00, $46
 
-    db $03
-    bigdw $6a78
+    db Bank(MetatileMap_GreenGreensScreen1)
+    bigdw MetatileMap_GreenGreensScreen1
     db $10, $08, $00, $00, $06
 
-    db $03
-    bigdw $6ba1
+    db Bank(MetatileMap_GreenGreensScreen2)
+    bigdw MetatileMap_GreenGreensScreen2
     db $50, $08, $00, $00, $46
 
-    db $03
-    bigdw $7005
+    db Bank(MetatileMap_GreenGreensScreen3)
+    bigdw MetatileMap_GreenGreensScreen3
     db $10, $28, $00, $00, $06
 
-    db $03
-    bigdw $6ad2
+    db Bank(MetatileMap_GreenGreensScreen4)
+    bigdw MetatileMap_GreenGreensScreen4
     db $0A, $18, $00, $08, $00
 
 
-CasteLololoMetatiles:
-    db $03
-    bigdw $7626
+CasteLololoMaps:
+    db Bank(MetatileMap_CastleLololoScreen0)
+    bigdw MetatileMap_CastleLololoScreen0
     db $0A, $08, $00, $00, $00
 
-    db $03
-    bigdw $771e
+    db Bank(MetatileMap_CastleLololoScreen1)
+    bigdw MetatileMap_CastleLololoScreen1
     db $0A, $10, $01, $00, $00
 
-    db $03
-    bigdw $73f1
+    db Bank(MetatileMap_CastleLololoScreen2)
+    bigdw MetatileMap_CastleLololoScreen2
     db $0A, $08, $00, $00, $00
 
-    db $03
-    bigdw $71cd
+    db Bank(MetatileMap_CastleLololoScreen3)
+    bigdw MetatileMap_CastleLololoScreen3
     db $18, $08, $01, $00, $0E
 
-    db $03
-    bigdw $742b
+    db Bank(MetatileMap_CastleLololoScreen4)
+    bigdw MetatileMap_CastleLololoScreen4
     db $14, $0C, $01, $04, $0A
 
-    db $03
-    bigdw $7771
+    db Bank(MetatileMap_CastleLololoScreen5)
+    bigdw MetatileMap_CastleLololoScreen5
     db $10, $0C, $01, $00, $06
 
-    db $03
-    bigdw $758d
+    db Bank(MetatileMap_CastleLololoScreen6)
+    bigdw MetatileMap_CastleLololoScreen6
     db $0A, $14, $00, $00, $00
 
-    db $03
-    bigdw $7234
+    db Bank(MetatileMap_CastleLololoScreen7)
+    bigdw MetatileMap_CastleLololoScreen7
     db $3C, $08, $01, $00, $14
 
-    db $03
-    bigdw $7317
+    db Bank(MetatileMap_CastleLololoScreen8)
+    bigdw MetatileMap_CastleLololoScreen8
     db $0A, $08, $00, $00, $00
 
-    db $03
-    bigdw $74ba
+    db Bank(MetatileMap_CastleLololoScreen9)
+    bigdw MetatileMap_CastleLololoScreen9
     db $16, $10, $00, $00, $0C
 
-    db $03
-    bigdw $7199
+    db Bank(MetatileMap_CastleLololoScreen10)
+    bigdw MetatileMap_CastleLololoScreen10
     db $0A, $08, $01, $00, $00
 
-    db $03
-    bigdw $7669
+    db Bank(MetatileMap_CastleLololoScreen11)
+    bigdw MetatileMap_CastleLololoScreen11
     db $10, $08, $00, $00, $06
 
-    db $03
-    bigdw $7366
+    db Bank(MetatileMap_CastleLololoScreen12)
+    bigdw MetatileMap_CastleLololoScreen12
     db $0C, $10, $00, $00, $02
 
-    db $03
-    bigdw $76bc
+    db Bank(MetatileMap_CastleLololoScreen13)
+    bigdw MetatileMap_CastleLololoScreen13
     db $10, $08, $00, $00, $06
 
-    db $03
-    bigdw $733d
+    db Bank(MetatileMap_CastleLololoScreen14)
+    bigdw MetatileMap_CastleLololoScreen14
     db $0A, $08, $00, $08, $00
 
-    db $03
-    bigdw $7801
+    db Bank(MetatileMap_CastleLololoScreen15)
+    bigdw MetatileMap_CastleLololoScreen15
     db $0A, $08, $00, $00, $00
 
 
-FloatIslandsMetatiles:
-    db $03
-    bigdw $6273
+FloatIslandsMaps:
+    db Bank(MetatileMap_FloatIslandsScreen0)
+    bigdw MetatileMap_FloatIslandsScreen0
     db $78, $08, $00, $00, $6E
 
-    db $03
-    bigdw $6688
+    db Bank(MetatileMap_FloatIslandsScreen1)
+    bigdw MetatileMap_FloatIslandsScreen1
     db $32, $10, $01, $00, $28
 
-    db $03
-    bigdw $65bc
+    db Bank(MetatileMap_FloatIslandsScreen2)
+    bigdw MetatileMap_FloatIslandsScreen2
     db $0A, $18, $00, $00, $00
 
-    db $03
-    bigdw $68d3
+    db Bank(MetatileMap_FloatIslandsScreen3)
+    bigdw MetatileMap_FloatIslandsScreen3
     db $46, $08, $00, $00, $3C
 
-    db $03
-    bigdw $6593
+    db Bank(MetatileMap_FloatIslandsScreen4)
+    bigdw MetatileMap_FloatIslandsScreen4
     db $0A, $08, $01, $00, $00
 
-    db $03
-    bigdw $686f
+    db Bank(MetatileMap_FloatIslandsScreen5)
+    bigdw MetatileMap_FloatIslandsScreen5
     db $0A, $18, $01, $01, $00
 
-    db $03
-    bigdw $6a54
+    db Bank(MetatileMap_FloatIslandsScreen6)
+    bigdw MetatileMap_FloatIslandsScreen6
     db $0A, $08, $00, $00, $00
 
-    db $03
-    bigdw $649e
+    db Bank(MetatileMap_FloatIslandsScreen7)
+    bigdw MetatileMap_FloatIslandsScreen7
     db $2A, $08, $00, $00, $14
 
 
-BubblyCloudsMetatiles:
-    db $03
-    bigdw $7843
+BubblyCloudsMaps:
+    db Bank(MetatileMap_BubblyCloudsScreen0)
+    bigdw MetatileMap_BubblyCloudsScreen0
     db $62, $08, $00, $00, $58
 
-    db $03
-    bigdw $7c9f
+    db Bank(MetatileMap_BubblyCloudsScreen1)
+    bigdw MetatileMap_BubblyCloudsScreen1
     db $46, $08, $00, $00, $3C
 
-    db $03
-    bigdw $7ac5
+    db Bank(MetatileMap_BubblyCloudsScreen2)
+    bigdw MetatileMap_BubblyCloudsScreen2
     db $12, $20, $00, $04, $16
 
-    db $06
-    bigdw $6ce8
+    db Bank(MetatileMap_BubblyCloudsScreen3)
+    bigdw MetatileMap_BubblyCloudsScreen3
     db $32, $0C, $00, $00, $28
 
-    db $03
-    bigdw $7e39
+    db Bank(MetatileMap_BubblyCloudsScreen4)
+    bigdw MetatileMap_BubblyCloudsScreen4
     db $0A, $18, $00, $00, $00
 
-    db $06
-    bigdw $69d7
+    db Bank(MetatileMap_BubblyCloudsScreen5)
+    bigdw MetatileMap_BubblyCloudsScreen5
     db $32, $0E, $00, $00, $28
 
-    db $06
-    bigdw $6b94
+    db Bank(MetatileMap_BubblyCloudsScreen6)
+    bigdw MetatileMap_BubblyCloudsScreen6
     db $3C, $08, $00, $00, $32
 
-    db $06
-    bigdw $6800
+    db Bank(MetatileMap_BubblyCloudsScreen7)
+    bigdw MetatileMap_BubblyCloudsScreen7
     db $0E, $28, $00, $00, $04
 
-    db $06
-    bigdw $6e6d
+    db Bank(MetatileMap_BubblyCloudsScreen8)
+    bigdw MetatileMap_BubblyCloudsScreen8
     db $0A, $64, $00, $00, $00
 
-    db $06
-    bigdw $712d
+    db Bank(MetatileMap_BubblyCloudsScreen9)
+    bigdw MetatileMap_BubblyCloudsScreen9
     db $0A, $08, $00, $08, $00
 
 
-MtDededeMetatiles:
-    db $06
-    bigdw $716e
+MtDededeMaps:
+    db Bank(MetatileMap_MtDededeScreen0)
+    bigdw MetatileMap_MtDededeScreen0
     db $3C, $08, $00, $10, $32
 
-    db $06
-    bigdw $7653
+    db Bank(MetatileMap_MtDededeScreen1)
+    bigdw MetatileMap_MtDededeScreen1
     db $28, $08, $00, $00, $1E
 
-    db $06
-    bigdw $7225
+    db Bank(MetatileMap_MtDededeScreen2)
+    bigdw MetatileMap_MtDededeScreen2
     db $1E, $10, $00, $00, $14
 
-    db $06
-    bigdw $739c
+    db Bank(MetatileMap_MtDededeScreen3)
+    bigdw MetatileMap_MtDededeScreen3
     db $1A, $0E, $00, $00, $10
 
-    db $06
-    bigdw $7497
+    db Bank(MetatileMap_MtDededeScreen4)
+    bigdw MetatileMap_MtDededeScreen4
     db $0A, $32, $00, $00, $00
 
-    db $06
-    bigdw $71e2
+    db Bank(MetatileMap_MtDededeScreen5)
+    bigdw MetatileMap_MtDededeScreen5
     db $12, $08, $00, $00, $08
 
-    db $03
-    bigdw $6ad2
+    db Bank(MetatileMap_GreenGreensScreen4)
+    bigdw MetatileMap_GreenGreensScreen4
     db $0A, $18, $00, $00, $00
 
-    db $03
-    bigdw $649e
+    db Bank(MetatileMap_FloatIslandsScreen7)
+    bigdw MetatileMap_FloatIslandsScreen7
     db $2A, $08, $00, $00, $14
 
-    db $03
-    bigdw $733d
+    db Bank(MetatileMap_CastleLololoScreen14)
+    bigdw MetatileMap_CastleLololoScreen14
     db $0A, $08, $00, $00, $00
 
-    db $06
-    bigdw $712d
+    db Bank(MetatileMap_BubblyCloudsScreen9)
+    bigdw MetatileMap_BubblyCloudsScreen9
     db $0A, $08, $00, $00, $00
 
 
