@@ -1981,7 +1981,7 @@ Call_001_4d3f:
     add hl, bc
     ld b, h
     ld c, l
-    ld hl, $c100
+    ld hl, wMetatiles
     add hl, bc
     call Call_000_1964
     ld a, $16

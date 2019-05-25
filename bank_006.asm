@@ -266,7 +266,7 @@ Jump_006_4203:
     ld bc, $0032
 
 jr_006_421e:
-    ld hl, $c100
+    ld hl, wMetatiles
     add hl, bc
     call $1964
     xor a
@@ -656,7 +656,7 @@ Call_006_4485:
     ld b, a
     ld a, [$d03f]
     ld e, a
-    call $1c52
+    call Call_000_1c52
     ld a, [wStageScrollTileX]
     dec a
     ld l, a
@@ -664,7 +664,7 @@ Call_006_4485:
     add hl, bc
     ld b, h
     ld c, l
-    ld hl, $c100
+    ld hl, wMetatiles
     add hl, bc
     call $1964
     ld a, $ff
@@ -776,8 +776,8 @@ jr_006_456e:
     ld e, a
     ld a, [$d03f]
     ld b, a
-    call $1c52
-    ld hl, $c100
+    call Call_000_1c52
+    ld hl, wMetatiles
     add hl, bc
     ld b, $00
     ld a, [wStageScrollTileX]
@@ -1263,7 +1263,7 @@ jr_006_48e0:
     ld c, $06
     call Decompress
     ld hl, $71e2
-    ld de, $c100
+    ld de, wMetatiles
     ld c, $06
     call Decompress
     ld a, $04

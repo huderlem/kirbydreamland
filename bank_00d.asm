@@ -7316,7 +7316,7 @@ jr_00d_5ff4:
     ld b, d
     ld l, e
     db $10
-    call $c100
+    call wMetatiles
     ldh a, [$c3]
     nop
     nop

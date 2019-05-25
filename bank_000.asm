@@ -627,7 +627,7 @@ TryDoorWarp:
     ldh a, [$92]
     and $20
     ldh [$92], a
-    ld hl, $c100
+    ld hl, wMetatiles
     add hl, bc
     call Call_000_1964
     ld a, $16
@@ -939,7 +939,7 @@ Call_000_07cd:
     ld a, [$d03f]
     ld e, a
     call Call_000_1c52
-    ld hl, $c100
+    ld hl, wMetatiles
     add hl, bc
     push hl
     call Call_000_0784
@@ -993,7 +993,7 @@ Call_000_819:
     ld a, [$d03f]
     ld e, a
     call Call_000_1c52
-    ld hl, $c100
+    ld hl, wMetatiles
     add hl, bc
     ldh a, [$91]
     ld b, a
@@ -1461,7 +1461,7 @@ jr_000_0abc:
     ld a, [$d03f]
     ld b, a
     call Call_000_1c52
-    ld hl, $c100
+    ld hl, wMetatiles
     add hl, bc
     ld b, $00
     ld a, [wStageScrollTileX]
@@ -2049,7 +2049,7 @@ Jump_000_0caf:
     ld a, [$d03f]
     ld b, a
     call Call_000_1c52
-    ld hl, $c100
+    ld hl, wMetatiles
     add hl, bc
     ld b, $00
     ld a, [wStageScrollTileX]
@@ -2092,7 +2092,7 @@ Jump_000_0caf:
 Call_000_1046:
     push bc
     push de
-    ld hl, $c100
+    ld hl, wMetatiles
     ld a, [wStageScrollTileY]
     dec a
     ld b, a
@@ -2353,7 +2353,7 @@ Call_000_11de:
     ld [$d057], a
     xor a
     ld [$d058], a
-    ld hl, $c100
+    ld hl, wMetatiles
     ld b, $00
     ld a, [wStageScrollTileX]
     bit 7, a
@@ -2517,7 +2517,7 @@ Call_000_12b4:
     ld a, [$d03f]
     ld b, a
     call Call_000_1c52
-    ld hl, $c100
+    ld hl, wMetatiles
     add hl, bc
     pop de
     pop bc
@@ -3337,7 +3337,7 @@ Call_000_19f9:
     push hl
     ld h, d
     ld l, e
-    ld de, $c100
+    ld de, wMetatiles
     call Decompress
     pop hl
     ld a, [hl+]
@@ -6791,7 +6791,7 @@ Call_000_2e7f:
     ld a, [$d03f]
     ld b, a
     call Call_000_1c52
-    ld hl, $c100
+    ld hl, wMetatiles
     add hl, bc
     ld e, d
     ld d, $00

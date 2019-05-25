@@ -5,7 +5,14 @@ wOAMBuffer:: ; $c000
 	ds $a0
 wOAMBufferEnd:: ; $c0a0
 
-	ds $560
+	ds $60
+
+wMetatiles:: ; $c100
+; Holds the metatile ids that define the entire stage that Kirby plays in.
+; The metatiles are arranged in rows, so if the stage were 20x10, the first 20
+; metatiles ids in this list make up the top row of the stage. Metatile ids correspond
+; to the tiles in wMetatileDefinitions.
+	ds $500
 
 wMetatileDefinitions:: ; $c600
 ; Each metatiles is defined by 4 bytes, which specify the tile numbers to use for
