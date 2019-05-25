@@ -954,7 +954,7 @@ jr_006_45b5:
     add a
     ld c, a
     ld b, $00
-    ld hl, $3a43
+    ld hl, Unk3a43
     add hl, bc
     ld a, [hl+]
     ld c, a
