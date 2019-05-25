@@ -1689,7 +1689,7 @@ Call_000_4b77:
     ld hl, Unk4b92
     add hl, de
     add hl, de
-    ld de, $d08b
+    ld de, wScore
     ld a, [de]
     add [hl]
     ld [de], a

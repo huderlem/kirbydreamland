@@ -3568,7 +3568,7 @@ Unk1bc5:
 
 
 Call_000_1bd9:
-    ld hl, $d08b
+    ld hl, wScore
     ld a, [hl+]
     ld c, a
     ld a, [hl+]
@@ -7264,7 +7264,7 @@ Call_3168:
     push hl
     ld hl, $ff8f
     set 5, [hl]
-    ld hl, $d08b
+    ld hl, wScore
     add [hl]
     ld [hl+], a
     jr nc, .jr_000_317a
@@ -7279,7 +7279,7 @@ Call_3168:
 
 
 Call_000_317f:
-    ld hl, $d08b
+    ld hl, wScore
     ld a, [hl+]
     sub $9f
     ld a, [hl+]
@@ -7287,7 +7287,7 @@ Call_000_317f:
     ld a, [hl]
     sbc $01
     ret c
-    ld hl, $d08b
+    ld hl, wScore
     ld a, $9f
     ld [hl+], a
     ld a, $86

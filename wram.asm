@@ -69,7 +69,12 @@ wRemainingLives:: ; $d089
 wMaximumLives:: ; $d08a
 	ds 1
 
-	ds 10
+wScore:: ; $d08b
+; Stored in little-endian.
+; The score displayed on-screen artificially adds an extra zero to the end.
+	ds 3
+
+	ds 7
 
 wClearSpritesOffset:: ; $d095
 	ds 1

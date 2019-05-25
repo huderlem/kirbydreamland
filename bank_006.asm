@@ -1084,42 +1084,35 @@ Jump_006_4800:
     call PlaySong
     call StopTimer
     call Call_000_0670
-
-jr_006_480b:
+.jr_006_480b:
     ld hl, $ff8c
     set 6, [hl]
-
-jr_006_4810:
+.jr_006_4810:
     bit 6, [hl]
-    jr nz, jr_006_4810
-
+    jr nz, .jr_006_4810
     call Call_006_5098
     ld a, [$d3d0]
     and a
-    jr z, jr_006_480b
-
+    jr z, .jr_006_480b
     ld hl, $ff95
     res 0, [hl]
     ld a, [$d3cf]
     and a
-    jp nz, Jump_006_485e
-
+    jp nz, .jump_006_485e
     ld a, [wMaximumLives]
     ld [wRemainingLives], a
     call Call_000_1570
     ld hl, $d048
     ld a, [hl-]
     and a
-    jr z, jr_006_483e
-
+    jr z, .jr_006_483e
     xor a
     ld [hl-], a
     ld [hl-], a
     ld [hl-], a
     ld [hl-], a
-
-jr_006_483e:
-    ld hl, $d08d
+.jr_006_483e:
+    ld hl, wScore + 2
     ld a, [hl]
     srl a
     ld [hl-], a
@@ -1134,15 +1127,13 @@ jr_006_483e:
     call Call_006_40e4
     ld a, [$d03c]
     call PlaySong
-    jp $01e6
-
-
-Jump_006_485e:
+    jp Jump_000_01e6
+.jump_006_485e:
     ld a, $3c
     call Call_000_1dc3
     call Call_000_0648
     call StartTimer
-    jp $0156
+    jp InitGame
 
 
 Jump_006_486c:
