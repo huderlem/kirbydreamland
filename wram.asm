@@ -20,6 +20,14 @@ wMetatileDefinitions:: ; $c600
 ; The order is top-left, top-right, bottom-left, bottom-right.
 	ds $140 * 4
 
+wTilemapCopyBuffer:: ; $cb00
+; This buffer queues tilemap data to be copied at a later time.
+; Rather than holding raw data, it prefixes individual individual data packets
+; with their destination addresses.  The size of the data packets depends on the
+; context of the data.  For example, metatiles are first queued here, and each data
+; packet is the size of a metatile (4 bytes).
+	ds $500
+
 SECTION "WRAM Bank 1", WRAMX
 
 	ds $2c

@@ -2446,7 +2446,7 @@ Call_000_1288:
 
 Call_000_1292:
     push bc
-    ld de, $cb00
+    ld de, wTilemapCopyBuffer
     ld c, $09
 .jr_000_1298:
     ld a, [hl]
@@ -2470,7 +2470,7 @@ Call_000_1292:
 
 Call_000_12b4:
     push bc
-    ld de, $cb00
+    ld de, wTilemapCopyBuffer
     ld a, [$d03f]
     ld b, a
     ld a, [wStageScrollTileX]
@@ -3214,7 +3214,7 @@ Call_000_1964:
     xor a
     ld [$d057], a
     ld [$d058], a
-    ld de, $cb00
+    ld de, wTilemapCopyBuffer
     ld a, $0a
     ld b, a
 .jr_000_1973:
@@ -3892,7 +3892,7 @@ VBlank:
     ldh [rSCX], a
     ld a, [$d055]
     ldh [rSCY], a
-    ld hl, $cb00
+    ld hl, wTilemapCopyBuffer
 .jr_000_1db1:
     ld a, [hl+]
     and a
@@ -4118,7 +4118,7 @@ Call_000_1ee3:
     ret z
     bit 5, a
     ret z
-    ld bc, $cb00
+    ld bc, wTilemapCopyBuffer
 .jr_000_1eee:
     ld a, [bc]
     inc bc

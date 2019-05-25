@@ -72,7 +72,7 @@ TryDrawExtraGameText:
     ret z
     ld bc, _SCRN0 + $145
     ld de, ExtraGameText
-    ld hl, $cb00
+    ld hl, wTilemapCopyBuffer
     ld a, 10
 .loop:
     push af
@@ -1359,7 +1359,7 @@ jr_006_4a11:
 
 
 jr_006_4a33:
-    ld bc, $cb00
+    ld bc, wTilemapCopyBuffer
 
 jr_006_4a36:
     ld a, $97
@@ -1563,7 +1563,7 @@ Call_006_4b85:
     ld a, $01
     sub b
     ld [$d060], a
-    ld hl, $cb00
+    ld hl, wTilemapCopyBuffer
     ld b, $0a
 
 jr_006_4b94:
@@ -1630,7 +1630,7 @@ jr_006_4bed:
 
 
 Call_006_4bf6:
-    ld bc, $cb00
+    ld bc, wTilemapCopyBuffer
     ld a, [$d06b]
     ld h, a
     ld a, [$d06c]
@@ -7164,7 +7164,7 @@ jr_006_6463:
 Call_006_646b:
 Jump_006_646b:
     ld a, $98
-    ld [$cb00], a
+    ld [wTilemapCopyBuffer], a
     ld a, $e4
     ld [$cb01], a
     ld a, $c7
@@ -7262,7 +7262,7 @@ jr_006_6509:
     ld hl, $98ea
     add hl, bc
     ld a, h
-    ld [$cb00], a
+    ld [wTilemapCopyBuffer], a
     ld a, l
     ld [$cb01], a
     xor a
@@ -7286,7 +7286,7 @@ jr_006_652f:
     add $72
     ld [$cb02], a
     ld a, $99
-    ld [$cb00], a
+    ld [wTilemapCopyBuffer], a
     ld a, $2c
     ld [$cb01], a
     ld a, b
@@ -7480,7 +7480,7 @@ Call_006_666d:
     add $72
     ld [$cb02], a
     ld a, $98
-    ld [$cb00], a
+    ld [wTilemapCopyBuffer], a
     ld a, $ee
     ld [$cb01], a
     ld a, b
@@ -7503,7 +7503,7 @@ Call_006_669c:
     add $72
     ld [$cb02], a
     ld a, $99
-    ld [$cb00], a
+    ld [wTilemapCopyBuffer], a
     ld a, $2e
     ld [$cb01], a
     ld a, b
@@ -7527,7 +7527,7 @@ Call_006_66cb:
     jr nz, jr_006_66fc
 
     ld a, $98
-    ld [$cb00], a
+    ld [wTilemapCopyBuffer], a
     ld a, $e6
     ld [$cb01], a
     ld a, $c6
@@ -7548,7 +7548,7 @@ Call_006_66cb:
 
 jr_006_66fc:
     ld a, $98
-    ld [$cb00], a
+    ld [wTilemapCopyBuffer], a
     ld a, $e6
     ld [$cb01], a
     ld a, $c7
