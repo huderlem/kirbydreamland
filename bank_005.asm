@@ -575,7 +575,7 @@ jr_005_4286:
 
     ld hl, $43b6
     ld de, $4008
-    call $21e6
+    call Call_000_21e6
     ret
 
 
@@ -634,7 +634,7 @@ jr_005_4318:
     ld c, $00
     ld hl, $4000
     ld de, $4008
-    call $21e6
+    call Call_000_21e6
     pop bc
     jp $241f
 
@@ -871,7 +871,7 @@ jr_005_4466:
     ld e, a
     ld a, [$d40e]
     ld d, a
-    jp $23af
+    jp Call_000_23af
 
 
 Call_005_448a:
@@ -923,7 +923,7 @@ jr_005_44c5:
     ld e, a
     ld a, [$d40e]
     ld d, a
-    call $23af
+    call Call_000_23af
     jr jr_005_44ee
 
 jr_005_44e1:
@@ -933,7 +933,7 @@ jr_005_44e4:
     ld de, $4008
     ld a, [$d411]
     ld c, a
-    jp $21e6
+    jp Call_000_21e6
 
 
 jr_005_44ee:
@@ -965,7 +965,7 @@ jr_005_44f9:
 
 jr_005_4515:
     ld de, $4008
-    jp $21e6
+    jp Call_000_21e6
 
 
 jr_005_451b:
@@ -983,7 +983,7 @@ jr_005_451e:
     ld_long a, $ff92
     and $20
     push af
-    call $3d48
+    call Call_000_3d48
     pop af
     ld_long $ff92, a
     ld hl, $ff90
@@ -1000,7 +1000,7 @@ jr_005_453b:
     ld e, a
     ld a, [$d40e]
     ld d, a
-    call $23af
+    call Call_000_23af
     ld a, [$d410]
     bit 4, a
     jr nz, jr_005_4560
@@ -1015,7 +1015,7 @@ jr_005_4560:
     ld c, a
     ld hl, $4005
     ld de, $4008
-    jp $21e6
+    jp Call_000_21e6
 
 
 Call_005_456d:
@@ -1332,7 +1332,7 @@ jr_005_4730:
     ld_long a, $ff92
     and $20
     push af
-    call $3d48
+    call Call_000_3d48
     pop af
     ld_long $ff92, a
     xor a
@@ -1382,7 +1382,7 @@ jr_005_4782:
     set 5, [hl]
 
 jr_005_4791:
-    call $3768
+    call Call_000_3768
     ld a, $09
     call PlaySong
     jp Call_000_21ce
@@ -1557,7 +1557,7 @@ jr_005_4864:
 
     ld hl, $4003
     ld de, $4000
-    call $21e6
+    call Call_000_21e6
     ld hl, $ff94
     set 7, [hl]
     ld hl, $d3f6
@@ -1657,7 +1657,7 @@ Call_005_48ea:
     sub $08
     ld l, a
     ld h, $00
-    call $2e96
+    call Call_000_2e96
     ld hl, wStageScrollTileX
     add [hl]
     dec a
@@ -1670,13 +1670,13 @@ Call_005_48ea:
     sub $10
     ld l, a
     ld h, $00
-    call $2e96
+    call Call_000_2e96
     ld hl, wStageScrollTileY
     add [hl]
     dec a
     ld e, a
     push de
-    call $2e7f
+    call Call_000_2e7f
     pop bc
     push bc
     ld c, $03
@@ -1757,7 +1757,7 @@ jr_005_4972:
     push bc
     push de
     ld hl, $41a2
-    call $234a
+    call Call_000_234a
     ld hl, $d1a0
     add hl, bc
     set 0, [hl]
@@ -1801,7 +1801,7 @@ jr_005_49a1:
 
 
 Call_005_49ae:
-    call $1d01
+    call Call_000_1d01
     and $1e
     add $db
     ld e, a

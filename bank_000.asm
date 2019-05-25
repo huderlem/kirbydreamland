@@ -4847,6 +4847,7 @@ Call_000_2344:
     ld c, $0d
     ld b, $0f
     jr jr_000_234e
+Call_000_234a:
     ld c, $0f
     ld b, $10
 jr_000_234e:

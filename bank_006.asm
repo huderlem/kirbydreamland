@@ -163,7 +163,7 @@ jr_006_411c:
 .jr_006_4142:
     ld a, $ff
     ld [wClearAllSprites], a
-    call $231e
+    call Call_000_231e
     call Call_000_0648
     call Call_000_1c0a
     call StartTimer
@@ -226,8 +226,8 @@ jr_006_411c:
     ld [wCurStageScreen], a
     push hl
     call StopTimer
-    call $19c9
-    call $19f9
+    call Call_000_19c9
+    call Call_000_19f9
     pop hl
     ld a, [hl+]
     ld [wStageScrollTileX], a
@@ -268,11 +268,11 @@ Jump_006_4203:
 jr_006_421e:
     ld hl, wMetatiles
     add hl, bc
-    call $1964
+    call Call_000_1964
     xor a
     ld [wClearSpritesOffset], a
     call Call_000_21fb
-    call $139b
+    call Call_000_139b
     call Call_000_2329
     call ClearSprites
     ld a, [wCurStage]
@@ -549,7 +549,7 @@ jr_006_43f4:
     push hl
 
 Jump_006_43fc:
-    call $319d
+    call Call_000_319d
     call Call_006_5098
     pop hl
     ld a, [$d3dd]
@@ -613,7 +613,7 @@ Call_006_444f:
     ld l, a
     ld de, $157a
     ld bc, $0000
-    call $21e6
+    call Call_000_21e6
     ret
 
 
@@ -626,7 +626,7 @@ Call_006_4473:
     push hl
     ld hl, $410c
     ld bc, $0000
-    call $21e6
+    call Call_000_21e6
     pop hl
     pop af
     ret
@@ -637,7 +637,7 @@ Call_006_4485:
     ld a, [hl+]
     ld [wCurStageScreen], a
     push hl
-    call $19c9
+    call Call_000_19c9
     call Call_000_0648
     ld a, $ff
     call PlaySE
@@ -650,7 +650,7 @@ Call_006_4485:
     ld a, [hl+]
     ld [wStageScrollTileY], a
     push hl
-    call $19f9
+    call Call_000_19f9
     ld a, [wStageScrollTileY]
     dec a
     ld b, a
@@ -666,14 +666,14 @@ Call_006_4485:
     ld c, l
     ld hl, wMetatiles
     add hl, bc
-    call $1964
+    call Call_000_1964
     ld a, $ff
     ld [wClearAllSprites], a
     call Call_006_444f
     xor a
     call Call_000_21fb
     call ClearSprites
-    call $2e9c
+    call Call_000_2e9c
     ld a, [wCurStage]
     cp $04
     jr nz, jr_006_44eb
@@ -721,7 +721,7 @@ Call_006_4506:
     ld [$d063], a
     xor a
     ld [$d076], a
-    call $1062
+    call Call_000_1062
     pop hl
     pop af
     ret
@@ -750,7 +750,7 @@ Call_006_4528:
 
 jr_006_454b:
     ld a, c
-    call $0643
+    call Call_000_0643
     jr nc, jr_006_4557
 
     dec c
@@ -784,7 +784,7 @@ jr_006_456e:
     dec a
     ld c, a
     add hl, bc
-    call $12b4
+    call Call_000_12b4
     ld hl, wStageScrollTileY
     dec [hl]
     ld_long a, $ff8c
@@ -845,8 +845,8 @@ jr_006_45b5:
 .jr_006_45f6:
     xor a
     ld [wClearSpritesOffset], a
-    call $2e9c
-    call $139b
+    call Call_000_2e9c
+    call Call_000_139b
     call ClearSprites
     ld_long a, $ff8c
     set 6, a
@@ -926,7 +926,7 @@ jr_006_45b5:
     ld bc, $0000
     ld hl, $4154
     ld de, $4137
-    call $21e6
+    call Call_000_21e6
     ld b, $a0
 .jr_006_46b6:
     push bc
@@ -971,9 +971,9 @@ jr_006_45b5:
     ld a, [hl+]
     ld [wCurStageScreen], a
     push hl
-    call $19c9
+    call Call_000_19c9
     call Call_000_0648
-    call $19f9
+    call Call_000_19f9
     pop hl
     ld a, [hl+]
     ld [wStageScrollTileX], a
@@ -987,7 +987,7 @@ jr_006_45b5:
     ld_long $ff8d, a
     ld_long $ff8e, a
     ld_long $ff92, a
-    call $139b
+    call Call_000_139b
     ld a, [wCurStage]
     cp $04
     jr z, .jr_006_4731
@@ -1029,7 +1029,7 @@ jr_006_45b5:
     call Call_000_0670
     xor a
     ld [wClearSpritesOffset], a
-    call $2e9c
+    call Call_000_2e9c
     ld bc, $0118
 .jr_006_4797:
     ld hl, $ff8c
@@ -1053,7 +1053,7 @@ jr_006_45b5:
     call Call_000_0648
     call InitWindow
     call StartTimer
-    call $231e
+    call Call_000_231e
     inc a
     ld [wStageScrollTileX], a
     ld [wStageScrollTileY], a
@@ -1229,7 +1229,7 @@ jr_006_48e0:
     ld a, $08
     ld [$d040], a
     ld hl, $c104
-    call $1964
+    call Call_000_1964
     call StopTimer
     call Call_000_0670
     ld de, $01b0
@@ -1391,7 +1391,7 @@ jr_006_4a3e:
     xor a
     ld [bc], a
     ld bc, $0034
-    call $1ce0
+    call Call_000_1ce0
     ld_long a, $ff91
     set 2, a
     ld_long $ff91, a
@@ -1787,7 +1787,7 @@ jr_006_4cf3:
 jr_006_4d06:
     call Call_000_0648
     call StartTimer
-    call $231e
+    call Call_000_231e
     ld a, [wExtraGameEnabled]
     and a
     ld a, $01
@@ -2156,7 +2156,7 @@ Call_006_5098:
     push af
     xor a
     ld [wClearSpritesOffset], a
-    call $2e9c
+    call Call_000_2e9c
     call ClearSprites
     pop af
     ld [$d06c], a
@@ -7030,7 +7030,7 @@ Jump_006_5f00:
 ExecuteConfigurationModeScreen:
     call Call_000_0648
     call StartTimer
-    call $231e
+    call Call_000_231e
     call InitWindow
     xor a
     ld [$d053], a
@@ -7282,7 +7282,7 @@ jr_006_6527:
 
 Call_006_652f:
 jr_006_652f:
-    call $1c6b
+    call Call_000_1c6b
     add $72
     ld [$cb02], a
     ld a, $99
@@ -7476,7 +7476,7 @@ jr_006_6664:
 
 
 Call_006_666d:
-    call $1c6b
+    call Call_000_1c6b
     add $72
     ld [$cb02], a
     ld a, $98
@@ -7499,7 +7499,7 @@ Call_006_666d:
 
 
 Call_006_669c:
-    call $1c6b
+    call Call_000_1c6b
     add $72
     ld [$cb02], a
     ld a, $99
