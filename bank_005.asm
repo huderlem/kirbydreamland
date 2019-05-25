@@ -95,7 +95,7 @@ jr_005_4075:
     dec d
     jr nz, jr_005_4075
 
-    call $21ce
+    call Call_000_21ce
 
 jr_005_407f:
     ld hl, $ff8e
@@ -552,7 +552,7 @@ jr_005_4286:
     ld [hl], a
     ld hl, $ff92
     bit 3, [hl]
-    jp z, $21ce
+    jp z, Call_000_21ce
 
     ret
 
@@ -939,7 +939,7 @@ jr_005_44e4:
 jr_005_44ee:
     ld a, [$d411]
     ld c, a
-    jp $21ce
+    jp Call_000_21ce
 
 
 jr_005_44f5:
@@ -969,7 +969,7 @@ jr_005_4515:
 
 
 jr_005_451b:
-    jp $21ce
+    jp Call_000_21ce
 
 
 jr_005_451e:
@@ -1007,7 +1007,7 @@ jr_005_453b:
 
     ld a, [$d411]
     ld c, a
-    jp $21ce
+    jp Call_000_21ce
 
 
 jr_005_4560:
@@ -1190,7 +1190,7 @@ jr_005_460f:
     ld [$d3bf], a
     ld a, $20
     call PlaySE
-    jp $21ce
+    jp Call_000_21ce
 
 
 Jump_005_4647:
@@ -1198,18 +1198,16 @@ Jump_005_4647:
     call Call_005_47b5
     ld hl, $ff8f
     set 4, [hl]
-    ld a, [$d089]
+    ld a, [wRemainingLives]
     inc a
-    cp $63
-    jr c, jr_005_465c
-
-    ld a, $63
-
-jr_005_465c:
-    ld [$d089], a
+    cp 99
+    jr c, .storedNewLives
+    ld a, 99
+.storedNewLives:
+    ld [wRemainingLives], a
     ld a, $16
     call PlaySE
-    jp $21ce
+    jp Call_000_21ce
 
 
 jr_005_4667:
@@ -1303,7 +1301,7 @@ Jump_005_4704:
 Call_005_470e:
 Jump_005_470e:
 jr_005_470e:
-    jp $21ce
+    jp Call_000_21ce
 
 
 Jump_005_4711:
@@ -1387,7 +1385,7 @@ jr_005_4791:
     call $3768
     ld a, $09
     call PlaySong
-    jp $21ce
+    jp Call_000_21ce
 
 
 Call_005_479c:

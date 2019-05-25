@@ -73,15 +73,15 @@ InitGame:
     ld a, Bank(ExecuteTitlescreen)
     ld [wLoadedROMBank], a
     ld [MBC1RomBank], a
-    ld a, $05
-    ld [$d08a], a
+    ld a, 5
+    ld [wMaximumLives], a
     ld a, $06
     ld [$d088], a
     call ExecuteTitlescreen
     ld a, $0c
     ld [$d050], a
-    ld a, [$d08a]
-    ld [$d089], a
+    ld a, [wMaximumLives]
+    ld [wRemainingLives], a
     call Call_000_231e
     ld a, [wExtraGameSelected]
     ld [wExtraGameEnabled], a
@@ -89,6 +89,7 @@ InitGame:
     ld [wLoadedROMBank], a
     ld [MBC1RomBank], a
     call Call_006_40e4
+Jump_000_01e6:
     ld a, Bank(Jump_001_4783)
     ld [wLoadedROMBank], a
     ld [MBC1RomBank], a
@@ -4348,7 +4349,7 @@ Call_000_1fb2:
     ret z
     res 4, a
     ldh [$8f], a
-    ld a, [$d089]
+    ld a, [wRemainingLives]
     dec a
     call Call_000_1c6b
     add $72

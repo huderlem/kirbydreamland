@@ -62,7 +62,14 @@ wPlayerScreenYCoord:: ; $d05d
 wBGP:: ; $d080
 	ds 1
 
-	ds $14
+	ds 8
+
+wRemainingLives:: ; $d089
+	ds 1
+wMaximumLives:: ; $d08a
+	ds 1
+
+	ds 10
 
 wClearSpritesOffset:: ; $d095
 	ds 1

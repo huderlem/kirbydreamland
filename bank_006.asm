@@ -810,28 +810,22 @@ Call_006_459e:
     ld_long a, $ff93
     set 2, a
     ld_long $ff93, a
-
 jr_006_45b5:
     ld_long a, $ff8c
     bit 6, a
     jr nz, jr_006_45b5
-
     ld_long a, $ff94
     bit 0, a
-    jr nz, jr_006_462f
-
+    jr nz, .jr_006_462f
     ld_long a, $ff8e
     and $9c
-    jr nz, jr_006_45f6
-
+    jr nz, .jr_006_45f6
     ld_long a, $ff92
     and $80
-    jr nz, jr_006_45f6
-
+    jr nz, .jr_006_45f6
     ld_long a, $ff93
     and $38
-    jr nz, jr_006_45f6
-
+    jr nz, .jr_006_45f6
     ld hl, $ff93
     set 0, [hl]
     ld hl, $d067
@@ -842,16 +836,13 @@ jr_006_45b5:
     adc $00
     ld [hl-], a
     cp $04
-    jr c, jr_006_45f6
-
+    jr c, .jr_006_45f6
     ld a, [hl]
     cp $b0
-    jr c, jr_006_45f6
-
+    jr c, .jr_006_45f6
     ld hl, $ff91
     set 4, [hl]
-
-jr_006_45f6:
+.jr_006_45f6:
     xor a
     ld [wClearSpritesOffset], a
     call $2e9c
@@ -863,7 +854,6 @@ jr_006_45f6:
     ld_long a, $ff8b
     bit 3, a
     jr z, jr_006_45b5
-
     ld a, $18
     call PlaySE
     ld_long a, $ff93
@@ -876,14 +866,11 @@ jr_006_45f6:
     ld a, $1e
     call Call_000_1de0
     ret
-
-
-jr_006_462f:
+.jr_006_462f:
     ld_long a, $ff91
     res 4, a
     ld_long $ff91, a
-    jr jr_006_45f6
-
+    jr .jr_006_45f6
     xor a
     ld [$d086], a
     ld a, $15
@@ -904,12 +891,11 @@ jr_006_462f:
     ld [$d1a0], a
     ld a, [wCurStage]
     cp $04
-    jr nz, jr_006_4678
-
+    jr nz, .jr_006_4678
     ld a, [wCurStageScreen]
     ld b, $00
     ld c, a
-    ld hl, $474d
+    ld hl, .Unk474d
     add hl, bc
     ld a, [hl]
     ld c, a
@@ -917,8 +903,7 @@ jr_006_462f:
     add hl, bc
     xor a
     ld [hl], a
-
-jr_006_4678:
+.jr_006_4678:
     xor a
     ld_long $ff8c, a
     ld_long $ff94, a
@@ -943,34 +928,28 @@ jr_006_4678:
     ld de, $4137
     call $21e6
     ld b, $a0
-
-jr_006_46b6:
+.jr_006_46b6:
     push bc
     ld a, [$d0d1]
     cp $dc
-    jr nc, jr_006_46c2
-
+    jr nc, .jr_006_46c2
     cp $a0
-    jr nc, jr_006_46c7
-
-jr_006_46c2:
+    jr nc, .jr_006_46c7
+.jr_006_46c2:
     ld a, $01
     ld [$d160], a
-
-jr_006_46c7:
+.jr_006_46c7:
     ld a, $01
     call Call_000_1dc3
     pop bc
     dec b
-    jr nz, jr_006_46b6
-
+    jr nz, .jr_006_46b6
     ld hl, $ff94
     res 5, [hl]
-    ld a, [$d089]
+    ld a, [wRemainingLives]
     dec a
-    jr z, jr_006_4757
-
-    ld [$d089], a
+    jr z, .noLivesRemaining
+    ld [wRemainingLives], a
     ld a, [wCurStage]
     add a
     ld c, a
@@ -1011,12 +990,10 @@ jr_006_46c7:
     call $139b
     ld a, [wCurStage]
     cp $04
-    jr z, jr_006_4731
-
+    jr z, .jr_006_4731
     ld a, [$d03c]
     call PlaySong
-
-jr_006_4731:
+.jr_006_4731:
     ld_long a, $ff91
     res 6, a
     ld_long $ff91, a
@@ -1026,17 +1003,10 @@ jr_006_4731:
     ld_long $ff8f, a
     ld a, [$d087]
     ld [$d086], a
-    jp $01e6
-
-
-    nop
-    ld bc, $0302
-    inc b
-    dec b
-    ld bc, $0203
-    inc b
-
-jr_006_4757:
+    jp Jump_000_01e6
+.Unk474d:
+    db $00, $01, $02, $03, $04, $05, $01, $03, $02, $04
+.noLivesRemaining:
     call Call_000_0648
     call InitWindow
     call StartTimer
@@ -1061,29 +1031,23 @@ jr_006_4757:
     ld [wClearSpritesOffset], a
     call $2e9c
     ld bc, $0118
-
-jr_006_4797:
+.jr_006_4797:
     ld hl, $ff8c
     set 6, [hl]
-
-jr_006_479c:
+.jr_006_479c:
     bit 6, [hl]
-    jr nz, jr_006_479c
-
+    jr nz, .jr_006_479c
     ld_long a, $ff8b
     bit 3, a
-    jr nz, jr_006_47b0
-
+    jr nz, .jr_006_47b0
     dec bc
     ld a, b
     and a
-    jr nz, jr_006_4797
-
+    jr nz, .jr_006_4797
     ld a, c
     and a
-    jr nz, jr_006_4797
-
-jr_006_47b0:
+    jr nz, .jr_006_4797
+.jr_006_47b0:
     ld hl, $ff95
     set 0, [hl]
     call Call_000_0648
@@ -1140,8 +1104,8 @@ jr_006_4810:
     and a
     jp nz, Jump_006_485e
 
-    ld a, [$d08a]
-    ld [$d089], a
+    ld a, [wMaximumLives]
+    ld [wRemainingLives], a
     call Call_000_1570
     ld hl, $d048
     ld a, [hl-]
@@ -7114,7 +7078,7 @@ jr_006_63db:
 
     call StopTimer
     call Call_000_0670
-    ld a, [$d08a]
+    ld a, [wMaximumLives]
     call Call_006_652f
     ld hl, $ff8c
     set 6, [hl]
@@ -7276,12 +7240,12 @@ Jump_006_64d0:
     jr jr_006_6509
 
 jr_006_64e8:
-    ld a, [$d08a]
+    ld a, [wMaximumLives]
     cp $09
     ret z
 
     inc a
-    ld [$d08a], a
+    ld [wMaximumLives], a
     jr jr_006_652f
 
 Jump_006_64f4:
@@ -7319,11 +7283,11 @@ jr_006_6509:
 
 
 jr_006_6527:
-    ld a, [$d08a]
+    ld a, [wMaximumLives]
     dec a
     ret z
 
-    ld [$d08a], a
+    ld [wMaximumLives], a
 
 Call_006_652f:
 jr_006_652f:
