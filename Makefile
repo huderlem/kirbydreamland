@@ -18,7 +18,7 @@ endif
 
 %.o: dep = $(shell tools/scan_includes $(@D)/$*.asm)
 %.o: %.asm $$(dep)
-	rgbasm -o $@ $<
+	rgbasm -h -o $@ $<
 
 $(ROM): $(OBJS)
 	rgblink -n $(ROM:.gb=.sym) -m $(ROM:.gb=.map) -o $@ $(OBJS)

@@ -10164,6 +10164,7 @@ jr_005_6f87:
     inc b
     ld c, c
     halt
+    nop
     ld a, b
     db $76
     db $10

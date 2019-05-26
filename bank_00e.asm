@@ -6195,16 +6195,19 @@ jr_00e_5a6c:
     ld [$0025], sp
     ld b, c
     halt
+    nop
     inc b
 
 jr_00e_5a98:
     ld b, h
     nop
     halt
+    nop
     inc d
     rst $00
     inc b
     halt
+    nop
     jp hl
 
 

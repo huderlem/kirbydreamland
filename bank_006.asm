@@ -394,13 +394,13 @@ Call_006_42e8:
     set 1, [hl]
     call ClearSprites
     call StartTimer
-    ld hl, $4000
-    ld de, $8000
-    ld c, $02
+    ld hl, NormalGameSpritesGfx
+    ld de, _VRAM
+    ld c, Bank(NormalGameSpritesGfx)
     call Decompress
-    ld hl, $4855
-    ld de, $9670
-    ld c, $02
+    ld hl, NormalGameStatusBarGfx
+    ld de, _VRAM + $1670
+    ld c, Bank(NormalGameStatusBarGfx)
     call Decompress
     ld a, [wCurStage]
     ld c, a
@@ -428,25 +428,23 @@ Call_006_42e8:
     call Decompress
     ld a, [wCurStage]
     cp $04
-    jr z, jr_006_435b
-
+    jr z, .jr_006_435b
     ld hl, FontGfx
     ld de, _VRAM + $e00
     ld c, Bank(FontGfx)
     call Decompress
-    ld hl, $5cdd
-    ld de, $8800
-    ld c, $03
+    ld hl, StageIntroScreensTilesGfx
+    ld de, _VRAM + $800
+    ld c, Bank(StageIntroScreensTilesGfx)
     call Decompress
-
-jr_006_435b:
+.jr_006_435b:
     ld a, [wCurStage]
     ld c, a
     add a
     add c
     ld c, a
     ld b, $00
-    ld hl, $50bb
+    ld hl, StageIntroScreenTilemaps
     add hl, bc
     ld a, [hl+]
     ld c, a
@@ -470,44 +468,39 @@ jr_006_435b:
     add a
     ld e, a
     ld d, $00
-    ld hl, $43b5
+    ld hl, StageIntroWaitDurationFrames
     add hl, de
     ld a, [hl+]
     ld e, a
     ld d, [hl]
-
-jr_006_4396:
+.jr_006_4396:
     ld hl, $ff8c
     set 6, [hl]
-
-jr_006_439b:
-    db $76
+.jr_006_439b:
+    halt
     bit 6, [hl]
-    jr nz, jr_006_439b
-
+    jr nz, .jr_006_439b
     call Call_006_5098
     ld_long a, $ff8b
     bit 3, a
-    jr nz, jr_006_43af
-
+    jr nz, .jr_006_43af
     dec de
     ld a, d
     or e
-    jr nz, jr_006_4396
-
-jr_006_43af:
+    jr nz, .jr_006_4396
+.jr_006_43af:
     ld hl, $ff94
     res 1, [hl]
     ret
 
-
-    ld b, b
-    ld bc, $0157
-    sub b
-    ld bc, $0186
-    ret z
-
-    ld [bc], a
+StageIntroWaitDurationFrames:
+; Number of frames to wait on the stage intro splash screen before the stage
+; automatically starts. The player can press START to enter the stage sooner.
+    dw 320
+    dw 343
+    dw 400
+    dw 390
+    dw 712
 
 Jump_006_43bf:
     ld a, [$d041]
@@ -2169,16 +2162,23 @@ Call_006_5098:
     ret
 
 
-    ld b, $78
-    dec [hl]
-    ld b, $78
-    rst $18
-    ld b, $79
-    ld e, l
-    ld b, $79
-    ld sp, hl
-    ld b, $7a
-    xor a
+StageIntroScreenTilemaps:
+    db Bank(IntroScreenTilemap_GreenGreens)
+    bigdw IntroScreenTilemap_GreenGreens
+
+    db Bank(IntroScreenTilemap_CastleLololo)
+    bigdw IntroScreenTilemap_CastleLololo
+
+    db Bank(IntroScreenTilemap_FloatIslands)
+    bigdw IntroScreenTilemap_FloatIslands
+
+    db Bank(IntroScreenTilemap_BubblyClouds)
+    bigdw IntroScreenTilemap_BubblyClouds
+
+    db Bank(IntroScreenTilemap_MtDedede)
+    bigdw IntroScreenTilemap_MtDedede
+
+
     call nc, $de50
     ld d, b
     cp $50
@@ -7597,7 +7597,18 @@ MetatileMap_MtDededeScreen1:
 Metatiles_MtDedede:
     INCBIN "data/stages/mt_dedede/metatiles.bin.lz"
 
-INCBIN "baserom.gb", $1b835, $1bdf0 - $1b835
+IntroScreenTilemap_GreenGreens:
+    INCBIN "gfx/stages/green_greens/intro_screen.tilemap.lz"
+IntroScreenTilemap_CastleLololo:
+    INCBIN "gfx/stages/castle_lololo/intro_screen.tilemap.lz"
+IntroScreenTilemap_FloatIslands:
+    INCBIN "gfx/stages/float_islands/intro_screen.tilemap.lz"
+IntroScreenTilemap_BubblyClouds:
+    INCBIN "gfx/stages/bubbly_clouds/intro_screen.tilemap.lz"
+IntroScreenTilemap_MtDedede:
+    INCBIN "gfx/stages/mt_dedede/intro_screen.tilemap.lz"
+
+INCBIN "baserom.gb", $1bb0d, $1bdf0 - $1bb0d
 
 ; free space padding
 INCBIN "baserom.gb", $1bdf0, $1c000 - $1bdf0

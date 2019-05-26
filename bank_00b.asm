@@ -174,6 +174,7 @@ jr_00b_40c1:
     add hl, bc
     rst $28
     halt
+    nop
     ld b, $f2
     xor [hl]
     nop
@@ -195,6 +196,7 @@ jr_00b_40c1:
     rst $38
     db $ec
     halt
+    nop
     ld [bc], a
     rst $28
     xor [hl]
@@ -236,6 +238,7 @@ jr_00b_40c1:
     or d
     ld bc, $fae4
     halt
+    nop
     db $e4
     ld a, [c]
     ld h, [hl]
@@ -262,6 +265,7 @@ jr_00b_4159:
     ld hl, sp-$4e
     ld bc, $0ceb
     halt
+    nop
     db $eb
     inc b
     ld h, [hl]
@@ -3122,6 +3126,7 @@ jr_00b_4f5c:
     ld h, c
     ld hl, sp+$00
     halt
+    nop
     ld hl, sp-$08
     ld h, [hl]
     ld bc, $00f8
@@ -5488,6 +5493,7 @@ jr_00b_5b96:
     ld h, c
     ld hl, sp+$00
     halt
+    nop
     ld hl, sp-$08
     ld h, [hl]
     ld bc, $00f6

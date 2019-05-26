@@ -440,6 +440,7 @@ jr_004_41fc:
     ld [$007a], sp
     ld a, [bc]
     halt
+    nop
     ldh [$f7], a
     sub c
     rst $38
@@ -568,6 +569,7 @@ jr_004_42ac:
     nop
     nop
     halt
+    nop
     nop
     add a
     nop
@@ -757,6 +759,7 @@ jr_004_4372:
     nop
     nop
     nop
+    nop
     add sp, -$0b
     ld c, b
     db $eb
@@ -888,11 +891,13 @@ jr_004_43fa:
     nop
     db $10
     halt
+    nop
     jr nc, jr_004_44b6
 
     nop
     db $10
     halt
+    nop
     pop hl
     cpl
     ld b, h
@@ -1970,6 +1975,7 @@ jr_004_4786:
     halt
     nop
     nop
+    nop
     db $e3
     ld [hl], l
     ld c, d
@@ -2538,6 +2544,7 @@ jr_004_4aba:
     nop
     ld [bc], a
     halt
+    nop
     pop hl
     ld b, a
     ld c, h
@@ -2798,6 +2805,7 @@ jr_004_4d75:
     ld [hl], l
     inc b
     halt
+    nop
     inc b
     ld [hl], l
     add l
@@ -3083,6 +3091,7 @@ jr_004_4e92:
     db $e4
     inc bc
     halt
+    nop
     inc bc
     db $76
     add l
@@ -3097,6 +3106,7 @@ jr_004_4e92:
     ld [hl], l
     inc bc
     halt
+    nop
     db $e4
     ld a, [bc]
     nop
@@ -3282,6 +3292,7 @@ Jump_004_4f65:
     halt
     nop
     nop
+    nop
     ld b, $87
     adc d
     ld b, $87
@@ -3300,6 +3311,7 @@ Jump_004_4f65:
     nop
     ld b, $83
     halt
+    nop
     nop
     nop
     dec l
@@ -3806,6 +3818,7 @@ jr_004_51df:
     db $f4
     add b
     halt
+    nop
     ldh [$f1], a
     nop
     db $f4
@@ -4661,6 +4674,7 @@ jr_004_560e:
     nop
     halt
     nop
+    nop
     ld a, e
     nop
     ld a, d
@@ -4703,6 +4717,7 @@ jr_004_560e:
     nop
     add b
     halt
+    nop
     pop hl
     sub c
     ld d, [hl]
@@ -4960,6 +4975,7 @@ jr_004_560e:
     nop
     db $10
     halt
+    nop
     ld [$0074], sp
     pop hl
     db $dd
@@ -5117,6 +5133,7 @@ jr_004_5880:
     nop
     and b
     halt
+    nop
     db $10
     ld [hl], h
     nop
@@ -5202,6 +5219,7 @@ jr_004_5911:
     nop
     ld b, b
     halt
+    nop
     push hl
     sub $58
     ld d, b
@@ -5455,6 +5473,7 @@ jr_004_5a4a:
     nop
     db $10
     halt
+    nop
     db $10
     add [hl]
     nop
@@ -5933,11 +5952,13 @@ jr_004_5be0:
     nop
     inc h
     halt
+    nop
     ld [de], a
     add [hl]
     nop
     ld [de], a
     halt
+    nop
 
 jr_004_5c37:
     inc d
@@ -10479,6 +10500,7 @@ jr_004_717a:
     nop
     db $10
     halt
+    nop
     db $10
     ld [hl], h
     nop
