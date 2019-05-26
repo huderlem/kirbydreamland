@@ -3,7 +3,18 @@ SECTION "ROM Bank $003", ROMX[$4000], BANK[$3]
 TitlescreenTilemap:
     INCBIN "gfx/titlescreen.tilemap"
 
-INCBIN "baserom.gb", $c1c7, $e273 - $c1c7
+INCBIN "baserom.gb", $c1c7, $c6e0 - $c1c7
+
+Metatiles_GreenGreens:
+    INCBIN "data/stages/green_greens/metatiles.bin.lz"
+Metatiles_FloatIslands:
+    INCBIN "data/stages/float_islands/metatiles.bin.lz"
+Metatiles_CastleLololo:
+    INCBIN "data/stages/castle_lololo/metatiles.bin.lz"
+Metatiles_BubblyClouds:
+    INCBIN "data/stages/bubbly_clouds/metatiles.bin.lz"
+
+INCBIN "baserom.gb", $cfcf, $e273 - $cfcf
 
 MetatileMap_FloatIslandsScreen0:
     INCBIN "data/stages/float_islands/screen_0.map.lz"

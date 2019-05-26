@@ -3535,7 +3535,7 @@ Call_000_19f9:
     add c
     ld b, $00
     ld c, a
-    ld hl, Unk20A2
+    ld hl, StageMetatileDefinitions
     add hl, bc
     ld a, [hl+]
     ld c, a
@@ -4374,21 +4374,21 @@ Unk2089:
     db $0A, $6C, $79, $E0, $8A
     db $02, $6C, $49, $00, $88
 
-Unk20A2:
-    db $03
-    bigdw $46E0
+StageMetatileDefinitions:
+    db Bank(Metatiles_GreenGreens)
+    bigdw Metatiles_GreenGreens
 
-    db $03
-    bigdw $4AC3
+    db Bank(Metatiles_CastleLololo)
+    bigdw Metatiles_CastleLololo
 
-    db $03
-    bigdw $48D9
+    db Bank(Metatiles_FloatIslands)
+    bigdw Metatiles_FloatIslands
 
-    db $03
-    bigdw $4CFF
+    db Bank(Metatiles_BubblyClouds)
+    bigdw Metatiles_BubblyClouds
 
-    db $06
-    bigdw $777C
+    db Bank(Metatiles_MtDedede)
+    bigdw Metatiles_MtDedede
 
 
 Unk20B1:

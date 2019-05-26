@@ -175,7 +175,7 @@ jr_006_411c:
     add c
     ld b, $00
     ld c, a
-    ld hl, Unk20A2
+    ld hl, StageMetatileDefinitions
     add hl, bc
     ld a, [hl+]
     ld c, a
@@ -7594,7 +7594,10 @@ MetatileMap_MtDededeScreen4:
 MetatileMap_MtDededeScreen1:
     INCBIN "data/stages/mt_dedede/screen_1.map.lz"
 
-INCBIN "baserom.gb", $1b77c, $1bdf0 - $1b77c
+Metatiles_MtDedede:
+    INCBIN "data/stages/mt_dedede/metatiles.bin.lz"
+
+INCBIN "baserom.gb", $1b835, $1bdf0 - $1b835
 
 ; free space padding
 INCBIN "baserom.gb", $1bdf0, $1c000 - $1bdf0
