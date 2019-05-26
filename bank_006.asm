@@ -343,9 +343,9 @@ Call_006_4285:
     ld de, _VRAM + $0
     ld c, Bank(ExtraGameSpritesGfx)
     call Decompress
-    ld hl, $50f3
-    ld de, $9670
-    ld c, $0a
+    ld hl, ExtraGameStatusBarGfx
+    ld de, _VRAM + $1670
+    ld c, Bank(ExtraGameStatusBarGfx)
     call Decompress
 .continue:
     ld d, $00
@@ -356,12 +356,12 @@ Call_006_4285:
     add c
     ld c, a
     ld b, $00
-    ld hl, $2070
+    ld hl, NormalGame_StageTiles
     ld a, [wExtraGameEnabled]
     and a
-    jr z, .jr_006_42d1
-    ld hl, $2089
-.jr_006_42d1:
+    jr z, .loadTiles
+    ld hl, ExtraGame_StageTiles
+.loadTiles:
     add hl, bc
     ld a, [hl+]
     ld [$d06b], a
@@ -409,7 +409,7 @@ Call_006_42e8:
     add c
     ld c, a
     ld b, $00
-    ld hl, $2070
+    ld hl, NormalGame_StageTiles
     add hl, bc
     ld a, [hl+]
     ld [$d06b], a

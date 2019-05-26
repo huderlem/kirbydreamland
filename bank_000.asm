@@ -3507,11 +3507,11 @@ Call_000_19f9:
     add c
     ld b, $00
     ld c, a
-    ld hl, Unk2070
+    ld hl, NormalGame_StageTiles
     ld a, [wExtraGameEnabled]
     and a
     jr z, .jr_000_1b7c
-    ld hl, Unk2089
+    ld hl, ExtraGame_StageTiles
 .jr_000_1b7c:
     add hl, bc
     ld a, [hl+]
@@ -4360,19 +4360,49 @@ Call_000_1fb2:
     ret
 
 
-Unk2070:
-    db $02, $49, $52, $E0, $8A
-    db $02, $52, $66, $E0, $8A
-    db $02, $5B, $2C, $E0, $8A
-    db $02, $63, $EE, $E0, $8A
-    db $02, $6C, $49, $00, $88
+NormalGame_StageTiles:
+    db Bank(NormalGameTilesGfx_GreenGreens)
+    bigdw NormalGameTilesGfx_GreenGreens
+    dw _VRAM + $ae0
 
-Unk2089:
-    db $0A, $51, $F5, $E0, $8A
-    db $0A, $5B, $0B, $E0, $8A
-    db $0A, $63, $C1, $E0, $8A
-    db $0A, $6C, $79, $E0, $8A
-    db $02, $6C, $49, $00, $88
+    db Bank(NormalGameTilesGfx_CastleLololo)
+    bigdw NormalGameTilesGfx_CastleLololo
+    dw _VRAM + $ae0
+
+    db Bank(NormalGameTilesGfx_FloatIslands)
+    bigdw NormalGameTilesGfx_FloatIslands
+    dw _VRAM + $ae0
+
+    db Bank(NormalGameTilesGfx_BubblyClouds)
+    bigdw NormalGameTilesGfx_BubblyClouds
+    dw _VRAM + $ae0
+
+    db Bank(NormalGameTilesGfx_MtDedede)
+    bigdw NormalGameTilesGfx_MtDedede
+    dw _VRAM + $800
+
+
+ExtraGame_StageTiles:
+    db Bank(ExtraGameTilesGfx_GreenGreens)
+    bigdw ExtraGameTilesGfx_GreenGreens
+    dw _VRAM + $ae0
+
+    db Bank(ExtraGameTilesGfx_CastleLololo)
+    bigdw ExtraGameTilesGfx_CastleLololo
+    dw _VRAM + $ae0
+
+    db Bank(ExtraGameTilesGfx_FloatIslands)
+    bigdw ExtraGameTilesGfx_FloatIslands
+    dw _VRAM + $ae0
+
+    db Bank(ExtraGameTilesGfx_BubblyClouds)
+    bigdw ExtraGameTilesGfx_BubblyClouds
+    dw _VRAM + $ae0
+
+    db Bank(NormalGameTilesGfx_MtDedede)
+    bigdw NormalGameTilesGfx_MtDedede
+    dw _VRAM + $800
+
 
 StageMetatileDefinitions:
     db Bank(Metatiles_GreenGreens)
