@@ -824,7 +824,7 @@ Call_000_6ec:
     ld a, $02
     ld [$d062], a
     ld [$d063], a
-    call Call_000_1268
+    call ApplyPlayerRightSpeed
     xor a
     ld [$d062], a
     call Call_000_110b
@@ -845,7 +845,7 @@ Call_000_6ec:
     ld a, $02
     ld [$d062], a
     ld [$d063], a
-    call Call_000_1272
+    call ApplyPlayerLeftSpeed
     xor a
     ld [$d062], a
     jp Call_000_1062
@@ -1378,7 +1378,7 @@ jr_000_0abc:
     jr c, .jr_000_0b08
     ld a, [$d061]
     ld [$d060], a
-    call Call_000_127d
+    call ApplyPlayerUpSpeed
     ld a, [wPlayerScreenYCoord]
     cp $08
     jp nz, Jump_000_0bba
@@ -1393,7 +1393,7 @@ jr_000_0abc:
     jp Jump_000_0bba
 
 .jr_000_0b08:
-    call Call_000_127d
+    call ApplyPlayerUpSpeed
     ldh a, [$90]
     bit 4, a
     jp nz, Jump_000_0bba
@@ -1427,7 +1427,7 @@ jr_000_0abc:
     ld [$d061], a
     ld a, b
     ld [$d060], a
-    call Call_000_127d
+    call ApplyPlayerUpSpeed
     ld a, [wPlayerScreenYCoord]
     cp $10
     jp nz, Jump_000_0baf
@@ -1955,7 +1955,7 @@ Jump_000_0caf:
     ld a, c
     sub b
     jr c, .jr_000_0f5a
-    call Call_000_1288
+    call ApplyPlayerDownSpeed
     ld a, [$d040]
     cp $08
     jp nz, .jump_000_1021
@@ -1971,7 +1971,7 @@ Jump_000_0caf:
     ld a, [$d060]
     sub b
     ld [$d060], a
-    call nz, Call_000_1288
+    call nz, ApplyPlayerDownSpeed
     ld a, [wStageScrollTileY]
     ld b, a
     ld a, [$d040]
@@ -2013,7 +2013,7 @@ Jump_000_0caf:
     ld a, b
     dec a
     ld [$d060], a
-    call Call_000_1288
+    call ApplyPlayerDownSpeed
     ld a, [$d040]
     sub $07
     ld [wStageScrollTileY], a
@@ -2137,7 +2137,7 @@ Call_000_1062:
     ld [$d063], a
     ld a, b
     ld [$d062], a
-    call Call_000_1268
+    call ApplyPlayerRightSpeed
     ld a, [$d042]
     inc a
     ld [wStageScrollTileX], a
@@ -2245,7 +2245,7 @@ Call_000_110b:
     ld [$d063], a
     ld b, a
     ld [$d062], a
-    call Call_000_1272
+    call ApplyPlayerLeftSpeed
     ld a, $01
     ld [wStageScrollTileX], a
     jp .jump_000_11be
@@ -2406,7 +2406,7 @@ Call_000_1248:
     ret
 
 
-Call_000_1268:
+ApplyPlayerRightSpeed:
     ld hl, wPlayerScreenXCoord
     ld a, [$d062]
     ld b, a
@@ -2415,7 +2415,7 @@ Call_000_1268:
     ret
 
 
-Call_000_1272:
+ApplyPlayerLeftSpeed:
     ld hl, wPlayerScreenXCoord
     ld a, [$d062]
     ld b, a
@@ -2425,7 +2425,7 @@ Call_000_1272:
     ret
 
 
-Call_000_127d:
+ApplyPlayerUpSpeed:
     ld hl, wPlayerScreenYCoord
     ld a, [$d060]
     ld b, a
@@ -2435,7 +2435,7 @@ Call_000_127d:
     ret
 
 
-Call_000_1288:
+ApplyPlayerDownSpeed:
     ld hl, wPlayerScreenYCoord
     ld a, [$d060]
     ld b, a

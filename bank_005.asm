@@ -2093,7 +2093,7 @@ InitRAM:
 Call_005_4b30:
 ; TODO: nop-ing this function results in title-screen music alterations.
     ld hl, $4b3a
-    ld de, $dc00
+    ld de, wdc00
     call HAL_Decompress
     ret
 
@@ -3153,13 +3153,11 @@ Call_005_5038:
     ld a, [de]
     and $e0
     cp $c0
-    jr nz, jr_005_5043
-
+    jr nz, .jr_005_5043
     inc de
     ld a, [de]
-    jr jr_005_505a
-
-jr_005_5043:
+    jr .jr_005_505a
+.jr_005_5043:
     ld h, $de
     ld a, $aa
     add b
@@ -3175,8 +3173,7 @@ jr_005_5043:
     adc $79
     ld h, a
     ld a, [hl]
-
-jr_005_505a:
+.jr_005_505a:
     ld c, a
     ld h, $de
     ld a, $52
@@ -4000,7 +3997,7 @@ Call_005_53cb:
 Call_005_53d3:
     push bc
     push de
-    ld d, $dc
+    ld d, wdc00 >> 8
     ld l, a
     ld h, d
     and e
@@ -4015,12 +4012,10 @@ Call_005_53d3:
     ld b, a
     ld a, l
     sub e
-    jr nc, jr_005_53e9
-
+    jr nc, .jr_005_53e9
     cpl
     inc a
-
-jr_005_53e9:
+.jr_005_53e9:
     ld l, a
     dec h
     ld a, c

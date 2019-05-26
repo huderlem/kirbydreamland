@@ -454,7 +454,7 @@ Call_006_42e8:
     ld e, a
     ld h, d
     ld l, e
-    ld de, $9800
+    ld de, _VRAM + $1800
     call Decompress
     xor a
     call Call_000_21fb
@@ -1059,9 +1059,9 @@ jr_006_45b5:
     ld de, _VRAM + $e00
     ld c, Bank(FontGfx)
     call Decompress
-    ld hl, $5cdd
-    ld de, $8800
-    ld c, $03
+    ld hl, StageIntroScreensTilesGfx
+    ld de, _VRAM + $800
+    ld c, Bank(StageIntroScreensTilesGfx)
     call Decompress
     ld hl, $46b5
     ld de, $9800
@@ -1153,9 +1153,9 @@ Jump_006_486c:
     ld [$d053], a
     ld [$d055], a
     call StartTimer
-    ld hl, $41c7
-    ld de, $8e00
-    ld c, $03
+    ld hl, FontFullTilesGfx
+    ld de, _VRAM + $e00
+    ld c, Bank(FontFullTilesGfx)
     call Decompress
     ld hl, $4fcf
     ld de, $8000

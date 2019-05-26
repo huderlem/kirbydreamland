@@ -3,7 +3,10 @@ SECTION "ROM Bank $003", ROMX[$4000], BANK[$3]
 TitlescreenTilemap:
     INCBIN "gfx/titlescreen.tilemap.lz"
 
-INCBIN "baserom.gb", $c1c7, $c6e0 - $c1c7
+FontFullTilesGfx:
+    INCBIN "gfx/font_full.2bpp.lz"
+
+INCBIN "baserom.gb", $c2c8, $c6e0 - $c2c8
 
 Metatiles_GreenGreens:
     INCBIN "data/stages/green_greens/metatiles.bin.lz"

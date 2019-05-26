@@ -155,7 +155,7 @@ Call_001_4000:
     ld a, c
     sub b
     jr c, .jr_001_4133
-    call Call_000_1268
+    call ApplyPlayerRightSpeed
     ld a, [wPlayerScreenXCoord]
     xor a
     ld [$d063], a
@@ -170,7 +170,7 @@ Call_001_4000:
     ld [$d062], a
     ld a, b
     ld [$d063], a
-    call Call_000_1268
+    call ApplyPlayerRightSpeed
     scf
     ret
 .jr_001_4149:
@@ -343,14 +343,14 @@ Call_001_417c:
     jr c, .jr_001_429c
     ld a, [$d063]
     ld [$d062], a
-    call Call_000_1272
+    call ApplyPlayerLeftSpeed
     ld a, [wPlayerScreenXCoord]
     cp $08
     jr z, .jr_001_42a1
     and a
     ret
 .jr_001_429c:
-    call Call_000_1272
+    call ApplyPlayerLeftSpeed
     scf
     ret
 .jr_001_42a1:

@@ -96,3 +96,8 @@ wDestGfxAddress:: ; $d097
 
 wRAMFuncD099:: ; $d099
 	ds 7
+
+	ds $b60
+
+wdc00:: ; $dc00
+	ds $200
