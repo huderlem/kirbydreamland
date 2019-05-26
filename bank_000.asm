@@ -971,7 +971,7 @@ Call_000_07cd:
     ld a, [hl]
     ld c, a
     ld b, $00
-    ld hl, $ca00
+    ld hl, wMetatileCollisions
     add hl, bc
     ld a, [hl]
 .jr_000_0812:
@@ -1024,7 +1024,7 @@ Call_000_819:
     ld a, [hl]
     ld c, a
     ld b, $00
-    ld hl, $ca00
+    ld hl, wMetatileCollisions
     add hl, bc
     ld a, [hl]
     pop hl
@@ -6833,7 +6833,7 @@ Call_000_2e7f:
 
 
 Call_000_2e90:
-    ld hl, $ca00
+    ld hl, wMetatileCollisions
     add hl, de
     ld a, [hl]
     ret

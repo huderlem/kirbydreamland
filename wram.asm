@@ -18,7 +18,11 @@ wMetatileDefinitions:: ; $c600
 ; Each metatiles is defined by 4 bytes, which specify the tile numbers to use for
 ; its 2x2 orientation on screen.
 ; The order is top-left, top-right, bottom-left, bottom-right.
-	ds $140 * 4
+	ds $100 * 4
+wMetatileCollisions:: ; $ca00
+; Each metatile has an associated collision attribute. The metatile collisions are included in
+; the compressed metatile blobs, so they directly follow the metatile defintion data.
+	ds $100
 
 wTilemapCopyBuffer:: ; $cb00
 ; This buffer queues tilemap data to be copied at a later time.
