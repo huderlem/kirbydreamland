@@ -69,7 +69,13 @@ wPlayerScreenXCoord:: ; $d05c
 wPlayerScreenYCoord:: ; $d05d
 	ds 1
 
-	ds $22
+	ds 13
+
+wTemp:: ; $d06b
+; Used for lots of functions where it's convenient to store a value for later, instead of using the stack.
+	ds 1
+
+	ds 20
 
 wBGP:: ; $d080
 	ds 1
@@ -88,7 +94,7 @@ wScore:: ; $d08b
 
 	ds 7
 
-wClearSpritesOffset:: ; $d095
+wSpriteProcessingOffset:: ; $d095
 	ds 1
 
 wClearAllSprites:: ; $d096

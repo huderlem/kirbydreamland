@@ -143,7 +143,7 @@ Jump_000_01f2:
 
 Func_000_246:
     xor a
-    ld [wClearSpritesOffset], a
+    ld [wSpriteProcessingOffset], a
     ld a, [wLoadedROMBank]
     push af
     ld a, Bank(Call_005_432c)
@@ -198,7 +198,7 @@ Func_000_246:
     jr nz, .jr_000_02b9
     push hl
     xor a
-    ld [wClearSpritesOffset], a
+    ld [wSpriteProcessingOffset], a
     call Call_000_2e9c
     call ClearSprites
     pop hl
@@ -559,7 +559,7 @@ TryDoorWarp:
     call Call_000_1def
     push bc
     xor a
-    ld [wClearSpritesOffset], a
+    ld [wSpriteProcessingOffset], a
     call Call_000_2e9c
     call ClearSprites
     pop bc
@@ -640,7 +640,7 @@ TryDoorWarp:
     ld [$d078], a
     ld [$d079], a
     ld [$d064], a
-    ld [wClearSpritesOffset], a
+    ld [wSpriteProcessingOffset], a
     ld a, $20
     ld [$d07c], a
     ld a, $0e
@@ -693,7 +693,7 @@ Call_000_0648:
     ldh [$90], a
 .jr_000_0655:
     xor a
-    ld [wClearSpritesOffset], a
+    ld [wSpriteProcessingOffset], a
     call Call_000_2e9c
     call ClearSprites
     ld hl, $ff8c
@@ -974,14 +974,14 @@ Call_000_07cd:
     ld hl, wMetatileCollisions
     add hl, bc
     ld a, [hl]
-.jr_000_0812:
+.return:
     pop hl
     pop de
     pop bc
     ret
 .jr_000_0816:
     xor a
-    jr .jr_000_0812
+    jr .return
 
 
 Call_000_819:
@@ -2548,7 +2548,7 @@ Call_000_131a:
     ld bc, wMetatileDefinitions
     add hl, bc
     ld a, [$d057]
-    ld [$d06b], a
+    ld [wTemp], a
     ld a, [$d058]
     ld [$d06c], a
     ld [$d07f], a
@@ -2565,7 +2565,7 @@ Call_000_131a:
     ld a, [hl]
     ld [de], a
     inc de
-    ld a, [$d06b]
+    ld a, [wTemp]
     ld [$d057], a
     ld a, [$d06c]
     ld [$d058], a
@@ -2642,7 +2642,7 @@ Call_000_139b:
     ld hl, UnkAnimations_157D
     jr .jr_000_13c7
 .jr_000_13c4:
-    ld hl, $15b7
+    ld hl, UnkAnimations_15b7
 .jr_000_13c7:
     ld c, $00
     ldh a, [$8d]
@@ -2867,7 +2867,7 @@ Call_000_139b:
     inc hl
     cp [hl]
     jr nz, .jr_000_1559
-    jr .jr_000_1569
+    jr .return
 .jr_000_1546:
     res 6, a
     ldh [$94], a
@@ -2888,7 +2888,7 @@ Call_000_139b:
     ld [$d083], a
     ld bc, $0000
     call Call_000_21e6
-.jr_000_1569:
+.return:
     ld a, [wLoadedROMBank]
     ld [MBC1RomBank], a
     ret
@@ -2905,7 +2905,7 @@ Unk157A:
 
 UnkAnimations_157D:
 ; animations
-    dw Unk15F1 ; kirby standing facing right
+    dw Anim_KirbyFaceRight
     dw Unk15F4 ; kirby walking to the right
     dw Unk1602
     dw Unk1605
@@ -2934,6 +2934,8 @@ UnkAnimations_157D:
     dw Unk1753
     dw Unk175D
     dw Unk176A
+
+UnkAnimations_15b7:
     dw Unk1778
     dw Unk177B
     dw Unk1789
@@ -2964,180 +2966,359 @@ UnkAnimations_157D:
     dw Unk18E4
     dw Unk18F1
 
-Unk15F1:
-    db $00, $B9, $58
+Anim_KirbyFaceRight:
+    anim_forever Metasprite_KirbyFaceRight
 
 Unk15F4:
-    db $0B, $C1, $58
-    db $08, $C9, $58
-    db $0B, $D1, $58
-    db $08, $C9, $58
-    db $E2, $F3
+    anim_duration 11, $58C1
+    anim_duration  8, $58C9
+    anim_duration 11, $58D1
+    anim_duration  8, $58C9
+    anim_jump Unk15F4
 
 Unk1602:
-    db $00, $D9, $58
+    anim_forever $58D9
 
 Unk1605:
-    db $EA, $94, $D0, $02, $1B, $16, $0A, $69, $5A, $0A, $71, $5A, $0A, $81, $5A, $02, $99, $5A, $F4, $94, $D0, $02, $04, $19, $59, $04, $31, $59, $E2, $F9
+    anim_jump_if_equal $d094, 2, $161b
+    anim_duration 10, $5A69
+    anim_duration 10, $5A71
+    anim_duration 10, $5A81
+    anim_duration 2, $5A99
+    anim_store_value $D094, 2
+.loop
+    anim_duration 4, $5919
+    anim_duration 4, $5931
+    anim_jump .loop
 
 Unk1623:
-    db $14, $19, $59, $14, $31, $59, $E2, $F9
+    anim_duration 20, $5919
+    anim_duration 20, $5931
+    anim_jump Unk1623
 
 Unk162B:
-    db $0A, $81, $5A, $0A, $99, $5A, $0A, $69, $5A, $F9, $8E, $FF, $78, $00, $F4, $94, $D0, $01, $EC, $01
+    anim_duration 10, $5A81
+    anim_duration 10, $5A99
+    anim_duration 10, $5A69
+    anim_f9 $FF8E, $78, $00
+    anim_store_value $D094, 1
+    db $EC, $01
 
 Unk163F:
-    db $F9, $8E, $FF, $FF, $02, $06, $C9, $5B, $F9, $92, $FF, $7F, $00, $F9, $8E, $FF, $FC, $00, $EC, $01
+    anim_f9 $FF8E, $FF, $02
+    anim_duration 6, $5BC9
+    anim_f9 $FF92, $7F, $00
+    anim_f9 $FF8E, $FC, $00
+    db $EC, $01
 
 Unk1653:
-    db $F9, $8E, $FF, $FF, $02, $06, $D1, $5B, $F9, $92, $FF, $7F, $00, $F9, $8E, $FF, $FC, $00, $EC, $01
+    anim_f9 $FF8E, $FF, $02
+    anim_duration 6, $5BD1
+    anim_f9 $FF92, $7F, $00
+    anim_f9 $FF8E, $FC, $00
+    db $EC, $01
 
 Unk1667:
-    db $F9, $8E, $FF, $FF, $02, $06, $D9, $5B, $F9, $92, $FF, $7F, $00, $F9, $8E, $FF, $FC, $00, $EC, $01
+    anim_f9 $FF8E, $FF, $02
+    anim_duration 6, $5BD9
+    anim_f9 $FF92, $7F, $00
+    anim_f9 $FF8E, $FC, $00
+    db $EC, $01
 
 Unk167B:
-    db $F9, $8E, $FF, $FF, $02, $06, $DD, $5B, $F9, $92, $FF, $7F, $00, $F9, $8E, $FF, $FC, $00, $EC, $01
+    anim_f9 $FF8E, $FF, $02
+    anim_duration 6, $5BDD
+    anim_f9 $FF92, $7F, $00
+    anim_f9 $FF8E, $FC, $00
+    db $EC, $01
 
 Unk168F:
-    db $00, $C9, $5B
+    anim_forever $5BC9
 
 Unk1692:
-    db $10, $C1, $58, $0C, $C9, $58, $10, $D1, $58, $0C, $C9, $58, $E2, $F3
+    anim_duration 16, $58C1
+    anim_duration 12, $58C9
+    anim_duration 16, $58D1
+    anim_duration 12, $58C9
+    anim_jump Unk1692
 
 Unk16A0:
-    db $08, $C1, $58, $08, $C9, $58, $10, $D1, $58, $E2, $F6
+    anim_duration  8, $58C1
+    anim_duration  8, $58C9
+    anim_duration 16, $58D1
+    anim_jump Unk16A0
 
 Unk16AB:
-    db $00, $69, $5B
+    anim_forever $5B69
 
 Unk16AE:
-    db $F9, $8E, $FF, $FF, $02, $05, $69, $5B, $06, $C9, $5B, $F9, $92, $FF, $63, $00, $F9, $8E, $FF, $F8, $00, $F4, $64, $D0, $02, $F9, $8E, $FF, $FC, $00, $EC, $01
+    anim_f9 $FF8E, $FF, $02
+    anim_duration 5, $5B69
+    anim_duration 6, $5BC9
+    anim_f9 $FF92, $63, $00
+    anim_f9 $FF8E, $F8, $00
+    anim_store_value $D064, 2
+    anim_f9 $FF8E, $FC, $00
+    db $EC, $01
 
 Unk16CE:
-    db $EA, $94, $D0, $03, $DB, $16, $08, $69, $5A, $F4, $94, $D0, $03, $00, $71, $5A
+    anim_jump_if_equal $D094, 3, $16DB
+    anim_duration $08, $5A69
+    anim_store_value $D094, 3
+    anim_forever $5A71
 
 Unk16DE:
-    db $08, $71, $5A, $06, $69, $5A, $F9, $8E, $FF, $60, $00, $08, $E1, $5A, $F4, $94, $D0, $01, $EC, $01
+    anim_duration 8, $5A71
+    anim_duration 6, $5A69
+    anim_f9 $FF8E, $60, $00
+    anim_duration 8, $5AE1
+    anim_store_value $D094, 1
+    db $EC, $01
 
 Unk16F2:
-    db $F9, $8E, $FF, $EC, $00, $00, $79, $59
+    anim_f9 $FF8E, $EC, $00
+    anim_forever $5979
 
 Unk16FA:
-    db $F9, $8E, $FF, $EC, $00, $0C, $A9, $59, $0C, $C1, $59, $E2, $F9
+    anim_f9 $FF8E, $EC, $00
+.loop
+    anim_duration 12, $59A9
+    anim_duration 12, $59C1
+    anim_jump .loop
 
 Unk1707:
-    db $F9, $8E, $FF, $EC, $00, $00, $D9, $59
+    anim_f9 $FF8E, $EC, $00
+    anim_forever $59D9
 
 Unk170F:
-    db $05, $B1, $5A, $05, $71, $5A, $06, $69, $5A, $F9, $8E, $FF, $60, $00, $F4, $94, $D0, $01, $EC, $01
+    anim_duration 5, $5AB1
+    anim_duration 5, $5A71
+    anim_duration 6, $5A69
+    anim_f9 $FF8E, $60, $00
+    anim_store_value $D094, 1
+    db $EC, $01
 
 Unk1723:
-    db $00, $B1, $5A
+    anim_forever $5AB1
 
 Unk1726:
-    db $0A, $C9, $5A, $0A, $91, $59, $F4, $94, $D0, $04, $EC, $01
+    anim_duration 10, $5AC9
+    anim_duration 10, $5991
+    anim_store_value $D094, 4
+    db $EC, $01
 
 Unk1732:
-    db $05, $91, $59, $03, $C9, $5A, $03, $E1, $5A, $F9, $8E, $FF, $60, $00, $F9, $93, $FF, $EF, $00, $EC, $01
+    anim_duration 5, $5991
+    anim_duration 3, $5AC9
+    anim_duration 3, $5AE1
+    anim_f9 $FF8E, $60, $00
+    anim_f9 $FF93, $EF, $00
+    db $EC, $01
 
 Unk1747:
-    db $08, $71, $5A, $08, $71, $5A, $F4, $94, $D0, $06, $EC, $01
+    anim_duration 8, $5A71
+    anim_duration 8, $5A71
+    anim_store_value $D094, 6
+    db $EC, $01
 
 Unk1753:
-    db $05, $69, $5A, $F9, $95, $FF, $EF, $00, $EC, $01
+    anim_duration $05, $5A69
+    anim_f9 $FF95, $EF, $00
+    db $EC, $01
 
 Unk175D:
-    db $03, $81, $5A, $03, $99, $5A, $F9, $95, $FF, $FB, $00, $EC, $01
+    anim_duration 3, $5A81
+    anim_duration 3, $5A99
+    anim_f9 $FF95, $FB, $00
+    db $EC, $01
 
 Unk176A:
-    db $03, $C1, $58, $02, $C9, $58, $03, $D1, $58, $02, $C9, $58, $E2, $F3
+    anim_duration 3, $58C1
+    anim_duration 2, $58C9
+    anim_duration 3, $58D1
+    anim_duration 2, $58C9
+    anim_jump Unk176A
 
 Unk1778:
-    db $00, $E9, $58
+    anim_forever $58E9
 
 Unk177B:
-    db $0B, $F1, $58, $08, $F9, $58, $0B, $01, $59, $08, $F9, $58, $E2, $F3
+    anim_duration 11, $58F1
+    anim_duration  8, $58F9
+    anim_duration 11, $5901
+    anim_duration  8, $58F9
+    anim_jump Unk177B
 
 Unk1789:
-    db $00, $09, $59
+    anim_forever $5909
 
 Unk178C:
-    db $EA, $94, $D0, $02, $A2, $17, $0A, $E9, $5A, $0A, $F1, $5A, $0A, $01, $5B, $02, $19, $5B, $F4, $94, $D0, $02, $04, $49, $59, $04, $61, $59, $E2, $F9
+    anim_jump_if_equal $D094, 2, $17A2
+    anim_duration 10, $5AE9
+    anim_duration 10, $5AF1
+    anim_duration 10, $5B01
+    anim_duration  2, $5B19
+    anim_store_value $D094, 2
+.loop
+    anim_duration 4, $5949
+    anim_duration 4, $5961
+    anim_jump .loop
 
 Unk17AA:
-    db $14, $49, $59, $14, $61, $59, $E2, $F9
+    anim_duration 20, $5949
+    anim_duration 20, $5961
+    anim_jump Unk17AA
 
 Unk17B2:
-    db $0A, $01, $5B, $0A, $19, $5B, $0A, $E9, $5A, $F9, $8E, $FF, $78, $00, $F4, $94, $D0, $01, $EC, $01
+    anim_duration 10, $5B01
+    anim_duration 10, $5B19
+    anim_duration 10, $5AE9
+    anim_f9 $FF8E, $78, $00
+    anim_store_value $D094, 1
+    db $EC, $01
 
 Unk17C6:
-    db $F9, $8E, $FF, $FF, $02, $06, $AD, $5B, $F9, $92, $FF, $7F, $00, $F9, $8E, $FF, $FC, $00, $EC, $01
+    anim_f9 $FF8E, $FF, $02
+    anim_duration 6, $5BAD
+    anim_f9 $FF92, $7F, $00
+    anim_f9 $FF8E, $FC, $00
+    db $EC, $01
 
 Unk17DA:
-    db $F9, $8E, $FF, $FF, $02, $06, $B5, $5B, $F9, $92, $FF, $7F, $00, $F9, $8E, $FF, $FC, $00, $EC, $01
+    anim_f9 $FF8E, $FF, $02
+    anim_duration 6, $5BB5
+    anim_f9 $FF92, $7F, $00
+    anim_f9 $FF8E, $FC, $00
+    db $EC, $01
 
 Unk17EE:
-    db $F9, $8E, $FF, $FF, $02, $06, $BD, $5B, $F9, $92, $FF, $7F, $00, $F9, $8E, $FF, $FC, $00, $EC, $01
+    anim_f9 $FF8E, $FF, $02
+    anim_duration 6, $5BBD
+    anim_f9 $FF92, $7F, $00
+    anim_f9 $FF8E, $FC, $00
+    db $EC, $01
 
 Unk1802:
-    db $F9, $8E, $FF, $FF, $02, $06, $C1, $5B, $F9, $92, $FF, $7F, $00, $F9, $8E, $FF, $FC, $00, $EC, $01
+    anim_f9 $FF8E, $FF, $02
+    anim_duration 6, $5BC1
+    anim_f9 $FF92, $7F, $00
+    anim_f9 $FF8E, $FC, $00
+    db $EC, $01
 
 Unk1816:
-    db $00, $AD, $5B
+    anim_forever $5BAD
 
 Unk1819:
-    db $10, $F1, $58, $0C, $F9, $58, $10, $01, $59, $0C, $F9, $58, $E2, $F3
+    anim_duration 16, $58F1
+    anim_duration 12, $58F9
+    anim_duration 16, $5901
+    anim_duration 12, $58F9
+    anim_jump Unk1819
 
 Unk1827:
-    db $08, $F1, $58, $08, $F9, $58, $10, $01, $59, $E2, $F6
+    anim_duration  8, $58F1
+    anim_duration  8, $58F9
+    anim_duration 16, $5901
+    anim_jump Unk1827
 
 Unk1832:
-    db $00, $71, $5B
+    anim_forever $5B71
 
 Unk1835:
-    db $F9, $8E, $FF, $FF, $02, $05, $71, $5B, $06, $AD, $5B, $F9, $92, $FF, $63, $00, $F9, $8E, $FF, $F8, $00, $F4, $64, $D0, $02, $F9, $8E, $FF, $FC, $00, $EC, $01
+    anim_f9 $FF8E, $FF, $02
+    anim_duration 5, $5B71
+    anim_duration 6, $5BAD
+    anim_f9 $FF92, $63, $00
+    anim_f9 $FF8E, $F8, $00
+    anim_store_value $D064, 2
+    anim_f9 $FF8E, $FC, $00
+    db $EC, $01
 
 Unk1855:
-    db $EA, $94, $D0, $03, $62, $18, $08, $E9, $5A, $F4, $94, $D0, $03, $00, $F1, $5A
+    anim_jump_if_equal $D094, 3, $1862
+    anim_duration 8, $5AE9
+    anim_store_value $D094, 3
+    anim_forever $5AF1
 
 Unk1865:
-    db $08, $F1, $5A, $06, $E9, $5A, $F9, $8E, $FF, $60, $00, $08, $61, $5B, $F4, $94, $D0, $01, $EC, $01
+    anim_duration 8, $5AF1
+    anim_duration 6, $5AE9
+    anim_f9 $FF8E, $60, $00
+    anim_duration 8, $5B61
+    anim_store_value $D094, 1
+    db $EC, $01
 
 Unk1879:
-    db $F9, $8E, $FF, $EC, $00, $00, $F1, $59
+    anim_f9 $FF8E, $EC, $00
+    anim_forever $59F1
 
 Unk1881:
-    db $F9, $8E, $FF, $EC, $00, $0C, $21, $5A, $0C, $39, $5A, $E2, $F9
+    anim_f9 $FF8E, $EC, $00
+.loop
+    anim_duration 12, $5A21
+    anim_duration 12, $5A39
+    anim_jump .loop
 
 Unk188E:
-    db $F9, $8E, $FF, $EC, $00, $00, $51, $5A
+    anim_f9 $FF8E, $EC, $00
+    anim_forever $5A51
 
 Unk1896:
-    db $05, $31, $5B, $05, $F1, $5A, $06, $E9, $5A, $F9, $8E, $FF, $60, $00, $F4, $94, $D0, $01, $EC, $01
+    anim_duration 5, $5B31
+    anim_duration 5, $5AF1
+    anim_duration 6, $5AE9
+    anim_f9 $FF8E, $60, $00
+    anim_store_value $D094, 1
+    db $EC, $01
 
 Unk18AA:
-    db $00, $31, $5B
+    anim_forever $5B31
 
 Unk18AD:
-    db $0A, $49, $5B, $0A, $09, $5A, $F4, $94, $D0, $04, $EC, $01
+    anim_duration 10, $5B49
+    anim_duration 10, $5A09
+    anim_store_value $D094, 4
+    db $EC, $01
 
 Unk18B9:
-    db $05, $09, $5A, $03, $49, $5B, $03, $61, $5B, $F9, $8E, $FF, $60, $00, $F9, $93, $FF, $EF, $00, $EC, $01
+    anim_duration 5, $5A09
+    anim_duration 3, $5B49
+    anim_duration 3, $5B61
+    anim_f9 $FF8E, $60, $00
+    anim_f9 $FF93, $EF, $00
+    db $EC, $01
 
 Unk18CE:
-    db $08, $F1, $5A, $08, $F1, $5A, $F4, $94, $D0, $06, $EC, $01
+    anim_duration 8, $5AF1
+    anim_duration 8, $5AF1
+    anim_store_value $D094, 6
+    db $EC, $01
 
 Unk18DA:
-    db $05, $E9, $5A, $F9, $95, $FF, $EF, $00, $EC, $01
+    anim_duration 5, $5AE9
+    anim_f9 $FF95, $EF, $00
+    db $EC, $01
 
 Unk18E4:
-    db $03, $01, $5B, $03, $19, $5B, $F9, $95, $FF, $FB, $00, $EC, $01
+    anim_duration 3, $5B01
+    anim_duration 3, $5B19
+    anim_f9 $FF95, $FB, $00
+    db $EC, $01
 
 Unk18F1:
-    db $03, $F1, $58, $02, $F9, $58, $03, $01, $59, $02, $F9, $58, $E2, $F3
+    anim_duration 3, $58F1
+    anim_duration 2, $58F9
+    anim_duration 3, $5901
+    anim_duration 2, $58F9
+    anim_jump Unk18F1
 
-Jump_000_18ff:
-    ld [$d06b], a
+DrawMetaSprite:
+; Draws a collection of sprites, called a metasprite, into the OAM buffer.
+; A metasprite is used to group together smaller OAM entries to make one large sprite.
+; Input: a = oam attribute toggle (this is xor'd with each sprite's attribute)
+;        b = x offset
+;        c = y offset
+    ld [wTemp], a
     ld a, [wLoadedROMBank]
     push af
     ld a, $0b
@@ -3145,11 +3326,11 @@ Jump_000_18ff:
     ld [MBC1RomBank], a
     ld a, [hl]
     cp $80
-    jr z, .jr_000_1933
-    ld a, [wClearSpritesOffset]
+    jr z, .end
+    ld a, [wSpriteProcessingOffset]
     ld e, a
-    ld d, $c0
-.jr_000_1919:
+    ld d, wOAMBuffer >> 8
+.loop:
     ld a, [hl+]
     add c
     ld [de], a
@@ -3161,16 +3342,16 @@ Jump_000_18ff:
     ld a, [hl+]
     ld [de], a
     inc e
-    ld a, [$d06b]
+    ld a, [wTemp]
     xor [hl]
     ld [de], a
     inc hl
     inc e
     bit 0, a
-    jr z, .jr_000_1919
+    jr z, .loop
     ld a, e
-    ld [wClearSpritesOffset], a
-.jr_000_1933:
+    ld [wSpriteProcessingOffset], a
+.end:
     pop af
     ld [wLoadedROMBank], a
     ld [MBC1RomBank], a
@@ -3180,7 +3361,7 @@ Jump_000_18ff:
 ClearSprites:
 ; Clears all OAM sprites after a specified offset.
 ; If [wClearAllSprites] == $ff, then all sprites are cleared.
-; Otherwise, start clearing at offset in [wClearSpritesOffset].
+; Otherwise, start clearing at offset in [wSpriteProcessingOffset].
     ld a, [wClearAllSprites]
     inc a
     jr nz, .startAtOffset ; $ff indicates that all OAM sprites should be cleared
@@ -3188,10 +3369,10 @@ ClearSprites:
     ld c, a
     ld [wClearAllSprites], a
     xor a
-    ld [wClearSpritesOffset], a
+    ld [wSpriteProcessingOffset], a
     jr .copyOamData
 .startAtOffset:
-    ld a, [wClearSpritesOffset]
+    ld a, [wSpriteProcessingOffset]
     ld [wClearAllSprites], a
     ld c, wOAMBufferEnd - wOAMBuffer
 .copyOamData:
@@ -3260,7 +3441,7 @@ Call_000_1964:
     or $60
     ldh [$8c], a
     call Call_000_1ee3
-    ld a, [$d06b]
+    ld a, [wTemp]
     xor a
     ldh [$8c], a
     pop de
@@ -3515,7 +3696,7 @@ Call_000_19f9:
 .jr_000_1b7c:
     add hl, bc
     ld a, [hl+]
-    ld [$d06b], a
+    ld [wTemp], a
     ld a, [hl+]
     ld b, a
     ld a, [hl+]
@@ -3526,7 +3707,7 @@ Call_000_19f9:
     ld d, a
     ld h, b
     ld l, c
-    ld a, [$d06b]
+    ld a, [wTemp]
     ld c, a
     call Decompress
     ld a, [$d06c]
@@ -3918,7 +4099,7 @@ Call_000_1dc3:
     push hl
     push af
     xor a
-    ld [wClearSpritesOffset], a
+    ld [wSpriteProcessingOffset], a
     call Call_000_2e9c
     call ClearSprites
     pop af
@@ -5047,6 +5228,7 @@ Call_000_2441:
 
 
 Call_000_2447:
+; Input:  a = animation command id
     cp $ef
     jp nc, .jump_000_253f
     cp $e0
@@ -5061,7 +5243,7 @@ Call_000_2447:
 .jr_000_245b:
     cp $e1
     jr nz, .jr_000_2462
-    jp Call_000_2784
+    jp JumpAnimToHL
 .jr_000_2462:
     cp $e2
     jr nz, .jr_000_2479
@@ -5133,7 +5315,7 @@ Call_000_2447:
     cp [hl]
     jr nz, .jr_000_24cf
     inc hl
-    jp Call_000_2784
+    jp JumpAnimToHL
 .jr_000_24cf:
     ld de, $0003
     add hl, de
@@ -5155,7 +5337,7 @@ Call_000_2447:
     ld e, a
     ld d, $00
     add hl, de
-    jp Call_000_2784
+    jp JumpAnimToHL
 .jr_000_24ed:
     cp $ed
     jr nz, .jr_000_2505
@@ -5506,7 +5688,7 @@ Call_000_2447:
     cp [hl]
     inc hl
     jr nc, .jr_000_26cd
-    jp Call_000_2784
+    jp JumpAnimToHL
 .jr_000_26cd:
     inc hl
     inc hl
@@ -5637,7 +5819,7 @@ Call_000_2771:
     ret
 
 
-Call_000_2784:
+JumpAnimToHL:
     ld a, [hl+]
     ld [$d3d9], a
     ld a, [hl]
@@ -5700,14 +5882,14 @@ Call_000_278d:
     adc $00
     ld [hl], a
     pop hl
-    jp Call_000_2784
+    jp JumpAnimToHL
 .jr_000_27e0:
     cp $e4
     jr nz, .jr_000_27ec
     ld hl, $d23a
     add hl, bc
     add hl, bc
-    jp Call_000_2784
+    jp JumpAnimToHL
 .jr_000_27ec:
     cp $e5
     jr nz, .jr_000_2813
@@ -5784,7 +5966,7 @@ Call_000_278d:
     ld l, e
     add hl, bc
     add hl, bc
-    call Call_000_2784
+    call JumpAnimToHL
     pop hl
     ret
 .jr_000_2861:
@@ -5799,7 +5981,9 @@ Call_000_278d:
     ret
 
 
-Call_000_286f:
+HandleAnimationCommand:
+; Input:  a = animation command id
+;        hl = animation command address
     inc hl
     cp $fd
     jr nz, .jr_000_2886
@@ -5854,14 +6038,14 @@ Call_000_286f:
     adc $00
     ld [hl], a
     pop hl
-    jp Call_000_2784
+    jp JumpAnimToHL
 .jr_000_28c2:
     cp $e4
     jr nz, .jr_000_28ce
     ld hl, $d2da
     add hl, bc
     add hl, bc
-    jp Call_000_2784
+    jp JumpAnimToHL
 .jr_000_28ce:
     cp $e5
     jr nz, .jr_000_28f3
@@ -5936,7 +6120,7 @@ Call_000_286f:
     ld l, e
     add hl, bc
     add hl, bc
-    call Call_000_2784
+    call JumpAnimToHL
     pop hl
     ret
 .jr_000_2941:
@@ -6138,9 +6322,9 @@ Call_29b7:
     ld a, [wExtraGameEnabled]
     and a
     ld a, $08
-    jr z, .jr_000_2a8a
+    jr z, .updateDuration
     ld a, $09
-.jr_000_2a8a:
+.updateDuration:
     ld [wLoadedROMBank], a
     ld [MBC1RomBank], a
     ld hl, $d180
@@ -6149,10 +6333,10 @@ Call_29b7:
     and a
     ret z
     dec a
-    jr z, .jr_000_2a9c
+    jr z, .durationCompleted
     ld [hl], a
     ret
-.jr_000_2a9c:
+.durationCompleted:
     ld hl, $d2ba
     add hl, bc
     add hl, bc
@@ -6168,9 +6352,9 @@ Call_29b7:
     ld a, [hl]
     ld [$d3d8], a
     cp $e0
-    jr c, .jr_000_2ada
+    jr c, .durationCommand
     cp $ec
-    jr nz, .jr_000_2acf
+    jr nz, .handleAnimationCommand
     inc hl
     ld a, [hl+]
     ld d, a
@@ -6182,13 +6366,13 @@ Call_29b7:
     add hl, bc
     ld [hl], d
     jr .jr_000_2b18
-.jr_000_2acf:
-    call Call_000_286f
+.handleAnimationCommand:
+    call HandleAnimationCommand
     ld a, [$d3d8]
     cp $ff
     ret z
     jr .jr_000_2aa9
-.jr_000_2ada:
+.durationCommand:
     ld a, [$d3d8]
     ld hl, $d180
     add hl, bc
@@ -6476,10 +6660,10 @@ Call_000_2b26:
     add hl, de
     ld a, [hl]
     and $90
-    ld [$d06b], a
+    ld [wTemp], a
     ld hl, $ff94
     bit 5, [hl]
-    jr nz, .jr_000_2cd4
+    jr nz, .drawMetaSprite
     ld hl, $d1a0
     add hl, de
     ld a, [$d036]
@@ -6489,14 +6673,14 @@ Call_000_2b26:
     ret nz
 .jr_000_2cc4:
     bit 1, a
-    jr nz, .jr_000_2cd4
+    jr nz, .drawMetaSprite
     bit 4, [hl]
-    jr z, .jr_000_2cd4
-    ld a, [$d06b]
+    jr z, .drawMetaSprite
+    ld a, [wTemp]
     xor $10
-    ld [$d06b], a
-.jr_000_2cd4:
-    ld a, [$d06b]
+    ld [wTemp], a
+.drawMetaSprite:
+    ld a, [wTemp]
     ld hl, $d1c0
     add hl, de
     add hl, de
@@ -6504,7 +6688,7 @@ Call_000_2b26:
     inc hl
     ld h, [hl]
     ld l, e
-    jp Jump_000_18ff
+    jp DrawMetaSprite
 .jr_000_2ce3:
     pop bc
     ret
@@ -7563,7 +7747,7 @@ Call_000_331c:
 Call_000_3329:
     inc hl
     ld a, [hl+]
-    ld [$d06b], a
+    ld [wTemp], a
     ld h, [hl]
     ld l, a
     ld a, h
@@ -7614,7 +7798,7 @@ Call_000_3329:
     ld a, [de]
     and a
     jr z, .jr_000_3387
-    ld a, [$d06b]
+    ld a, [wTemp]
     cp [hl]
     jr nz, .jr_000_3387
     inc hl
@@ -7715,7 +7899,7 @@ Call_000_3329:
     ld hl, $d200
     add hl, bc
     add hl, bc
-    ld a, [$d06b]
+    ld a, [wTemp]
     ld [hl+], a
     ld a, [$d06c]
     ld [hl], a

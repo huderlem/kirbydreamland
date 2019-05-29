@@ -1141,7 +1141,7 @@ jr_005_45fd:
 
 
 Call_005_4600:
-    ld [$d06b], a
+    ld [wTemp], a
     ld hl, $d1e0
     add hl, bc
     add hl, bc
@@ -1318,7 +1318,7 @@ Jump_005_471b:
 jr_005_4723:
     ld a, $09
     call PlaySE
-    ld a, [$d06b]
+    ld a, [wTemp]
     and a
     jr z, jr_005_4730
 
@@ -1345,7 +1345,7 @@ jr_005_4748:
 
 Jump_005_474f:
     call Call_005_47c0
-    ld a, [$d06b]
+    ld a, [wTemp]
     and a
     jr z, jr_005_4761
 
@@ -1407,7 +1407,7 @@ Jump_005_479c:
 
 
 Call_005_47b5:
-    ld a, [$d06b]
+    ld a, [wTemp]
     and a
     ret z
 

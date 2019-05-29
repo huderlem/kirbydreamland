@@ -35,3 +35,5 @@ x = x + -8
 bigdw: MACRO ; big-endian word
 	dx 2, \1
 	ENDM
+
+INCLUDE "macros/animations.inc"

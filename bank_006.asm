@@ -6,7 +6,7 @@ ExecuteTitlescreen:
     call ClearSprites
     call StartTimer
     xor a
-    ld [wClearSpritesOffset], a
+    ld [wSpriteProcessingOffset], a
     ld [$d053], a
     ld [$d081], a
     ld [wBGP], a
@@ -219,7 +219,7 @@ jr_006_411c:
     ld a, [$d087]
     ld [$d086], a
     xor a
-    ld [wClearSpritesOffset], a
+    ld [wSpriteProcessingOffset], a
     call ClearSprites
     pop hl
     ld a, [hl+]
@@ -270,7 +270,7 @@ jr_006_421e:
     add hl, bc
     call Call_000_1964
     xor a
-    ld [wClearSpritesOffset], a
+    ld [wSpriteProcessingOffset], a
     call Call_000_21fb
     call Call_000_139b
     call Call_000_2329
@@ -364,7 +364,7 @@ Call_006_4285:
 .loadTiles:
     add hl, bc
     ld a, [hl+]
-    ld [$d06b], a
+    ld [wTemp], a
     ld a, [hl+]
     ld b, a
     ld a, [hl+]
@@ -375,7 +375,7 @@ Call_006_4285:
     ld d, a
     ld h, b
     ld l, c
-    ld a, [$d06b]
+    ld a, [wTemp]
     ld c, a
     call Decompress
     ret
@@ -384,7 +384,7 @@ Call_006_4285:
 Call_006_42e8:
     push hl
     xor a
-    ld [wClearSpritesOffset], a
+    ld [wSpriteProcessingOffset], a
     ld [$d053], a
     ld [$d055], a
     inc a
@@ -412,7 +412,7 @@ Call_006_42e8:
     ld hl, NormalGame_StageTiles
     add hl, bc
     ld a, [hl+]
-    ld [$d06b], a
+    ld [wTemp], a
     ld a, [hl+]
     ld b, a
     ld a, [hl+]
@@ -423,7 +423,7 @@ Call_006_42e8:
     ld d, a
     ld h, b
     ld l, c
-    ld a, [$d06b]
+    ld a, [wTemp]
     ld c, a
     call Decompress
     ld a, [wCurStage]
@@ -837,7 +837,7 @@ jr_006_45b5:
     set 4, [hl]
 .jr_006_45f6:
     xor a
-    ld [wClearSpritesOffset], a
+    ld [wSpriteProcessingOffset], a
     call Call_000_2e9c
     call Call_000_139b
     call ClearSprites
@@ -1021,7 +1021,7 @@ jr_006_45b5:
     call StopTimer
     call Call_000_0670
     xor a
-    ld [wClearSpritesOffset], a
+    ld [wSpriteProcessingOffset], a
     call Call_000_2e9c
     ld bc, $0118
 .jr_006_4797:
@@ -1068,7 +1068,7 @@ jr_006_45b5:
     ld c, $03
     call Decompress
     xor a
-    ld [$d06b], a
+    ld [wTemp], a
     ld [$d053], a
     ld [$d055], a
 
@@ -1494,7 +1494,7 @@ Call_006_4b00:
     ld a, $0b
     call PlaySong
     ld a, $98
-    ld [$d06b], a
+    ld [wTemp], a
     ld a, $1f
     ld [$d06c], a
     ld a, $9c
@@ -1624,7 +1624,7 @@ jr_006_4bed:
 
 Call_006_4bf6:
     ld bc, wTilemapCopyBuffer
-    ld a, [$d06b]
+    ld a, [wTemp]
     ld h, a
     ld a, [$d06c]
     ld l, a
@@ -1644,7 +1644,7 @@ jr_006_4c09:
 
     ld hl, $981f
     ld a, h
-    ld [$d06b], a
+    ld [wTemp], a
     ld a, l
     ld [$d06c], a
 
@@ -1676,13 +1676,13 @@ jr_006_4c1e:
     ld_long a, $ff91
     set 2, a
     ld_long $ff91, a
-    ld a, [$d06b]
+    ld a, [wTemp]
     ld h, a
     ld a, [$d06c]
     ld l, a
     dec hl
     ld a, h
-    ld [$d06b], a
+    ld [wTemp], a
     ld a, l
     ld [$d06c], a
     ld a, d
@@ -2143,18 +2143,18 @@ Call_006_5098:
     push bc
     push de
     push hl
-    ld a, [$d06b]
+    ld a, [wTemp]
     push af
     ld a, [$d06c]
     push af
     xor a
-    ld [wClearSpritesOffset], a
+    ld [wSpriteProcessingOffset], a
     call Call_000_2e9c
     call ClearSprites
     pop af
     ld [$d06c], a
     pop af
-    ld [$d06b], a
+    ld [wTemp], a
     pop hl
     pop de
     pop bc
@@ -7055,7 +7055,7 @@ ExecuteConfigurationModeScreen:
     ld c, $03
     call Decompress
     xor a
-    ld [$d06b], a
+    ld [wTemp], a
     dec a
     ld [$d050], a
     ld hl, $98eb
@@ -7118,7 +7118,7 @@ jr_006_63fe:
 
 
 Jump_006_6435:
-    ld a, [$d06b]
+    ld a, [wTemp]
     cp $02
     jp z, Jump_006_655e
 
@@ -7133,7 +7133,7 @@ Jump_006_6440:
 
 
 Jump_006_6449:
-    ld a, [$d06b]
+    ld a, [wTemp]
     and a
     ret z
 
@@ -7141,7 +7141,7 @@ Jump_006_6449:
     jr jr_006_6463
 
 Jump_006_6451:
-    ld a, [$d06b]
+    ld a, [wTemp]
     cp $03
     ret z
 
@@ -7149,7 +7149,7 @@ Jump_006_6451:
     jr jr_006_6463
 
 Jump_006_645a:
-    ld a, [$d06b]
+    ld a, [wTemp]
     inc a
     cp $04
     jr nz, jr_006_6463
@@ -7157,7 +7157,7 @@ Jump_006_645a:
     xor a
 
 jr_006_6463:
-    ld [$d06b], a
+    ld [wTemp], a
     ld a, $1a
     call PlaySE
 
@@ -7189,7 +7189,7 @@ Jump_006_646b:
     ld [$cb0b], a
     xor a
     ld [$cb0c], a
-    ld a, [$d06b]
+    ld a, [wTemp]
     ld c, a
     add a
     add c
@@ -7205,7 +7205,7 @@ Jump_006_646b:
 
 
 Jump_006_64c3:
-    ld a, [$d06b]
+    ld a, [wTemp]
     cp $02
     jp z, Jump_006_655e
 
@@ -7213,7 +7213,7 @@ Jump_006_64c3:
     jp z, Jump_006_6440
 
 Jump_006_64d0:
-    ld a, [$d06b]
+    ld a, [wTemp]
     cp $01
     jr z, jr_006_64e8
 
@@ -7240,7 +7240,7 @@ jr_006_64e8:
     jr jr_006_652f
 
 Jump_006_64f4:
-    ld a, [$d06b]
+    ld a, [wTemp]
     cp $01
     jr z, jr_006_6527
 
@@ -7318,7 +7318,7 @@ Jump_006_655e:
     call StopTimer
     call Call_000_0670
     xor a
-    ld [$d06b], a
+    ld [wTemp], a
     ld hl, $d067
     ld [hl+], a
     ld [hl], a
@@ -7363,7 +7363,7 @@ jr_006_658f:
 
 jr_006_65bf:
     ld a, $01
-    ld [$d06b], a
+    ld [wTemp], a
     call Call_006_66cb
     ld a, $1a
     call PlaySE
@@ -7371,14 +7371,14 @@ jr_006_65bf:
 
 jr_006_65ce:
     xor a
-    ld [$d06b], a
+    ld [wTemp], a
     call Call_006_66cb
     ld a, $1a
     call PlaySE
     jr jr_006_658a
 
 jr_006_65dc:
-    ld a, [$d06b]
+    ld a, [wTemp]
     and a
     jr nz, jr_006_65f4
 
@@ -7404,7 +7404,7 @@ jr_006_65f4:
     jr jr_006_658a
 
 jr_006_6606:
-    ld a, [$d06b]
+    ld a, [wTemp]
     and a
     jr nz, jr_006_661e
 
@@ -7440,11 +7440,11 @@ Jump_006_6630:
 
 
 Jump_006_6633:
-    ld a, [$d06b]
+    ld a, [wTemp]
     ld b, a
     ld a, $01
     sub b
-    ld [$d06b], a
+    ld [wTemp], a
     call Call_006_66cb
     ld a, $1a
     call PlaySE
@@ -7460,7 +7460,7 @@ Jump_006_6648:
 
 
 Jump_006_6655:
-    ld a, [$d06b]
+    ld a, [wTemp]
     and a
     jr nz, jr_006_6664
 
@@ -7522,7 +7522,7 @@ Call_006_669c:
 
 
 Call_006_66cb:
-    ld a, [$d06b]
+    ld a, [wTemp]
     and a
     jr nz, jr_006_66fc
 
