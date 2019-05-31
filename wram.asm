@@ -107,7 +107,16 @@ wDestGfxAddress:: ; $d097
 wRAMFuncD099:: ; $d099
 	ds 7
 
-	ds $b60
+	ds $338
+
+wCurrentAnimationCmd:: ; $d3d8
+  ds 1
+
+; Stores an address to the current byte the animation script parser is looking at.
+wAnimationParserScriptReadAddress:: ; $d3d9
+  ds 2
+
+  ds $825
 
 wdc00:: ; $dc00
 	ds $200
