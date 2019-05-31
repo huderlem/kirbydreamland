@@ -5241,7 +5241,7 @@ Call_000_2447:
     xor a
     ld [hl], a
     dec a
-    ld [$d3d8], a
+    ld [wCurrentAnimationCmd], a
     ret
 .jr_000_245b:
     cp $e1
@@ -5259,9 +5259,9 @@ Call_000_2447:
 .jr_000_246f:
     add hl, de
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 .jr_000_2479:
     cp $e8
@@ -5271,9 +5271,9 @@ Call_000_2447:
     ld a, [hl+]
     ld d, a
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ld h, d
     ld l, e
     jp .jump_000_24a4
@@ -5287,9 +5287,9 @@ Call_000_2447:
     ld a, [hl+]
     push af
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ld h, d
     ld l, e
     pop af
@@ -5323,9 +5323,9 @@ Call_000_2447:
     ld de, $0003
     add hl, de
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 .jr_000_24dc:
     cp $eb
@@ -5354,9 +5354,9 @@ Call_000_2447:
     inc de
     ld a, [de]
     ld a, e
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, d
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 .jr_000_2505:
     cp $ee
@@ -5382,18 +5382,18 @@ Call_000_2447:
     ld [hl], a
     inc de
     ld a, e
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, d
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 .jr_000_252a:
     cp $ef
     jr nz, .jump_000_253f
 
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     xor a
     ld hl, $d35a
     add hl, bc
@@ -5427,9 +5427,9 @@ Call_000_2447:
     ld [hl], $00
     inc de
     ld a, e
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, d
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 .jr_000_2568:
     cp $f1
@@ -5472,18 +5472,18 @@ Call_000_2447:
     ld [hl], a
     inc de
     ld a, e
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, d
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     pop bc
     ret
 .jr_000_25a3:
     cp $f2
     jr nz, .jr_000_260c
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ld hl, $d190
     add hl, bc
     set 0, [hl]
@@ -5556,9 +5556,9 @@ Call_000_2447:
     cp $f3
     jr nz, .jr_000_2637
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ld hl, $d190
     add hl, bc
     res 0, [hl]
@@ -5589,9 +5589,9 @@ Call_000_2447:
     ld a, [hl+]
     ld [de], a
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 .jr_000_264a:
     cp $f5
@@ -5601,9 +5601,9 @@ Call_000_2447:
     ld a, [hl+]
     ld d, a
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ld h, d
     ld l, e
     inc [hl]
@@ -5616,9 +5616,9 @@ Call_000_2447:
     ld a, [hl+]
     ld d, a
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ld h, d
     ld l, e
     dec [hl]
@@ -5641,18 +5641,18 @@ Call_000_2447:
     ld a, [hl+]
     ld d, a
     ld a, e
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, d
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 .jr_000_268d:
     inc hl
     inc hl
     inc hl
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 .jr_000_2699:
     cp $f8
@@ -5680,9 +5680,9 @@ Call_000_2447:
     ld [de], a
     inc hl
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 .jr_000_26bf:
     cp $fa
@@ -5696,9 +5696,9 @@ Call_000_2447:
     inc hl
     inc hl
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 .jr_000_26d8:
     cp $fb
@@ -5722,9 +5722,9 @@ Call_000_2447:
     ld de, $0006
     add hl, de
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
 .jr_000_2707:
     ret
 
@@ -5824,9 +5824,9 @@ Call_000_2771:
 
 JumpAnimToHL:
     ld a, [hl+]
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, [hl]
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 
 
@@ -5841,9 +5841,9 @@ Call_000_278d:
     inc hl
     inc hl
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 .jr_000_27a4:
     cp $fe
@@ -5866,7 +5866,7 @@ Call_000_278d:
     add d
     add d
     ld d, a
-    ld a, [$d3d9]
+    ld a, [wAnimationParserScriptReadAddress]
     add d
     jr .jr_000_27d5
 .jr_000_27c6:
@@ -5877,11 +5877,11 @@ Call_000_278d:
     ld hl, $d23a
     add hl, bc
     add hl, bc
-    ld a, [$d3d9]
+    ld a, [wAnimationParserScriptReadAddress]
     add $03
 .jr_000_27d5:
     ld [hl+], a
-    ld a, [$d3da]
+    ld a, [wAnimationParserScriptReadAddress + 1]
     adc $00
     ld [hl], a
     pop hl
@@ -5908,10 +5908,10 @@ Call_000_278d:
     ld [hl], a
     inc de
     ld a, [de]
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     inc de
     ld a, [de]
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ld hl, $d180
     add hl, bc
     ld [hl], $01
@@ -5944,10 +5944,10 @@ Call_000_278d:
     pop de
     ld a, e
     ld [hl+], a
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, d
     ld [hl], a
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 .jr_000_283e:
     cp $e7
@@ -5975,9 +5975,9 @@ Call_000_278d:
 .jr_000_2861:
     pop hl
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 .jr_000_286b:
     call Call_000_2447
@@ -5997,9 +5997,9 @@ HandleAnimationCommand:
     inc hl
     inc hl
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 .jr_000_2886:
     cp $fe
@@ -6022,7 +6022,7 @@ HandleAnimationCommand:
     add d
     add d
     ld d, a
-    ld a, [$d3d9]
+    ld a, [wAnimationParserScriptReadAddress]
     add d
     jr .jr_000_28b7
 .jr_000_28a8:
@@ -6033,11 +6033,11 @@ HandleAnimationCommand:
     ld hl, $d2da
     add hl, bc
     add hl, bc
-    ld a, [$d3d9]
+    ld a, [wAnimationParserScriptReadAddress]
     add $03
 .jr_000_28b7:
     ld [hl+], a
-    ld a, [$d3da]
+    ld a, [wAnimationParserScriptReadAddress + 1]
     adc $00
     ld [hl], a
     pop hl
@@ -6053,9 +6053,9 @@ HandleAnimationCommand:
     cp $e5
     jr nz, .jr_000_28f3
     ld a, [hl+]
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, [hl+]
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ld d, h
     ld e, l
     ld hl, $d21a
@@ -6098,10 +6098,10 @@ HandleAnimationCommand:
     pop de
     ld a, e
     ld [hl+], a
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, d
     ld [hl], a
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 .jr_000_291e:
     cp $e7
@@ -6129,9 +6129,9 @@ HandleAnimationCommand:
 .jr_000_2941:
     pop hl
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 .jr_000_294b:
     call Call_000_2447
@@ -6245,16 +6245,16 @@ Call_29b7:
     add hl, bc
     add hl, bc
     ld a, [hl+]
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, [hl]
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
 .jr_000_2a05:
-    ld a, [$d3d9]
+    ld a, [wAnimationParserScriptReadAddress]
     ld l, a
-    ld a, [$d3da]
+    ld a, [wAnimationParserScriptReadAddress + 1]
     ld h, a
     ld a, [hl]
-    ld [$d3d8], a
+    ld [wCurrentAnimationCmd], a
     cp $e0
     jr c, .jr_000_2a3e
     cp $ec
@@ -6263,16 +6263,16 @@ Call_29b7:
     ld a, [hl+]
     ld d, a
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ld hl, $d170
     add hl, bc
     ld [hl], d
     jr .jr_000_2a73
 .jr_000_2a2b:
     call Call_000_278d
-    ld a, [$d3d8]
+    ld a, [wCurrentAnimationCmd]
     cp $ff
     jr nz, .jr_000_2a05
     ld a, $01
@@ -6280,13 +6280,13 @@ Call_29b7:
     ld [MBC1RomBank], a
     ret
 .jr_000_2a3e:
-    ld a, [$d3d8]
+    ld a, [wCurrentAnimationCmd]
     ld hl, $d170
     add hl, bc
     ld [hl], a
-    ld a, [$d3d9]
+    ld a, [wAnimationParserScriptReadAddress]
     ld l, a
-    ld a, [$d3da]
+    ld a, [wAnimationParserScriptReadAddress + 1]
     ld h, a
     inc hl
     ld a, [hl+]
@@ -6310,16 +6310,16 @@ Call_29b7:
     ld [hl], d
     pop hl
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
 .jr_000_2a73:
-    ld a, [$d3d9]
+    ld a, [wAnimationParserScriptReadAddress]
     ld hl, $d21a
     add hl, bc
     add hl, bc
     ld [hl+], a
-    ld a, [$d3da]
+    ld a, [wAnimationParserScriptReadAddress + 1]
     ld [hl], a
 .jump_000_2a80:
     ld a, [wExtraGameEnabled]
@@ -6344,16 +6344,16 @@ Call_29b7:
     add hl, bc
     add hl, bc
     ld a, [hl+]
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, [hl]
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
 .jr_000_2aa9:
-    ld a, [$d3d9]
+    ld a, [wAnimationParserScriptReadAddress]
     ld l, a
-    ld a, [$d3da]
+    ld a, [wAnimationParserScriptReadAddress + 1]
     ld h, a
     ld a, [hl]
-    ld [$d3d8], a
+    ld [wCurrentAnimationCmd], a
     cp $e0
     jr c, .durationCommand
     cp $ec
@@ -6362,33 +6362,33 @@ Call_29b7:
     ld a, [hl+]
     ld d, a
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ld hl, $d180
     add hl, bc
     ld [hl], d
     jr .jr_000_2b18
 .handleAnimationCommand:
     call HandleAnimationCommand
-    ld a, [$d3d8]
+    ld a, [wCurrentAnimationCmd]
     cp $ff
     ret z
     jr .jr_000_2aa9
 .durationCommand:
-    ld a, [$d3d8]
+    ld a, [wCurrentAnimationCmd]
     ld hl, $d180
     add hl, bc
     ld [hl], a
-    ld a, [$d3d9]
+    ld a, [wAnimationParserScriptReadAddress]
     ld l, a
-    ld a, [$d3da]
+    ld a, [wAnimationParserScriptReadAddress + 1]
     ld h, a
     inc hl
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     inc hl
     ld a, [hl]
     cp $ff
@@ -6405,23 +6405,23 @@ Call_29b7:
     ld a, [de]
     ld [hl], a
 .jr_000_2b06:
-    ld a, [$d3d9]
+    ld a, [wAnimationParserScriptReadAddress]
     ld l, a
-    ld a, [$d3da]
+    ld a, [wAnimationParserScriptReadAddress + 1]
     ld h, a
     inc hl
     inc hl
     ld a, l
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, h
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
 .jr_000_2b18:
-    ld a, [$d3d9]
+    ld a, [wAnimationParserScriptReadAddress]
     ld hl, $d2ba
     add hl, bc
     add hl, bc
     ld [hl+], a
-    ld a, [$d3da]
+    ld a, [wAnimationParserScriptReadAddress + 1]
     ld [hl], a
     ret
 
@@ -7371,18 +7371,18 @@ Call_30b2:
     ld a, [hl]
     add $28
     sub e
-    ld a, [$d3d9]
+    ld a, [wAnimationParserScriptReadAddress]
     ld l, a
-    ld a, [$d3da]
+    ld a, [wAnimationParserScriptReadAddress + 1]
     ld h, a
     jr nc, .jr_000_30d3
     inc hl
     inc hl
 .jr_000_30d3:
     ld a, [hl+]
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, [hl]
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 
 
@@ -7405,26 +7405,26 @@ Call_30dc:
     ld a, [hl]
     add hl, bc
     cp [hl]
-    ld a, [$d3d9]
+    ld a, [wAnimationParserScriptReadAddress]
     ld l, a
-    ld a, [$d3da]
+    ld a, [wAnimationParserScriptReadAddress + 1]
     ld h, a
     jr c, .jr_000_3107
     inc hl
     inc hl
 .jr_000_3107:
     ld a, [hl+]
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, [hl]
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 .jr_000_3110:
-    ld a, [$d3d9]
+    ld a, [wAnimationParserScriptReadAddress]
     add $04
-    ld [$d3d9], a
-    ld a, [$d3da]
+    ld [wAnimationParserScriptReadAddress], a
+    ld a, [wAnimationParserScriptReadAddress + 1]
     adc $00
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     ret
 
 
@@ -7436,9 +7436,9 @@ Call_3121:
     add hl, bc
     add hl, bc
     push bc
-    ld a, [$d3d9]
+    ld a, [wAnimationParserScriptReadAddress]
     ld e, a
-    ld a, [$d3da]
+    ld a, [wAnimationParserScriptReadAddress + 1]
     ld d, a
     ld a, [de]
     ld [hl+], a
@@ -7450,9 +7450,9 @@ Call_3121:
     ld l, b
     inc de
     ld a, e
-    ld [$d3d9], a
+    ld [wAnimationParserScriptReadAddress], a
     ld a, d
-    ld [$d3da], a
+    ld [wAnimationParserScriptReadAddress + 1], a
     pop bc
     push hl
     ld a, [hl]

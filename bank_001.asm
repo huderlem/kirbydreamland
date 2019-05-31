@@ -1616,7 +1616,7 @@ Call_000_4afb:
     ld hl, $d3f6
     inc [hl]
     ld a, $ff
-    ld [$d3d8], a
+    ld [wCurrentAnimationCmd], a
     ret
 
 
