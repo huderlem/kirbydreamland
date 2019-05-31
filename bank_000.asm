@@ -3731,7 +3731,7 @@ Call_000_19f9:
     ld hl, $ff91
     bit 5, [hl]
     jr z, .jump_000_1bc2
-    ld hl, $1bcf
+    ld hl, Unk1bcf
     ld a, [wCurStageScreen]
     ld c, a
     ld b, $00
@@ -3745,7 +3745,10 @@ Call_000_19f9:
 
 
 Unk1bc5:
-    db $04, $00, $01, $02, $03, $04, $00, $02, $01, $03, $12, $0D, $10, $0E, $0F, $11, $0D, $0E, $10, $0F
+    db $04, $00, $01, $02, $03, $04, $00, $02, $01, $03
+
+Unk1bcf:
+    db $12, $0D, $10, $0E, $0F, $11, $0D, $0E, $10, $0F
 
 
 Call_000_1bd9:
@@ -4875,7 +4878,7 @@ Call_000_21fb:
     push af
     ld a, [wExtraGameEnabled]
     and a
-    ld a, $07
+    ld a, Bank(Unk1c000)
     jr z, .jr_000_2214
     ld a, $0f
 .jr_000_2214:
@@ -4897,7 +4900,7 @@ Call_000_21fb:
     ld a, [wCurStage]
     jr .jr_000_2249
 .jr_000_223a:
-    ld hl, $4000
+    ld hl, Unk1c000
     ld a, [wCurStage]
     ld e, a
     add hl, de
@@ -7851,7 +7854,7 @@ Call_000_3329:
     ld hl, $d3c4
     add hl, de
     ld a, [hl]
-    ld hl, $3408
+    ld hl, Unk3408
     add hl, bc
     and [hl]
     jr z, .jr_000_33cd

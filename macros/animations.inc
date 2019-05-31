@@ -11,6 +11,12 @@ anim_forever: MACRO
 	ENDM
 
 ; \1 = destination
+anim_goto: MACRO
+	db $E1
+	dw \1
+	ENDM
+
+; \1 = destination
 anim_jump: MACRO
 .anim_jump\@
 	db $E2

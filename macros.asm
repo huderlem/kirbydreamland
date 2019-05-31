@@ -37,3 +37,4 @@ bigdw: MACRO ; big-endian word
 	ENDM
 
 INCLUDE "macros/animations.inc"
+INCLUDE "macros/entity_movements.inc"
