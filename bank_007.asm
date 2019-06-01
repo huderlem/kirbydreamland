@@ -8,67 +8,67 @@ StageEntities:
     dw MtDededeEntities
 
 GreenGreensEntities:
-    dw GreenGreensScreen0_Entities, $42d0
-    dw GreenGreensScreen1_Entities, $42d0
-    dw GreenGreensScreen2_Entities, $42d0
-    dw GreenGreensScreen3_Entities, $42d4
-    dw GreenGreensScreen4_Entities, $42f9
+    dw GreenGreensScreen0_Entities_XTrip, GreenGreensScreen0_Entities_YTrip
+    dw GreenGreensScreen1_Entities_XTrip, GreenGreensScreen1_Entities_YTrip
+    dw GreenGreensScreen2_Entities_XTrip, GreenGreensScreen2_Entities_YTrip
+    dw GreenGreensScreen3_Entities_XTrip, GreenGreensScreen3_Entities_YTrip
+    dw GreenGreensScreen4_Entities_XTrip, GreenGreensScreen4_Entities_YTrip
 
 CastleLololoEntities:
-    dw CastleLololoScreen0_Entities, $45b9
-    dw CastleLololoScreen1_Entities, $4625
-    dw CastleLololoScreen2_Entities, $46a2
-    dw CastleLololoScreen3_Entities, $45e0
-    dw CastleLololoScreen4_Entities, $46d7
-    dw CastleLololoScreen5_Entities, $4748
-    dw CastleLololoScreen6_Entities, $47c6
-    dw CastleLololoScreen7_Entities, $4835
-    dw CastleLololoScreen8_Entities, $593d
-    dw CastleLololoScreen9_Entities, $48ea
-    dw CastleLololoScreen10_Entities, $4919
-    dw CastleLololoScreen11_Entities, $48a0
-    dw CastleLololoScreen12_Entities, $4960
-    dw CastleLololoScreen13_Entities, $49d6
-    dw CastleLololoScreen14_Entities, $594e
-    dw CastleLololoScreen15_Entities, $4a20
+    dw CastleLololoScreen0_Entities_XTrip, CastleLololoScreen0_Entities_YTrip
+    dw CastleLololoScreen1_Entities_XTrip, CastleLololoScreen1_Entities_YTrip
+    dw CastleLololoScreen2_Entities_XTrip, CastleLololoScreen2_Entities_YTrip
+    dw CastleLololoScreen3_Entities_XTrip, CastleLololoScreen3_Entities_YTrip
+    dw CastleLololoScreen4_Entities_XTrip, CastleLololoScreen4_Entities_YTrip
+    dw CastleLololoScreen5_Entities_XTrip, CastleLololoScreen5_Entities_YTrip
+    dw CastleLololoScreen6_Entities_XTrip, CastleLololoScreen6_Entities_YTrip
+    dw CastleLololoScreen7_Entities_XTrip, CastleLololoScreen7_Entities_YTrip
+    dw CastleLololoScreen8_Entities_XTrip, CastleLololoScreen8_Entities_YTrip
+    dw CastleLololoScreen9_Entities_XTrip, CastleLololoScreen9_Entities_YTrip
+    dw CastleLololoScreen10_Entities_XTrip, CastleLololoScreen10_Entities_YTrip
+    dw CastleLololoScreen11_Entities_XTrip, CastleLololoScreen11_Entities_YTrip
+    dw CastleLololoScreen12_Entities_XTrip, CastleLololoScreen12_Entities_YTrip
+    dw CastleLololoScreen13_Entities_XTrip, CastleLololoScreen13_Entities_YTrip
+    dw CastleLololoScreen14_Entities_XTrip, CastleLololoScreen14_Entities_YTrip
+    dw CastleLololoScreen15_Entities_XTrip, CastleLololoScreen15_Entities_YTrip
 
 FloatIslandsEntities:
-    dw FloatIslandsScreen0_Entities, $4aa9
-    dw FloatIslandsScreen1_Entities, $4ae4
-    dw FloatIslandsScreen2_Entities, $4b31
-    dw FloatIslandsScreen3_Entities, $4b84
-    dw FloatIslandsScreen4_Entities, $4b92
-    dw FloatIslandsScreen5_Entities, $4ba3
-    dw FloatIslandsScreen6_Entities, $4bb4
-    dw FloatIslandsScreen7_Entities, $4bcb
+    dw FloatIslandsScreen0_Entities_XTrip, FloatIslandsScreen0_Entities_YTrip
+    dw FloatIslandsScreen1_Entities_XTrip, FloatIslandsScreen1_Entities_YTrip
+    dw FloatIslandsScreen2_Entities_XTrip, FloatIslandsScreen2_Entities_YTrip
+    dw FloatIslandsScreen3_Entities_XTrip, FloatIslandsScreen3_Entities_YTrip
+    dw FloatIslandsScreen4_Entities_XTrip, FloatIslandsScreen4_Entities_YTrip
+    dw FloatIslandsScreen5_Entities_XTrip, FloatIslandsScreen5_Entities_YTrip
+    dw FloatIslandsScreen6_Entities_XTrip, FloatIslandsScreen6_Entities_YTrip
+    dw FloatIslandsScreen7_Entities_XTrip, FloatIslandsScreen7_Entities_YTrip
 
 BubblyCloudsEntities:
-    dw BubblyCloudsScreen0_Entities, $4fa3
-    dw BubblyCloudsScreen1_Entities, $510d
-    dw BubblyCloudsScreen2_Entities, $51c9
-    dw BubblyCloudsScreen3_Entities, $529a
-    dw BubblyCloudsScreen4_Entities, $5900
-    dw BubblyCloudsScreen5_Entities, $5384
-    dw BubblyCloudsScreen6_Entities, $5445
-    dw BubblyCloudsScreen7_Entities, $54be
-    dw BubblyCloudsScreen8_Entities, $5545
-    dw BubblyCloudsScreen9_Entities, $591b
+    dw BubblyCloudsScreen0_Entities_XTrip, BubblyCloudsScreen0_Entities_YTrip
+    dw BubblyCloudsScreen1_Entities_XTrip, BubblyCloudsScreen1_Entities_YTrip
+    dw BubblyCloudsScreen2_Entities_XTrip, BubblyCloudsScreen2_Entities_YTrip
+    dw BubblyCloudsScreen3_Entities_XTrip, BubblyCloudsScreen3_Entities_YTrip
+    dw BubblyCloudsScreen4_Entities_XTrip, BubblyCloudsScreen4_Entities_YTrip
+    dw BubblyCloudsScreen5_Entities_XTrip, BubblyCloudsScreen5_Entities_YTrip
+    dw BubblyCloudsScreen6_Entities_XTrip, BubblyCloudsScreen6_Entities_YTrip
+    dw BubblyCloudsScreen7_Entities_XTrip, BubblyCloudsScreen7_Entities_YTrip
+    dw BubblyCloudsScreen8_Entities_XTrip, BubblyCloudsScreen8_Entities_YTrip
+    dw BubblyCloudsScreen9_Entities_XTrip, BubblyCloudsScreen9_Entities_YTrip
 
 MtDededeEntities:
-    dw MtDededeScreen0_Entities, $5a22
-    dw MtDededeScreen1_Entities, $5a22
-    dw MtDededeScreen2_Entities, $59b2
-    dw MtDededeScreen3_Entities, $59ed
-    dw MtDededeScreen4_Entities, $59fd
-    dw MtDededeScreen5_Entities, $5a22
-    dw GreenGreensScreen4_Entities, $42f9
-    dw FloatIslandsScreen7_Entities, $4bcb
-    dw CastleLololoScreen14_Entities, $594e
-    dw BubblyCloudsScreen9_Entities, $591b
+    dw MtDededeScreen0_Entities_XTrip, MtDededeScreen0_Entities_YTrip
+    dw MtDededeScreen1_Entities_XTrip, MtDededeScreen1_Entities_YTrip
+    dw MtDededeScreen2_Entities_XTrip, MtDededeScreen2_Entities_YTrip
+    dw MtDededeScreen3_Entities_XTrip, MtDededeScreen3_Entities_YTrip
+    dw MtDededeScreen4_Entities_XTrip, MtDededeScreen4_Entities_YTrip
+    dw MtDededeScreen5_Entities_XTrip, MtDededeScreen5_Entities_YTrip
+    dw GreenGreensScreen4_Entities_XTrip, GreenGreensScreen4_Entities_YTrip
+    dw FloatIslandsScreen7_Entities_XTrip, FloatIslandsScreen7_Entities_YTrip
+    dw CastleLololoScreen14_Entities_XTrip, CastleLololoScreen14_Entities_YTrip
+    dw BubblyCloudsScreen9_Entities_XTrip, BubblyCloudsScreen9_Entities_YTrip
 
 INCBIN "baserom.gb", $1c0ce, $1c202 - $1c0ce
 
-GreenGreensScreen0_Entities:
+GreenGreensScreen0_Entities_XTrip:
     dbw 0, $0000
     dbw 15, Unk1c304
     dbw 17, Unk1c318
@@ -93,13 +93,13 @@ GreenGreensScreen0_Entities:
     dbw 78, Unk1c3E0
     db $FF
 
-GreenGreensScreen1_Entities:
+GreenGreensScreen1_Entities_XTrip:
     dbw 0, $0000
     dbw 5, $43eb
     dbw 10, $43f6
     db $FF
 
-GreenGreensScreen2_Entities:
+GreenGreensScreen2_Entities_XTrip:
     dbw 0, $0000
     dbw 10, $445b
     dbw 15, $440b
@@ -129,7 +129,7 @@ GreenGreensScreen2_Entities:
     dbw 76, $451a
     db $FF
 
-GreenGreensScreen3_Entities:
+GreenGreensScreen3_Entities_XTrip:
     dbw 0, $0000
     dbw 1, $4556
     dbw 2, $4594
@@ -145,12 +145,39 @@ GreenGreensScreen3_Entities:
     dbw 12, $454c
     db $FF
 
-GreenGreensScreen4_Entities:
+GreenGreensScreen4_Entities_XTrip:
     dbw 0, $0000
     dbw 7, $459e
     db $FF
 
-INCBIN "baserom.gb", $1c2d0, $1c304 - $1c2d0
+GreenGreensScreen0_Entities_YTrip:
+GreenGreensScreen1_Entities_YTrip:
+GreenGreensScreen2_Entities_YTrip:
+    dbw 0, $0000
+    db $FF
+
+GreenGreensScreen3_Entities_YTrip:
+    dbw 0, $0000
+    dbw 4, $452e
+    dbw 4, $4524
+    dbw 7, $4538
+    dbw 14, $4556
+    dbw 19, $4562
+    dbw 19, $4542
+    dbw 19, $454c
+    dbw 23, $456c
+    dbw 28, $4580
+    dbw 32, $458a
+    dbw 37, $4594
+    db $FF
+
+GreenGreensScreen4_Entities_YTrip:
+    dbw 0, $0000
+    dbw 22, $459e
+    dbw 26, $45a8
+    db $FF
+
+    db $FF ; stray terminator... was all of this data entered by hand?
 
 Unk1c304:
     db $0F, $05, $00, $00
@@ -274,14 +301,19 @@ Unk1c3E0:
 
 INCBIN "baserom.gb", $1c3ea, $1c5b2 - $1c3ea
 
-CastleLololoScreen0_Entities:
+CastleLololoScreen0_Entities_XTrip:
     dbw 0, $0000
     dbw 8, $45c0
     db $FF
 
-INCBIN "baserom.gb", $1c5b9, $1c5ca - $1c5b9
+CastleLololoScreen0_Entities_YTrip:
+    dbw 0, $0000
+    dbw 1, $45c0
+    db $FF
 
-CastleLololoScreen3_Entities:
+INCBIN "baserom.gb", $1c5c0, $1c5ca - $1c5c0
+
+CastleLololoScreen3_Entities_XTrip:
     dbw 0, $0000
     dbw 10, $4603
     dbw 11, $45e4
@@ -291,15 +323,31 @@ CastleLololoScreen3_Entities:
     dbw 22, $4617
     db $FF
 
-INCBIN "baserom.gb", $1c5e0, $1c621 - $1c5e0
-
-CastleLololoScreen1_Entities:
+CastleLololoScreen3_Entities_YTrip:
     dbw 0, $0000
     db $FF
 
-INCBIN "baserom.gb", $1c625, $1c692 - $1c625
+INCBIN "baserom.gb", $1c5e4, $1c621 - $1c5e4
 
-CastleLololoScreen2_Entities:
+CastleLololoScreen1_Entities_XTrip:
+    dbw 0, $0000
+    db $FF
+
+CastleLololoScreen1_Entities_YTrip:
+    dbw 0, $0000
+    dbw 1, $464c
+    dbw 1, $4656
+    dbw 7, $4660
+    dbw 11, $466a
+    dbw 11, $4641
+    dbw 14, $4674
+    dbw 14, $467e
+    dbw 14, $4688
+    db $FF
+
+INCBIN "baserom.gb", $1c641, $1c692 - $1c641
+
+CastleLololoScreen2_Entities_XTrip:
     dbw 0, $0000
     dbw 0, $46a6
     dbw 2, $46c5
@@ -307,16 +355,30 @@ CastleLololoScreen2_Entities:
     dbw 9, $46b0
     db $FF
 
-INCBIN "baserom.gb", $1c6a2, $1c6d0 - $1c6a2
+CastleLololoScreen2_Entities_YTrip:
+    dbw 0, $0000
+    db $FF
 
-CastleLololoScreen4_Entities:
+INCBIN "baserom.gb", $1c6a6, $1c6d0 - $1c6a6
+
+CastleLololoScreen4_Entities_XTrip:
     dbw 0, $0000
     dbw 9, $4715
     db $FF
 
-INCBIN "baserom.gb", $1c6d7, $1c729 - $1c6d7
+CastleLololoScreen4_Entities_YTrip:
+    dbw 0, $0000
+    dbw 1, $46ed
+    dbw 6, $4701
+    dbw 6, $471f
+    dbw 9, $46f7
+    dbw 10, $470b
+    dbw 10, $4715
+    db $FF
 
-CastleLololoScreen5_Entities:
+INCBIN "baserom.gb", $1c6ed, $1c729 - $1c6ed
+
+CastleLololoScreen5_Entities_XTrip:
     dbw 0, $0000
     dbw 2, $4772
     dbw 5, $47a4
@@ -329,15 +391,38 @@ CastleLololoScreen5_Entities:
     dbw 15, $4786
     db $FF
 
-INCBIN "baserom.gb", $1c748, $1c7c2 - $1c748
+CastleLololoScreen5_Entities_YTrip:
+    dbw 0, $0000
+    dbw 1, $4790
+    dbw 1, $479a
+    dbw 2, $47b8
+    dbw 3, $47ae
+    dbw 5, $4772
+    dbw 6, $4786
+    dbw 7, $4767
+    dbw 9, $477c
+    dbw 7, $47a4
+    db $FF
 
-CastleLololoScreen6_Entities:
+INCBIN "baserom.gb", $1c767, $1c7c2 - $1c767
+
+CastleLololoScreen6_Entities_XTrip:
     dbw 0, $0000
     db $FF
 
-INCBIN "baserom.gb", $1c7c6, $1c819 - $1c7c6
+CastleLololoScreen6_Entities_YTrip:
+    dbw 0, $0000
+    dbw 5, $47dc
+    dbw 6, $47f0
+    dbw 7, $47fa
+    dbw 8, $4804
+    dbw 11, $480e
+    dbw 18, $47e6
+    db $FF
 
-CastleLololoScreen7_Entities:
+INCBIN "baserom.gb", $1c7dc, $1c819 - $1c7dc
+
+CastleLololoScreen7_Entities_XTrip:
     dbw 0, $0000
     dbw 7, $4844
     dbw 10, $486c
@@ -349,9 +434,13 @@ CastleLololoScreen7_Entities:
     dbw 25, $4839
     db $FF
 
-INCBIN "baserom.gb", $1c835, $1c88a - $1c835
+CastleLololoScreen7_Entities_YTrip:
+    dbw 0, $0000
+    db $FF
 
-CastleLololoScreen11_Entities:
+INCBIN "baserom.gb", $1c839, $1c88a - $1c839
+
+CastleLololoScreen11_Entities_XTrip:
     dbw 0, $0000
     dbw 6, $48b8
     dbw 8, $48c2
@@ -361,17 +450,27 @@ CastleLololoScreen11_Entities:
     dbw 15, $48ae
     db $FF
 
-INCBIN "baserom.gb", $1c8a0, $1c8e0 - $1c8a0
+CastleLololoScreen11_Entities_YTrip:
+    dbw 0, $0000
+    db $FF
 
-CastleLololoScreen9_Entities:
+INCBIN "baserom.gb", $1c8a4, $1c8e0 - $1c8a4
+
+CastleLololoScreen9_Entities_XTrip:
     dbw 0, $0000
     dbw 11, $48ff
     dbw 11, $48f4
     db $FF
 
-INCBIN "baserom.gb", $1c8ea, $1c909 - $1c8ea
+CastleLololoScreen9_Entities_YTrip:
+    dbw 0, $0000
+    dbw 3, $48ff
+    dbw 9, $48f4
+    db $FF
 
-CastleLololoScreen10_Entities:
+INCBIN "baserom.gb", $1c8f4, $1c909 - $1c8f4
+
+CastleLololoScreen10_Entities_XTrip:
     dbw 0, $0000
     dbw 1, $4931
     dbw 1, $491d
@@ -379,9 +478,13 @@ CastleLololoScreen10_Entities:
     dbw 8, $4927
     db $FF
 
-INCBIN "baserom.gb", $1c919, $1c947 - $1c919
+CastleLololoScreen10_Entities_YTrip:
+    dbw 0, $0000
+    db $FF
 
-CastleLololoScreen12_Entities:
+INCBIN "baserom.gb", $1c91d, $1c947 - $1c91d
+
+CastleLololoScreen12_Entities_XTrip:
     dbw 0, $0000
     dbw 0, $4979
     dbw 3, $49b6
@@ -392,9 +495,20 @@ CastleLololoScreen12_Entities:
     dbw 12, $4998
     db $FF
 
-INCBIN "baserom.gb", $1c960, $1c9c0 - $1c960
+CastleLololoScreen12_Entities_YTrip:
+    dbw 0, $0000
+    dbw 3, $49a2
+    dbw 4, $498e
+    dbw 5, $49b6
+    dbw 7, $4998
+    dbw 8, $49ac
+    dbw 10, $4979
+    dbw 14, $4984
+    db $FF
 
-CastleLololoScreen13_Entities:
+INCBIN "baserom.gb", $1c979, $1c9c0 - $1c979
+
+CastleLololoScreen13_Entities_XTrip:
     dbw 0, $0000
     dbw 1, $49da
     dbw 6, $49ee
@@ -404,17 +518,25 @@ CastleLololoScreen13_Entities:
     dbw 13, $49e4
     db $FF
 
-INCBIN "baserom.gb", $1c9d6, $1ca16 - $1c9d6
+CastleLololoScreen13_Entities_YTrip:
+    dbw 0, $0000
+    db $FF
 
-CastleLololoScreen15_Entities:
+INCBIN "baserom.gb", $1c9da, $1ca16 - $1c9da
+
+CastleLololoScreen15_Entities_XTrip:
     dbw 0, $0000
     dbw 1, $4a24
     dbw 5, $4a2e
     db $FF
 
-INCBIN "baserom.gb", $1ca20, $1ca39 - $1ca20
+CastleLololoScreen15_Entities_YTrip:
+    dbw 0, $0000
+    db $FF
 
-FloatIslandsScreen0_Entities:
+INCBIN "baserom.gb", $1ca24, $1ca39 - $1ca24
+
+FloatIslandsScreen0_Entities_XTrip:
     dbw 0, $0000
     dbw 16, $4bcf
     dbw 18, $4bd9
@@ -454,9 +576,11 @@ FloatIslandsScreen0_Entities:
     dbw 111, $4d2e
     db $FF
 
-INCBIN "baserom.gb", $1caa9, $1caad - $1caa9
+FloatIslandsScreen0_Entities_YTrip:
+    dbw 0, $0000
+    db $FF
 
-FloatIslandsScreen1_Entities:
+FloatIslandsScreen1_Entities_XTrip:
     dbw 0, $0000
     dbw 1, $4d38
     dbw 2, $4d43
@@ -477,9 +601,28 @@ FloatIslandsScreen1_Entities:
     dbw 46, $4dd9
     db $FF
 
-INCBIN "baserom.gb", $1cae4, $1cb1b - $1cae4
+FloatIslandsScreen1_Entities_YTrip:
+    dbw 0, $0000
+    dbw 1, $4dbb
+    dbw 2, $4dd9
+    dbw 2, $4d6b
+    dbw 2, $4d93
+    dbw 3, $4d89
+    dbw 3, $4d7f
+    dbw 5, $4dc5
+    dbw 5, $4d61
+    dbw 8, $4db1
+    dbw 9, $4d43
+    dbw 9, $4d57
+    dbw 9, $4dcf
+    dbw 12, $4d75
+    dbw 13, $4da7
+    dbw 13, $4d38
+    dbw 14, $4d9d
+    dbw 14, $4d4d
+    db $FF
 
-FloatIslandsScreen2_Entities:
+FloatIslandsScreen2_Entities_XTrip:
     dbw 0, $0000
     dbw 1, $4de4
     dbw 2, $4dee
@@ -489,9 +632,17 @@ FloatIslandsScreen2_Entities:
     dbw 15, $4e0c
     db $FF
 
-INCBIN "baserom.gb", $1cb31, $1cb47 - $1cb31
+FloatIslandsScreen2_Entities_YTrip:
+    dbw 0, $0000
+    dbw 1, $4e02
+    dbw 2, $4de4
+    dbw 3, $4dee
+    dbw 3, $4df8
+    dbw 7, $4e0c
+    dbw 22, $4e16
+    db $FF
 
-FloatIslandsScreen3_Entities:
+FloatIslandsScreen3_Entities_XTrip:
     dbw 0, $0000
     dbw 10, $4e21
     dbw 14, $4e2b
@@ -514,31 +665,43 @@ FloatIslandsScreen3_Entities:
     dbw 68, $4ed6
     db $FF
 
-INCBIN "baserom.gb", $1cb84, $1cb88 - $1cb84
+FloatIslandsScreen3_Entities_YTrip:
+    dbw 0, $0000
+    db $FF
 
-FloatIslandsScreen4_Entities:
+FloatIslandsScreen4_Entities_XTrip:
     dbw 0, $0000
     dbw 1, $4ee0
     dbw 2, $4eeb
     db $FF
 
-INCBIN "baserom.gb", $1cb92, $1cb9c - $1cb92
+FloatIslandsScreen4_Entities_YTrip:
+    dbw 0, $0000
+    dbw 4, $4ee0
+    dbw 4, $4eeb
+    db $FF
 
-FloatIslandsScreen5_Entities:
+FloatIslandsScreen5_Entities_XTrip:
     dbw 0, $0000
     dbw 6, $4ef6
     db $FF
 
-INCBIN "baserom.gb", $1cba3, $1cbad - $1cba3
+FloatIslandsScreen5_Entities_YTrip:
+    dbw 0, $0000
+    dbw 2, $4ef6
+    dbw 21, $4f00
+    db $FF
 
-FloatIslandsScreen6_Entities:
+FloatIslandsScreen6_Entities_XTrip:
     dbw 0, $0000
     dbw 5, $4f0b
     db $FF
 
-INCBIN "baserom.gb", $1cbb4, $1cbb8 - $1cbb4
+FloatIslandsScreen6_Entities_YTrip:
+    dbw 0, $0000
+    db $FF
 
-FloatIslandsScreen7_Entities:
+FloatIslandsScreen7_Entities_XTrip:
     dbw 0, $0000
     dbw 10, $4f29
     dbw 13, $4f15
@@ -547,9 +710,13 @@ FloatIslandsScreen7_Entities:
     dbw 38, $4f3e
     db $FF
 
-INCBIN "baserom.gb", $1cbcb, $1cf48 - $1cbcb
+FloatIslandsScreen7_Entities_YTrip:
+    dbw 0, $0000
+    db $FF
 
-BubblyCloudsScreen0_Entities:
+INCBIN "baserom.gb", $1cbcf, $1cf48 - $1cbcf
+
+BubblyCloudsScreen0_Entities_XTrip:
     dbw 0, $0000
     dbw 11, $5033
     dbw 14, $50c9
@@ -582,9 +749,13 @@ BubblyCloudsScreen0_Entities:
     dbw 96, $5079
     db $FF
 
-INCBIN "baserom.gb", $1cfa3, $1d0d3 - $1cfa3
+BubblyCloudsScreen0_Entities_YTrip:
+    dbw 0, $0000
+    db $FF
 
-BubblyCloudsScreen1_Entities:
+INCBIN "baserom.gb", $1cfa7, $1d0d3 - $1cfa7
+
+BubblyCloudsScreen1_Entities_XTrip:
     dbw 0, $0000
     dbw 9, $5193
     dbw 11, $51bb
@@ -606,15 +777,35 @@ BubblyCloudsScreen1_Entities:
     dbw 66, $51b1
     db $FF
 
-INCBIN "baserom.gb", $1d10d, $1d1c5 - $1d10d
-
-BubblyCloudsScreen2_Entities:
+BubblyCloudsScreen1_Entities_YTrip:
     dbw 0, $0000
     db $FF
 
-INCBIN "baserom.gb", $1d1c9, $1d269 - $1d1c9
+INCBIN "baserom.gb", $1d111, $1d1c5 - $1d111
 
-BubblyCloudsScreen3_Entities:
+BubblyCloudsScreen2_Entities_XTrip:
+    dbw 0, $0000
+    db $FF
+
+BubblyCloudsScreen2_Entities_YTrip:
+    dbw 0, $0000
+    dbw 4, $51f1
+    dbw 6, $5237
+    dbw 7, $525f
+    dbw 8, $5255
+    dbw 11, $520f
+    dbw 14, $5219
+    dbw 18, $5223
+    dbw 18, $522d
+    dbw 20, $5205
+    dbw 21, $51fb
+    dbw 25, $524b
+    dbw 29, $5241
+    db $FF
+
+INCBIN "baserom.gb", $1d1f1, $1d269 - $1d1f1
+
+BubblyCloudsScreen3_Entities_XTrip:
     dbw 0, $0000
     dbw 3, $5333
     dbw 15, $5349
@@ -633,9 +824,26 @@ BubblyCloudsScreen3_Entities:
     dbw 49, $52ed
     db $FF
 
-INCBIN "baserom.gb", $1d29a, $1d35f - $1d29a
+BubblyCloudsScreen3_Entities_YTrip:
+    dbw 0, $0000
+    dbw 0, $52c5
+    dbw 1, $531f
+    dbw 3, $52d9
+    dbw 3, $533e
+    dbw 5, $52e3
+    dbw 4, $5315
+    dbw 5, $5349
+    dbw 7, $52ed
+    dbw 7, $5329
+    dbw 8, $5354
+    dbw 9, $5333
+    dbw 10, $52cf
+    dbw 10, $531f
+    db $FF
 
-BubblyCloudsScreen5_Entities:
+INCBIN "baserom.gb", $1d2c5, $1d35f - $1d2c5
+
+BubblyCloudsScreen5_Entities_XTrip:
     dbw 0, $0000
     dbw 1, $53f3
     dbw 4, $53bf
@@ -650,9 +858,24 @@ BubblyCloudsScreen5_Entities:
     dbw 48, $53ca
     db $FF
 
-INCBIN "baserom.gb", $1d384, $1d426 - $1d384
+BubblyCloudsScreen5_Entities_YTrip:
+    dbw 0, $0000
+    dbw 0, $53ca
+    dbw 4, $5412
+    dbw 4, $53bf
+    dbw 4, $53d4
+    dbw 5, $53df
+    dbw 5, $53e9
+    dbw 6, $53fe
+    dbw 6, $5408
+    dbw 8, $53b4
+    dbw 8, $53f3
+    dbw 10, $53a9
+    db $FF
 
-BubblyCloudsScreen6_Entities:
+INCBIN "baserom.gb", $1d3a9, $1d426 - $1d3a9
+
+BubblyCloudsScreen6_Entities_XTrip:
     dbw 0, $0000
     dbw 10, $548f
     dbw 16, $549a
@@ -665,9 +888,13 @@ BubblyCloudsScreen6_Entities:
     dbw 79, $5485
     db $FF
 
-INCBIN "baserom.gb", $1d445, $1d4a5 - $1d445
+BubblyCloudsScreen6_Entities_YTrip:
+    dbw 0, $0000
+    db $FF
 
-BubblyCloudsScreen7_Entities:
+INCBIN "baserom.gb", $1d449, $1d4a5 - $1d449
+
+BubblyCloudsScreen7_Entities_XTrip:
     dbw 0, $0000
     dbw 4, $5505
     dbw 4, $54fb
@@ -678,48 +905,90 @@ BubblyCloudsScreen7_Entities:
     dbw 10, $5537
     db $FF
 
-INCBIN "baserom.gb", $1d4be, $1d541 - $1d4be
+BubblyCloudsScreen7_Entities_YTrip:
+    dbw 0, $0000
+    dbw 2, $5519
+    dbw 2, $54fb
+    dbw 5, $5523
+    dbw 14, $54f1
+    dbw 15, $5505
+    dbw 16, $5537
+    dbw 17, $550f
+    dbw 24, $54dd
+    dbw 29, $552d
+    db $FF
 
-BubblyCloudsScreen8_Entities:
+INCBIN "baserom.gb", $1d4dd, $1d541 - $1d4dd
+
+BubblyCloudsScreen8_Entities_XTrip:
     dbw 0, $0000
     db $FF
 
-INCBIN "baserom.gb", $1d545, $1d8f9 - $1d545
+BubblyCloudsScreen8_Entities_YTrip:
+    dbw 0, $0000
+    dbw 32, $5558
+    dbw 55, $5563
+    dbw 58, $5579
+    dbw 81, $556e
+    dbw 85, $5584
+    db $FF
 
-BubblyCloudsScreen4_Entities:
+INCBIN "baserom.gb", $1d558, $1d8f9 - $1d558
+
+BubblyCloudsScreen4_Entities_XTrip:
     dbw 0, $0000
     dbw 8, $5922
     db $FF
 
-INCBIN "baserom.gb", $1d900, $1d914 - $1d900
+BubblyCloudsScreen4_Entities_YTrip:
+    dbw 0, $0000
+    dbw 17, $5922
+    dbw 26, $590a
+    db $FF
 
-BubblyCloudsScreen9_Entities:
+INCBIN "baserom.gb", $1d90a, $1d914 - $1d90a
+
+BubblyCloudsScreen9_Entities_XTrip:
     dbw 0, $0000
     dbw 10, $592c
     db $FF
 
-INCBIN "baserom.gb", $1d91b, $1d936 - $1d91b
+BubblyCloudsScreen9_Entities_YTrip:
+    dbw 0, $0000
+    dbw 4, $592c
+    db $FF
 
-CastleLololoScreen8_Entities:
+INCBIN "baserom.gb", $1d922, $1d936 - $1d922
+
+CastleLololoScreen8_Entities_XTrip:
     dbw 0, $0000
     dbw 1, $5958
     db $FF
 
-INCBIN "baserom.gb", $1d93d, $1d944 - $1d93d
+CastleLololoScreen8_Entities_YTrip:
+    dbw 0, $0000
+    dbw 1, $5958
+    db $FF
 
-CastleLololoScreen14_Entities:
+CastleLololoScreen14_Entities_XTrip:
     dbw 0, $0000
     dbw 1, $5962
     dbw 9, $596c
     db $FF
 
-INCBIN "baserom.gb", $1d94e, $1d976 - $1d94e
+CastleLololoScreen14_Entities_YTrip:
+    dbw 0, $0000
+    dbw 1, $5962
+    dbw 9, $596c
+    db $FF
 
-MtDededeScreen0_Entities:
+INCBIN "baserom.gb", $1d958, $1d976 - $1d958
+
+MtDededeScreen0_Entities_XTrip:
     dbw 0, $0000
     db $FF
 
-MtDededeScreen1_Entities:
+MtDededeScreen1_Entities_XTrip:
     dbw 0, $0000
     dbw 8, $5a6e
     dbw 15, $5a5a
@@ -730,7 +999,7 @@ MtDededeScreen1_Entities:
     dbw 38, $5a30
     db $FF
 
-MtDededeScreen2_Entities:
+MtDededeScreen2_Entities_XTrip:
     dbw 0, $0000
     dbw 3, $5aac
     dbw 7, $5a8e
@@ -743,9 +1012,20 @@ MtDededeScreen2_Entities:
     dbw 27, $5a83
     db $FF
 
-INCBIN "baserom.gb", $1d9b2, $1d9d1 - $1d9b2
+MtDededeScreen2_Entities_YTrip:
+    dbw 0, $0000
+    dbw 1, $5aac
+    dbw 2, $5ac0
+    dbw 2, $5a83
+    dbw 3, $5ab6
+    dbw 5, $5a78
+    dbw 7, $5a98
+    dbw 9, $5aca
+    dbw 9, $5a8e
+    dbw 10, $5aa2
+    db $FF
 
-MtDededeScreen3_Entities:
+MtDededeScreen3_Entities_XTrip:
     dbw 0, $0000
     dbw 1, $5ad4
     dbw 3, $5adf
@@ -757,13 +1037,37 @@ MtDededeScreen3_Entities:
     dbw 19, $5b12
     db $FF
 
-INCBIN "baserom.gb", $1d9ed, $1da22 - $1d9ed
+MtDededeScreen3_Entities_YTrip:
+    dbw 0, $0000
+    dbw 3, $5b12
+    dbw 12, $5adf
+    dbw 12, $5aea
+    dbw 12, $5af4
+    db $FF
 
-MtDededeScreen4_Entities:
+MtDededeScreen4_Entities_YTrip:
+    dbw 0, $0000
+    dbw 0, $5b50
+    dbw 0, $5b5a
+    dbw 5, $5b64
+    dbw 12, $5b82
+    dbw 21, $5b8c
+    dbw 33, $5b6e
+    dbw 41, $5b78
+    dbw 46, $5b26
+    dbw 47, $5b31
+    dbw 47, $5b3c
+    dbw 47, $5b46
+    db $FF
+
+MtDededeScreen4_Entities_XTrip:
+MtDededeScreen0_Entities_YTrip:
+MtDededeScreen1_Entities_YTrip:
+MtDededeScreen5_Entities_YTrip:
     dbw 0, $0000
     db $FF
 
-MtDededeScreen5_Entities:
+MtDededeScreen5_Entities_XTrip:
     dbw 0, $0000
     dbw 11, $5b96
     db $FF

@@ -8,67 +8,67 @@ StageEntities_ExtraGame:
     dw MtDededeEntities_ExtraGame
 
 GreenGreensEntities_ExtraGame:
-    dw GreenGreensScreen0_Entities_ExtraGame, $42d0
-    dw GreenGreensScreen1_Entities_ExtraGame, $42d0
-    dw GreenGreensScreen2_Entities_ExtraGame, $42d0
-    dw GreenGreensScreen3_Entities_ExtraGame, $42d4
-    dw GreenGreensScreen4_Entities_ExtraGame, $42f9
+    dw GreenGreensScreen0_Entities_XTrip_ExtraGame, GreenGreensScreen0_Entities_YTrip_ExtraGame
+    dw GreenGreensScreen1_Entities_XTrip_ExtraGame, GreenGreensScreen1_Entities_YTrip_ExtraGame
+    dw GreenGreensScreen2_Entities_XTrip_ExtraGame, GreenGreensScreen2_Entities_YTrip_ExtraGame
+    dw GreenGreensScreen3_Entities_XTrip_ExtraGame, GreenGreensScreen3_Entities_YTrip_ExtraGame
+    dw GreenGreensScreen4_Entities_XTrip_ExtraGame, GreenGreensScreen4_Entities_YTrip_ExtraGame
 
 CastleLololoEntities_ExtraGame:
-    dw CastleLololoScreen0_Entities_ExtraGame, $45b9
-    dw CastleLololoScreen1_Entities_ExtraGame, $4625
-    dw CastleLololoScreen2_Entities_ExtraGame, $46a2
-    dw CastleLololoScreen3_Entities_ExtraGame, $45e0
-    dw CastleLololoScreen4_Entities_ExtraGame, $46d7
-    dw CastleLololoScreen5_Entities_ExtraGame, $473b
-    dw CastleLololoScreen6_Entities_ExtraGame, $47b9
-    dw CastleLololoScreen7_Entities_ExtraGame, $4828
-    dw CastleLololoScreen8_Entities_ExtraGame, $5d4f
-    dw CastleLololoScreen9_Entities_ExtraGame, $48dd
-    dw CastleLololoScreen10_Entities_ExtraGame, $490c
-    dw CastleLololoScreen11_Entities_ExtraGame, $4893
-    dw CastleLololoScreen12_Entities_ExtraGame, $4953
-    dw CastleLololoScreen13_Entities_ExtraGame, $49c9
-    dw CastleLololoScreen14_Entities_ExtraGame, $5d60
-    dw CastleLololoScreen15_Entities_ExtraGame, $4a13
+    dw CastleLololoScreen0_Entities_XTrip_ExtraGame, CastleLololoScreen0_Entities_YTrip_ExtraGame
+    dw CastleLololoScreen1_Entities_XTrip_ExtraGame, CastleLololoScreen1_Entities_YTrip_ExtraGame
+    dw CastleLololoScreen2_Entities_XTrip_ExtraGame, CastleLololoScreen2_Entities_YTrip_ExtraGame
+    dw CastleLololoScreen3_Entities_XTrip_ExtraGame, CastleLololoScreen3_Entities_YTrip_ExtraGame
+    dw CastleLololoScreen4_Entities_XTrip_ExtraGame, CastleLololoScreen4_Entities_YTrip_ExtraGame
+    dw CastleLololoScreen5_Entities_XTrip_ExtraGame, CastleLololoScreen5_Entities_YTrip_ExtraGame
+    dw CastleLololoScreen6_Entities_XTrip_ExtraGame, CastleLololoScreen6_Entities_YTrip_ExtraGame
+    dw CastleLololoScreen7_Entities_XTrip_ExtraGame, CastleLololoScreen7_Entities_YTrip_ExtraGame
+    dw CastleLololoScreen8_Entities_XTrip_ExtraGame, CastleLololoScreen8_Entities_YTrip_ExtraGame
+    dw CastleLololoScreen9_Entities_XTrip_ExtraGame, CastleLololoScreen9_Entities_YTrip_ExtraGame
+    dw CastleLololoScreen10_Entities_XTrip_ExtraGame, CastleLololoScreen10_Entities_YTrip_ExtraGame
+    dw CastleLololoScreen11_Entities_XTrip_ExtraGame, CastleLololoScreen11_Entities_YTrip_ExtraGame
+    dw CastleLololoScreen12_Entities_XTrip_ExtraGame, CastleLololoScreen12_Entities_YTrip_ExtraGame
+    dw CastleLololoScreen13_Entities_XTrip_ExtraGame, CastleLololoScreen13_Entities_YTrip_ExtraGame
+    dw CastleLololoScreen14_Entities_XTrip_ExtraGame, CastleLololoScreen14_Entities_YTrip_ExtraGame
+    dw CastleLololoScreen15_Entities_XTrip_ExtraGame, CastleLololoScreen15_Entities_YTrip_ExtraGame
 
 FloatIslandsEntities_ExtraGame:
-    dw FloatIslandsScreen0_Entities_ExtraGame, $4a9c
-    dw FloatIslandsScreen1_Entities_ExtraGame, $4ada
-    dw FloatIslandsScreen2_Entities_ExtraGame, $4b14
-    dw FloatIslandsScreen3_Entities_ExtraGame, $4b67
-    dw FloatIslandsScreen4_Entities_ExtraGame, $4b75
-    dw FloatIslandsScreen5_Entities_ExtraGame, $4b86
-    dw FloatIslandsScreen6_Entities_ExtraGame, $4b97
-    dw FloatIslandsScreen7_Entities_ExtraGame, $4bae
+    dw FloatIslandsScreen0_Entities_XTrip_ExtraGame, FloatIslandsScreen0_Entities_YTrip_ExtraGame
+    dw FloatIslandsScreen1_Entities_XTrip_ExtraGame, FloatIslandsScreen1_Entities_YTrip_ExtraGame
+    dw FloatIslandsScreen2_Entities_XTrip_ExtraGame, FloatIslandsScreen2_Entities_YTrip_ExtraGame
+    dw FloatIslandsScreen3_Entities_XTrip_ExtraGame, FloatIslandsScreen3_Entities_YTrip_ExtraGame
+    dw FloatIslandsScreen4_Entities_XTrip_ExtraGame, FloatIslandsScreen4_Entities_YTrip_ExtraGame
+    dw FloatIslandsScreen5_Entities_XTrip_ExtraGame, FloatIslandsScreen5_Entities_YTrip_ExtraGame
+    dw FloatIslandsScreen6_Entities_XTrip_ExtraGame, FloatIslandsScreen6_Entities_YTrip_ExtraGame
+    dw FloatIslandsScreen7_Entities_XTrip_ExtraGame, FloatIslandsScreen7_Entities_YTrip_ExtraGame
 
 BubblyCloudsEntities_ExtraGame:
-    dw BubblyCloudsScreen0_Entities_ExtraGame, $4f92
-    dw BubblyCloudsScreen1_Entities_ExtraGame, $50fc
-    dw BubblyCloudsScreen2_Entities_ExtraGame, $51b8
-    dw BubblyCloudsScreen3_Entities_ExtraGame, $5289
-    dw BubblyCloudsScreen4_Entities_ExtraGame, $5d12
-    dw BubblyCloudsScreen5_Entities_ExtraGame, $5373
-    dw BubblyCloudsScreen6_Entities_ExtraGame, $5434
-    dw BubblyCloudsScreen7_Entities_ExtraGame, $54ad
-    dw BubblyCloudsScreen8_Entities_ExtraGame, $5534
-    dw BubblyCloudsScreen9_Entities_ExtraGame, $5d2d
+    dw BubblyCloudsScreen0_Entities_XTrip_ExtraGame, BubblyCloudsScreen0_Entities_YTrip_ExtraGame
+    dw BubblyCloudsScreen1_Entities_XTrip_ExtraGame, BubblyCloudsScreen1_Entities_YTrip_ExtraGame
+    dw BubblyCloudsScreen2_Entities_XTrip_ExtraGame, BubblyCloudsScreen2_Entities_YTrip_ExtraGame
+    dw BubblyCloudsScreen3_Entities_XTrip_ExtraGame, BubblyCloudsScreen3_Entities_YTrip_ExtraGame
+    dw BubblyCloudsScreen4_Entities_XTrip_ExtraGame, BubblyCloudsScreen4_Entities_YTrip_ExtraGame
+    dw BubblyCloudsScreen5_Entities_XTrip_ExtraGame, BubblyCloudsScreen5_Entities_YTrip_ExtraGame
+    dw BubblyCloudsScreen6_Entities_XTrip_ExtraGame, BubblyCloudsScreen6_Entities_YTrip_ExtraGame
+    dw BubblyCloudsScreen7_Entities_XTrip_ExtraGame, BubblyCloudsScreen7_Entities_YTrip_ExtraGame
+    dw BubblyCloudsScreen8_Entities_XTrip_ExtraGame, BubblyCloudsScreen8_Entities_YTrip_ExtraGame
+    dw BubblyCloudsScreen9_Entities_XTrip_ExtraGame, BubblyCloudsScreen9_Entities_YTrip_ExtraGame
 
 MtDededeEntities_ExtraGame:
-    dw MtDededeScreen0_Entities_ExtraGame, $5e34
-    dw MtDededeScreen1_Entities_ExtraGame, $5e34
-    dw MtDededeScreen2_Entities_ExtraGame, $5dc4
-    dw MtDededeScreen3_Entities_ExtraGame, $5dff
-    dw MtDededeScreen4_Entities_ExtraGame, $5e0f
-    dw MtDededeScreen5_Entities_ExtraGame, $5e34
-    dw GreenGreensScreen4_Entities_ExtraGame, $42f9
-    dw FloatIslandsScreen7_Entities_ExtraGame, $4bae
-    dw CastleLololoScreen14_Entities_ExtraGame, $5d60
-    dw BubblyCloudsScreen9_Entities_ExtraGame, $5d2d
+    dw MtDededeScreen0_Entities_XTrip_ExtraGame, MtDededeScreen0_Entities_YTrip_ExtraGame
+    dw MtDededeScreen1_Entities_XTrip_ExtraGame, MtDededeScreen1_Entities_YTrip_ExtraGame
+    dw MtDededeScreen2_Entities_XTrip_ExtraGame, MtDededeScreen2_Entities_YTrip_ExtraGame
+    dw MtDededeScreen3_Entities_XTrip_ExtraGame, MtDededeScreen3_Entities_YTrip_ExtraGame
+    dw MtDededeScreen4_Entities_XTrip_ExtraGame, MtDededeScreen4_Entities_YTrip_ExtraGame
+    dw MtDededeScreen5_Entities_XTrip_ExtraGame, MtDededeScreen5_Entities_YTrip_ExtraGame
+    dw GreenGreensScreen4_Entities_XTrip_ExtraGame, GreenGreensScreen4_Entities_YTrip_ExtraGame
+    dw FloatIslandsScreen7_Entities_XTrip_ExtraGame, FloatIslandsScreen7_Entities_YTrip_ExtraGame
+    dw CastleLololoScreen14_Entities_XTrip_ExtraGame, CastleLololoScreen14_Entities_YTrip_ExtraGame
+    dw BubblyCloudsScreen9_Entities_XTrip_ExtraGame, BubblyCloudsScreen9_Entities_YTrip_ExtraGame
 
 INCBIN "baserom.gb", $3c0ce, $3c202 - $3c0ce
 
-GreenGreensScreen0_Entities_ExtraGame:
+GreenGreensScreen0_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 15, $4304
     dbw 17, $4318
@@ -93,13 +93,13 @@ GreenGreensScreen0_Entities_ExtraGame:
     dbw 78, $43e0
     db $FF
 
-GreenGreensScreen1_Entities_ExtraGame:
+GreenGreensScreen1_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 5, $43eb
     dbw 10, $43f6
     db $FF
 
-GreenGreensScreen2_Entities_ExtraGame:
+GreenGreensScreen2_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 10, $445b
     dbw 15, $440b
@@ -129,7 +129,7 @@ GreenGreensScreen2_Entities_ExtraGame:
     dbw 76, $451a
     db $FF
 
-GreenGreensScreen3_Entities_ExtraGame:
+GreenGreensScreen3_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 1, $4556
     dbw 2, $4594
@@ -145,21 +145,53 @@ GreenGreensScreen3_Entities_ExtraGame:
     dbw 12, $454c
     db $FF
 
-GreenGreensScreen4_Entities_ExtraGame:
+GreenGreensScreen4_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 7, $459e
     db $FF
 
-INCBIN "baserom.gb", $3c2d0, $3c5b2 - $3c2d0
+GreenGreensScreen0_Entities_YTrip_ExtraGame:
+GreenGreensScreen1_Entities_YTrip_ExtraGame:
+GreenGreensScreen2_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    db $FF
 
-CastleLololoScreen0_Entities_ExtraGame:
+GreenGreensScreen3_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 4, $452e
+    dbw 4, $4524
+    dbw 7, $4538
+    dbw 14, $4556
+    dbw 19, $4562
+    dbw 19, $4542
+    dbw 19, $454c
+    dbw 23, $456c
+    dbw 28, $4580
+    dbw 32, $458a
+    dbw 37, $4594
+    db $FF
+
+GreenGreensScreen4_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 22, $459e
+    dbw 26, $45a8
+    db $FF
+
+INCBIN "baserom.gb", $3c303, $3c5b2 - $3c303
+
+CastleLololoScreen0_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 8, $45c0
     db $FF
 
-INCBIN "baserom.gb", $3c5b9, $3c5ca - $3c5b9
+CastleLololoScreen0_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 1, $45c0
+    db $FF
 
-CastleLololoScreen3_Entities_ExtraGame:
+INCBIN "baserom.gb", $3c5c0, $3c5ca - $3c5c0
+
+CastleLololoScreen3_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 10, $4603
     dbw 11, $45e4
@@ -169,15 +201,31 @@ CastleLololoScreen3_Entities_ExtraGame:
     dbw 22, $4617
     db $FF
 
-INCBIN "baserom.gb", $3c5e0, $3c621 - $3c5e0
-
-CastleLololoScreen1_Entities_ExtraGame:
+CastleLololoScreen3_Entities_YTrip_ExtraGame:
     dbw 0, $0000
     db $FF
 
-INCBIN "baserom.gb", $3c625, $3c692 - $3c625
+INCBIN "baserom.gb", $3c5e4, $3c621 - $3c5e4
 
-CastleLololoScreen2_Entities_ExtraGame:
+CastleLololoScreen1_Entities_XTrip_ExtraGame:
+    dbw 0, $0000
+    db $FF
+
+CastleLololoScreen1_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 1, $464c
+    dbw 1, $4656
+    dbw 7, $4660
+    dbw 11, $466a
+    dbw 11, $4641
+    dbw 14, $4674
+    dbw 14, $467e
+    dbw 14, $4688
+    db $FF
+
+INCBIN "baserom.gb", $3c641, $3c692 - $3c641
+
+CastleLololoScreen2_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 0, $46a6
     dbw 2, $46c5
@@ -185,16 +233,29 @@ CastleLololoScreen2_Entities_ExtraGame:
     dbw 9, $46b0
     db $FF
 
-INCBIN "baserom.gb", $3c6a2, $3c6d0 - $3c6a2
+CastleLololoScreen2_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    db $FF
 
-CastleLololoScreen4_Entities_ExtraGame:
+INCBIN "baserom.gb", $3c6a6, $3c6d0 - $3c6a6
+
+CastleLololoScreen4_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 9, $4708
     db $FF
 
-INCBIN "baserom.gb", $3c6d7, $3c71c - $3c6d7
+CastleLololoScreen4_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 1, $46ea
+    dbw 6, $46fe
+    dbw 6, $4712
+    dbw 9, $46f4
+    dbw 2, $4708
+    db $FF
 
-CastleLololoScreen5_Entities_ExtraGame:
+INCBIN "baserom.gb", $3c6ea, $3c71c - $3c6ea
+
+CastleLololoScreen5_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 2, $4765
     dbw 5, $4797
@@ -207,15 +268,38 @@ CastleLololoScreen5_Entities_ExtraGame:
     dbw 15, $4779
     db $FF
 
-INCBIN "baserom.gb", $3c73b, $3c7b5 - $3c73b
+CastleLololoScreen5_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 1, $4783
+    dbw 1, $478d
+    dbw 2, $47ab
+    dbw 3, $47a1
+    dbw 5, $4765
+    dbw 6, $4779
+    dbw 7, $475a
+    dbw 9, $476f
+    dbw 7, $4797
+    db $FF
 
-CastleLololoScreen6_Entities_ExtraGame:
+INCBIN "baserom.gb", $3c75a, $3c7b5 - $3c75a
+
+CastleLololoScreen6_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     db $FF
 
-INCBIN "baserom.gb", $3c7b9, $3c80c - $3c7b9
+CastleLololoScreen6_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 5, $47cf
+    dbw 6, $47e3
+    dbw 7, $47ed
+    dbw 8, $47f7
+    dbw 11, $4801
+    dbw 18, $47d9
+    db $FF
 
-CastleLololoScreen7_Entities_ExtraGame:
+INCBIN "baserom.gb", $3c7cf, $3c80c - $3c7cf
+
+CastleLololoScreen7_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 7, $4837
     dbw 10, $485f
@@ -227,9 +311,13 @@ CastleLololoScreen7_Entities_ExtraGame:
     dbw 25, $482c
     db $FF
 
-INCBIN "baserom.gb", $3c828, $3c87d - $3c828
+CastleLololoScreen7_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    db $FF
 
-CastleLololoScreen11_Entities_ExtraGame:
+INCBIN "baserom.gb", $3c82c, $3c87d - $3c82c
+
+CastleLololoScreen11_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 6, $48ab
     dbw 8, $48b5
@@ -239,17 +327,27 @@ CastleLololoScreen11_Entities_ExtraGame:
     dbw 15, $48a1
     db $FF
 
-INCBIN "baserom.gb", $3c893, $3c8d3 - $3c893
+CastleLololoScreen11_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    db $FF
 
-CastleLololoScreen9_Entities_ExtraGame:
+INCBIN "baserom.gb", $3c897, $3c8d3 - $3c897
+
+CastleLololoScreen9_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 11, $48f2
     dbw 11, $48e7
     db $FF
 
-INCBIN "baserom.gb", $3c8dd, $3c8fc - $3c8dd
+CastleLololoScreen9_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 3, $48f2
+    dbw 9, $48e7
+    db $FF
 
-CastleLololoScreen10_Entities_ExtraGame:
+INCBIN "baserom.gb", $3c8e7, $3c8fc - $3c8e7
+
+CastleLololoScreen10_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 1, $4924
     dbw 1, $4910
@@ -257,9 +355,13 @@ CastleLololoScreen10_Entities_ExtraGame:
     dbw 8, $491a
     db $FF
 
-INCBIN "baserom.gb", $3c90c, $3c93a - $3c90c
+CastleLololoScreen10_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    db $FF
 
-CastleLololoScreen12_Entities_ExtraGame:
+INCBIN "baserom.gb", $3c910, $3c93a - $3c910
+
+CastleLololoScreen12_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 0, $496c
     dbw 3, $49a9
@@ -270,9 +372,20 @@ CastleLololoScreen12_Entities_ExtraGame:
     dbw 12, $498b
     db $FF
 
-INCBIN "baserom.gb", $3c953, $3c9b3 - $3c953
+CastleLololoScreen12_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 3, $4995
+    dbw 4, $4981
+    dbw 5, $49a9
+    dbw 7, $498b
+    dbw 8, $499f
+    dbw 10, $496c
+    dbw 14, $4977
+    db $FF
 
-CastleLololoScreen13_Entities_ExtraGame:
+INCBIN "baserom.gb", $3c96c, $3c9b3 - $3c96c
+
+CastleLololoScreen13_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 1, $49cd
     dbw 6, $49e1
@@ -282,17 +395,25 @@ CastleLololoScreen13_Entities_ExtraGame:
     dbw 13, $49d7
     db $FF
 
-INCBIN "baserom.gb", $3c9c9, $3ca09 - $3c9c9
+CastleLololoScreen13_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    db $FF
 
-CastleLololoScreen15_Entities_ExtraGame:
+INCBIN "baserom.gb", $3c9cd, $3ca09 - $3c9cd
+
+CastleLololoScreen15_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 1, $4a17
     dbw 5, $4a21
     db $FF
 
-INCBIN "baserom.gb", $3ca13, $3ca2c - $3ca13
+CastleLololoScreen15_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    db $FF
 
-FloatIslandsScreen0_Entities_ExtraGame:
+INCBIN "baserom.gb", $3ca17, $3ca2c - $3ca17
+
+FloatIslandsScreen0_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 16, $4bb2
     dbw 18, $4bbc
@@ -332,11 +453,12 @@ FloatIslandsScreen0_Entities_ExtraGame:
     dbw 111, $4d11
     db $FF
 
-FloatIslandsScreen2_Entities_ExtraGame:
+FloatIslandsScreen2_Entities_XTrip_ExtraGame:
+FloatIslandsScreen0_Entities_YTrip_ExtraGame:
     dbw 0, $0000
     db $FF
 
-FloatIslandsScreen1_Entities_ExtraGame:
+FloatIslandsScreen1_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 1, $4d1b
     dbw 1, $4d26
@@ -358,9 +480,39 @@ FloatIslandsScreen1_Entities_ExtraGame:
     dbw 46, $4dc6
     db $FF
 
-INCBIN "baserom.gb", $3cada, $3cb2a - $3cada
+FloatIslandsScreen1_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 1, $4da8
+    dbw 2, $4dc6
+    dbw 2, $4d4e
+    dbw 2, $4d76
+    dbw 3, $4d6c
+    dbw 3, $4d62
+    dbw 5, $4db2
+    dbw 5, $4d44
+    dbw 8, $4d94
+    dbw 8, $4d9e
+    dbw 9, $4d26
+    dbw 9, $4d3a
+    dbw 9, $4dbc
+    dbw 12, $4d58
+    dbw 13, $4d8a
+    dbw 13, $4d1b
+    dbw 14, $4d80
+    dbw 14, $4d30
+    db $FF
 
-FloatIslandsScreen3_Entities_ExtraGame:
+FloatIslandsScreen2_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 1, $4def
+    dbw 2, $4dd1
+    dbw 3, $4ddb
+    dbw 3, $4de5
+    dbw 13, $4df9
+    dbw 22, $4e05
+    db $FF
+
+FloatIslandsScreen3_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 10, $4e10
     dbw 14, $4e1a
@@ -383,31 +535,43 @@ FloatIslandsScreen3_Entities_ExtraGame:
     dbw 68, $4ec5
     db $FF
 
-INCBIN "baserom.gb", $3cb67, $3cb6b - $3cb67
+FloatIslandsScreen3_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    db $FF
 
-FloatIslandsScreen4_Entities_ExtraGame:
+FloatIslandsScreen4_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 1, $4ecf
     dbw 2, $4eda
     db $FF
 
-INCBIN "baserom.gb", $3cb75, $3cb7f - $3cb75
+FloatIslandsScreen4_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 4, $4ecf
+    dbw 4, $4eda
+    db $FF
 
-FloatIslandsScreen5_Entities_ExtraGame:
+FloatIslandsScreen5_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 6, $4ee5
     db $FF
 
-INCBIN "baserom.gb", $3cb86, $3cb90 - $3cb86
+FloatIslandsScreen5_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 2, $4ee5
+    dbw 21, $4eef
+    db $FF
 
-FloatIslandsScreen6_Entities_ExtraGame:
+FloatIslandsScreen6_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 5, $4efa
     db $FF
 
-INCBIN "baserom.gb", $3cb97, $3cb9b - $3cb97
+FloatIslandsScreen6_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    db $FF
 
-FloatIslandsScreen7_Entities_ExtraGame:
+FloatIslandsScreen7_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 10, $4f18
     dbw 13, $4f04
@@ -416,9 +580,13 @@ FloatIslandsScreen7_Entities_ExtraGame:
     dbw 38, $4f2d
     db $FF
 
-INCBIN "baserom.gb", $3cbae, $3cf37 - $3cbae
+FloatIslandsScreen7_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    db $FF
 
-BubblyCloudsScreen0_Entities_ExtraGame:
+INCBIN "baserom.gb", $3cbb2, $3cf37 - $3cbb2
+
+BubblyCloudsScreen0_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 11, $5022
     dbw 14, $50b8
@@ -451,9 +619,13 @@ BubblyCloudsScreen0_Entities_ExtraGame:
     dbw 96, $5068
     db $FF
 
-INCBIN "baserom.gb", $3cf92, $3d0c2 - $3cf92
+BubblyCloudsScreen0_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    db $FF
 
-BubblyCloudsScreen1_Entities_ExtraGame:
+INCBIN "baserom.gb", $3cf96, $3d0c2 - $3cf96
+
+BubblyCloudsScreen1_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 9, $5182
     dbw 11, $51aa
@@ -475,15 +647,35 @@ BubblyCloudsScreen1_Entities_ExtraGame:
     dbw 66, $51a0
     db $FF
 
-INCBIN "baserom.gb", $3d0fc, $3d1b4 - $3d0fc
-
-BubblyCloudsScreen2_Entities_ExtraGame:
+BubblyCloudsScreen1_Entities_YTrip_ExtraGame:
     dbw 0, $0000
     db $FF
 
-INCBIN "baserom.gb", $3d1b8, $3d258 - $3d1b8
+INCBIN "baserom.gb", $3d100, $3d1b4 - $3d100
 
-BubblyCloudsScreen3_Entities_ExtraGame:
+BubblyCloudsScreen2_Entities_XTrip_ExtraGame:
+    dbw 0, $0000
+    db $FF
+
+BubblyCloudsScreen2_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 4, $51e0
+    dbw 6, $5226
+    dbw 7, $524e
+    dbw 8, $5244
+    dbw 11, $51fe
+    dbw 14, $5208
+    dbw 18, $5212
+    dbw 18, $521c
+    dbw 20, $51f4
+    dbw 21, $51ea
+    dbw 25, $523a
+    dbw 29, $5230
+    db $FF
+
+INCBIN "baserom.gb", $3d1e0, $3d258 - $3d1e0
+
+BubblyCloudsScreen3_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 3, $5322
     dbw 15, $5338
@@ -502,9 +694,26 @@ BubblyCloudsScreen3_Entities_ExtraGame:
     dbw 49, $52dc
     db $FF
 
-INCBIN "baserom.gb", $3d289, $3d34e - $3d289
+BubblyCloudsScreen3_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 0, $52b4
+    dbw 1, $530e
+    dbw 3, $52c8
+    dbw 3, $532d
+    dbw 5, $52d2
+    dbw 4, $5304
+    dbw 5, $5338
+    dbw 7, $52dc
+    dbw 7, $5318
+    dbw 8, $5343
+    dbw 9, $5322
+    dbw 10, $52be
+    dbw 10, $530e
+    db $FF
 
-BubblyCloudsScreen5_Entities_ExtraGame:
+INCBIN "baserom.gb", $3d2b4, $3d34e - $3d2b4
+
+BubblyCloudsScreen5_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 1, $53e2
     dbw 4, $53ae
@@ -519,9 +728,24 @@ BubblyCloudsScreen5_Entities_ExtraGame:
     dbw 48, $53b9
     db $FF
 
-INCBIN "baserom.gb", $3d373, $3d415 - $3d373
+BubblyCloudsScreen5_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 0, $53b9
+    dbw 4, $5401
+    dbw 4, $53ae
+    dbw 4, $53c3
+    dbw 5, $53ce
+    dbw 5, $53d8
+    dbw 6, $53ed
+    dbw 6, $53f7
+    dbw 8, $53a3
+    dbw 8, $53e2
+    dbw 10, $5398
+    db $FF
 
-BubblyCloudsScreen6_Entities_ExtraGame:
+INCBIN "baserom.gb", $3d398, $3d415 - $3d398
+
+BubblyCloudsScreen6_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 10, $547e
     dbw 16, $5489
@@ -534,9 +758,13 @@ BubblyCloudsScreen6_Entities_ExtraGame:
     dbw 79, $5474
     db $FF
 
-INCBIN "baserom.gb", $3d434, $3d494 - $3d434
+BubblyCloudsScreen6_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    db $FF
 
-BubblyCloudsScreen7_Entities_ExtraGame:
+INCBIN "baserom.gb", $3d438, $3d494 - $3d438
+
+BubblyCloudsScreen7_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 4, $54f4
     dbw 4, $54ea
@@ -547,48 +775,110 @@ BubblyCloudsScreen7_Entities_ExtraGame:
     dbw 10, $5526
     db $FF
 
-INCBIN "baserom.gb", $3d4ad, $3d530 - $3d4ad
+BubblyCloudsScreen7_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 2, $5508
+    dbw 2, $54ea
+    dbw 5, $5512
+    dbw 14, $54e0
+    dbw 15, $54f4
+    dbw 16, $5526
+    dbw 17, $54fe
+    dbw 24, $54cc
+    dbw 29, $551c
+    db $FF
 
-BubblyCloudsScreen8_Entities_ExtraGame:
+INCBIN "baserom.gb", $3d4cc, $3d530 - $3d4cc
+
+BubblyCloudsScreen8_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     db $FF
 
-INCBIN "baserom.gb", $3d534, $3dd0b - $3d534
+BubblyCloudsScreen8_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 6, $55ba
+    dbw 9, $55c5
+    dbw 18, $55d0
+    dbw 26, $55dc
+    dbw 29, $55e7
+    dbw 32, $5583
+    dbw 35, $55f2
+    dbw 38, $55fd
+    dbw 41, $5608
+    dbw 46, $5613
+    dbw 49, $561f
+    dbw 52, $562a
+    dbw 55, $558e
+    dbw 58, $55a4
+    dbw 61, $5635
+    dbw 66, $5640
+    dbw 69, $564b
+    dbw 72, $5656
+    dbw 75, $5662
+    dbw 78, $566d
+    dbw 81, $5599
+    dbw 85, $55af
+    dbw 86, $5678
+    dbw 89, $5683
+    dbw 92, $568e
+    db $FF
 
-BubblyCloudsScreen4_Entities_ExtraGame:
+INCBIN "baserom.gb", $3d583, $3dd0b - $3d583
+
+BubblyCloudsScreen4_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 8, $5d34
     db $FF
 
-INCBIN "baserom.gb", $3dd12, $3dd26 - $3dd12
+BubblyCloudsScreen4_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 17, $5d34
+    dbw 26, $5d1c
+    db $FF
 
-BubblyCloudsScreen9_Entities_ExtraGame:
+INCBIN "baserom.gb", $3dd1c, $3dd26 - $3dd1c
+
+BubblyCloudsScreen9_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 10, $5d3e
     db $FF
 
-INCBIN "baserom.gb", $3dd2d, $3dd48 - $3dd2d
+BubblyCloudsScreen9_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 4, $5d3e
+    db $FF
 
-CastleLololoScreen8_Entities_ExtraGame:
+INCBIN "baserom.gb", $3dd34, $3dd48 - $3dd34
+
+CastleLololoScreen8_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 1, $5d6a
     db $FF
 
-INCBIN "baserom.gb", $3dd4f, $3dd56 - $3dd4f
+CastleLololoScreen8_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 1, $5d6a
+    db $FF
 
-CastleLololoScreen14_Entities_ExtraGame:
+CastleLololoScreen14_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 1, $5d74
     dbw 9, $5d7e
     db $FF
 
-INCBIN "baserom.gb", $3dd60, $3dd88 - $3dd60
+CastleLololoScreen14_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 1, $5d74
+    dbw 9, $5d7e
+    db $FF
 
-MtDededeScreen0_Entities_ExtraGame:
+INCBIN "baserom.gb", $3dd6a, $3dd88 - $3dd6a
+
+MtDededeScreen0_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     db $FF
 
-MtDededeScreen1_Entities_ExtraGame:
+MtDededeScreen1_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 8, $5e80
     dbw 15, $5e6c
@@ -599,7 +889,7 @@ MtDededeScreen1_Entities_ExtraGame:
     dbw 38, $5e42
     db $FF
 
-MtDededeScreen2_Entities_ExtraGame:
+MtDededeScreen2_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 3, $5ebe
     dbw 7, $5ea0
@@ -612,9 +902,20 @@ MtDededeScreen2_Entities_ExtraGame:
     dbw 27, $5e95
     db $FF
 
-INCBIN "baserom.gb", $3ddc4, $3dde3 - $3ddc4
+MtDededeScreen2_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 1, $5ebe
+    dbw 2, $5ed2
+    dbw 2, $5e95
+    dbw 3, $5ec8
+    dbw 5, $5e8a
+    dbw 7, $5eaa
+    dbw 9, $5edc
+    dbw 9, $5ea0
+    dbw 10, $5eb4
+    db $FF
 
-MtDededeScreen3_Entities_ExtraGame:
+MtDededeScreen3_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 1, $5ee6
     dbw 3, $5ef1
@@ -626,13 +927,37 @@ MtDededeScreen3_Entities_ExtraGame:
     dbw 19, $5f24
     db $FF
 
-INCBIN "baserom.gb", $3ddff, $3de34 - $3ddff
+MtDededeScreen3_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 3, $5f24
+    dbw 12, $5ef1
+    dbw 12, $5efc
+    dbw 12, $5f06
+    db $FF
 
-MtDededeScreen4_Entities_ExtraGame:
+MtDededeScreen4_Entities_YTrip_ExtraGame:
+    dbw 0, $0000
+    dbw 0, $5f62
+    dbw 0, $5f6c
+    dbw 5, $5f76
+    dbw 12, $5f94
+    dbw 21, $5f9e
+    dbw 33, $5f80
+    dbw 41, $5f8a
+    dbw 46, $5f38
+    dbw 47, $5f43
+    dbw 47, $5f4e
+    dbw 47, $5f58
+    db $FF
+
+MtDededeScreen4_Entities_XTrip_ExtraGame:
+MtDededeScreen0_Entities_YTrip_ExtraGame:
+MtDededeScreen1_Entities_YTrip_ExtraGame:
+MtDededeScreen5_Entities_YTrip_ExtraGame:
     dbw 0, $0000
     db $FF
 
-MtDededeScreen5_Entities_ExtraGame:
+MtDededeScreen5_Entities_XTrip_ExtraGame:
     dbw 0, $0000
     dbw 11, $5fa8
     db $FF
