@@ -1757,7 +1757,7 @@ Call_001_4bb4:
     ld bc, $0001
 .jr_001_4be1:
     push bc
-    ld hl, $d160
+    ld hl, wActiveEntities
     add hl, bc
     ld a, [hl]
     and a

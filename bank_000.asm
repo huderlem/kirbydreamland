@@ -4827,21 +4827,21 @@ InitRamFuncD099:
 
 
 Call_000_21ce:
-    ld hl, $d160
+    ld hl, wActiveEntities
     add hl, bc
     ld [hl], $00
     ret
 
 
 Call_000_21d5:
-    ld hl, $d160
+    ld hl, wActiveEntities
     add hl, bc
     ld [hl], $ff
     ret
 
 
 Call_000_21dc:
-    ld hl, $d160
+    ld hl, wActiveEntities
     add hl, bc
     ld a, [hl]
     and a
@@ -5022,7 +5022,7 @@ Call_000_2317:
 
 Call_000_231e:
     ld b, $10
-    ld hl, $d160
+    ld hl, wActiveEntities
 jr_000_2323:
     xor a
 .jr_000_2324:
@@ -5093,7 +5093,7 @@ jr_000_234e:
     push de
     ld b, $00
     ld a, $01
-    ld hl, $d160
+    ld hl, wActiveEntities
     add hl, bc
     ld [hl], a
     xor a
@@ -5236,7 +5236,7 @@ Call_000_2447:
     jp nc, .jump_000_253f
     cp $e0
     jr nz, .jr_000_245b
-    ld hl, $d160
+    ld hl, wActiveEntities
     add hl, bc
     xor a
     ld [hl], a
@@ -5346,7 +5346,7 @@ Call_000_2447:
     jr nz, .jr_000_2505
     ld d, h
     ld e, l
-    ld hl, $d160
+    ld hl, wActiveEntities
     add hl, bc
     ld a, [de]
     inc a
@@ -6292,7 +6292,7 @@ Call_29b7:
     ld a, [hl+]
     push hl
     call Call_000_294f
-    ld hl, $d100
+    ld hl, wEntityHorizontalVelocities
     add hl, bc
     add hl, bc
     ld [hl], e
@@ -6302,7 +6302,7 @@ Call_29b7:
     ld a, [hl+]
     push hl
     call Call_000_294f
-    ld hl, $d120
+    ld hl, wEntityVerticalVelocities
     add hl, bc
     add hl, bc
     ld [hl], e
@@ -6440,7 +6440,7 @@ Call_000_2b26:
     call Call_000_2ce5
     jp c, .jump_000_2b8b
     ld de, $d0a0
-    ld hl, $d100
+    ld hl, wEntityHorizontalVelocities
     call Call_000_2d0d
     ld hl, $ff91
     bit 7, [hl]
@@ -6482,7 +6482,7 @@ Call_000_2b26:
     ld [hl], a
 .jr_000_2b82:
     ld de, $d0d0
-    ld hl, $d120
+    ld hl, wEntityVerticalVelocities
     call Call_000_2d0d
 .jump_000_2b8b:
     ld hl, $d3cc
@@ -6579,7 +6579,7 @@ Call_000_2b26:
     bit 5, a
     jr z, .jr_000_2c26
     push af
-    call Call_000_2e04
+    call ApplyGravity
     pop af
 .jr_000_2c26:
     bit 3, a
@@ -6589,14 +6589,14 @@ Call_000_2b26:
     jr z, .jr_000_2c5b
     cp $06
     jr nz, .jr_000_2c4d
-    ld hl, $d120
+    ld hl, wEntityVerticalVelocities
     add hl, bc
     add hl, bc
     ld [hl], $66
     inc hl
     xor a
     ld [hl], a
-    ld hl, $d100
+    ld hl, wEntityHorizontalVelocities
     add hl, bc
     add hl, bc
     ld [hl+], a
@@ -6606,7 +6606,7 @@ Call_000_2b26:
     set 7, [hl]
     jr .jr_000_2c5b
 .jr_000_2c4d:
-    ld hl, $d120
+    ld hl, wEntityVerticalVelocities
     add hl, bc
     add hl, bc
     xor a
@@ -6918,27 +6918,27 @@ Call_000_2deb:
     ret
 
 
-Call_000_2e04:
-    ld hl, $d120
+ApplyGravity:
+    ld hl, wEntityVerticalVelocities
     add hl, bc
     add hl, bc
     ld a, [hl]
     add $24
     ld [hl+], a
-    jr nc, .jr_000_2e10
+    jr nc, .checkMaxDownwardVelocity
     inc [hl]
-.jr_000_2e10:
+.checkMaxDownwardVelocity:
     dec hl
     ld a, [hl+]
     cp $80
     ld a, [hl]
     cp $02
-    jr c, .jr_000_2e1f
+    jr c, .done
     ld a, $02
     ld [hl-], a
     ld a, $80
     ld [hl], a
-.jr_000_2e1f:
+.done:
     ret
 
 
@@ -7050,7 +7050,7 @@ Call_000_2e9c:
 .jr_000_2eb7:
     push bc
     ld b, $00
-    ld hl, $d160
+    ld hl, wActiveEntities
     add hl, bc
     ld a, [hl]
     and a
@@ -7081,7 +7081,7 @@ Call_000_2e9c:
 .jump_000_2eeb:
     push bc
     ld b, $00
-    ld hl, $d160
+    ld hl, wActiveEntities
     add hl, bc
     ld a, [hl]
     cp $01
@@ -7110,7 +7110,7 @@ Call_000_2e9c:
 .jr_000_2f19:
     push bc
     ld b, $00
-    ld hl, $d160
+    ld hl, wActiveEntities
     add hl, bc
     ld a, [hl]
     cp $01
@@ -7931,21 +7931,36 @@ Call_000_3410:
 Unk3421:
     db $05, $00, $00, $00, $04, $00, $00, $00, $69, $08, $08, $00, $54, $41, $69
     db $08, $08, $00, $72, $41, $69, $08, $08, $01, $72, $41, $69, $08, $08, $02, $72
-    db $41, $69, $08, $08, $03, $72, $41, $69, $08, $08, $04, $72, $41, $69, $08, $08
+    db $41, $69, $08, $08, $03, $72, $41, $69, $08, $08, $04, $72, $41
+
+Unk344d:
+    db $69, $08, $08
     db $05, $72, $41, $49, $08, $08, $05, $72, $41, $69, $08, $08, $06, $72, $41, $49
     db $08, $08, $06, $72, $41, $69, $06, $08, $07, $72, $41, $49, $08, $08, $08, $72
     db $41, $48, $08, $08, $08, $72, $41, $69, $08, $08, $09, $72, $41, $41, $08, $08
-    db $0A, $72, $41, $29, $06, $06, $01, $01, $03, $14, $54, $41, $01, $06, $06, $01
+    db $0A, $72, $41, $29, $06, $06, $01, $01, $03, $14, $54, $41
+
+Unk348c:
+    db $01, $06, $06, $01
     db $01, $03, $14, $54, $41, $01, $06, $06, $01, $01, $01, $14, $54, $41, $05, $06
     db $06, $01, $01, $00, $14, $54, $41, $00, $06, $06, $01, $01, $03, $14, $54, $41
     db $01, $06, $06, $01, $01, $03, $28, $54, $41, $01, $06, $06, $03, $64, $00, $00
     db $00, $06, $06, $03, $64, $01, $00, $54, $41, $01, $03, $03, $01, $00, $11, $01
     db $54, $41, $01, $03, $03, $01, $64, $01, $00, $54, $41, $01, $06, $06, $01, $64
     db $01, $03, $54, $41, $01, $06, $06, $01, $01, $03, $28, $60, $41, $01, $06, $06
-    db $01, $01, $01, $46, $54, $41, $01, $06, $06, $01, $01, $03, $1E, $BA, $41, $09
+    db $01, $01, $01, $46, $54, $41, $01, $06, $06, $01, $01, $03, $1E, $BA, $41
+
+Unk34ff:
+    db $09
     db $06, $06, $01, $01, $03, $14, $54, $41, $09, $06, $06, $01, $01, $03, $14, $54
-    db $41, $01, $06, $06, $01, $01, $03, $05, $54, $41, $01, $06, $06, $01, $01, $03
-    db $14, $54, $41, $01, $06, $06, $01, $01, $03, $14, $54, $41, $09, $06, $06, $01
+    db $41, $01, $06, $06, $01, $01, $03, $05, $54, $41
+
+Unk351a:
+    db $01, $06, $06, $01, $01, $03
+    db $14, $54, $41
+
+Unk3523:
+    db $01, $06, $06, $01, $01, $03, $14, $54, $41, $09, $06, $06, $01
     db $01, $03, $14, $54, $41, $01, $0A, $0A, $02, $01, $03, $28, $54, $41, $29, $09
     db $09, $02, $01, $01, $28, $54, $41, $01, $0A, $0D, $02, $01, $03, $14, $A8, $41
     db $09, $06, $06, $01, $01, $03, $14, $54, $41, $09, $06, $06, $01, $01, $01, $14
@@ -8479,7 +8494,7 @@ Jump_000_3d2d:
     res 2, [hl]
     call Call_000_3d48
     ld a, $01
-    ld [$d160], a
+    ld [wActiveEntities], a
     call Call_000_139b
     ld a, $01
     ld [wLoadedROMBank], a

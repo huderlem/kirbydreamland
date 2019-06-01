@@ -37,7 +37,7 @@ jr_005_4032:
     cp $0a
     jr c, jr_005_405d
 
-    ld hl, $d100
+    ld hl, wEntityHorizontalVelocities
     add hl, bc
     add hl, bc
     ld a, [hl]
@@ -64,7 +64,7 @@ jr_005_404f:
     dec d
     jr nz, jr_005_404f
 
-    ld hl, $d120
+    ld hl, wEntityVerticalVelocities
     add hl, bc
     add hl, bc
     ld [hl+], a
@@ -420,7 +420,7 @@ jr_005_41f4:
     ld de, $ffec
 
 jr_005_421d:
-    ld hl, $d100
+    ld hl, wEntityHorizontalVelocities
     call Call_005_4234
     ld de, $0014
     ld hl, $d150
@@ -432,7 +432,7 @@ jr_005_421d:
     ld de, $ffec
 
 jr_005_4231:
-    ld hl, $d120
+    ld hl, wEntityVerticalVelocities
 
 Call_005_4234:
     add hl, bc
@@ -598,7 +598,7 @@ jr_005_42f2:
     cp $0a
     jr c, jr_005_4318
 
-    ld hl, $d100
+    ld hl, wEntityHorizontalVelocities
     ld a, [hl]
     add e
     ld [hl+], a
@@ -621,7 +621,7 @@ jr_005_430b:
     dec d
     jr nz, jr_005_430b
 
-    ld hl, $d120
+    ld hl, wEntityVerticalVelocities
     ld [hl+], a
     ld [hl], e
     pop bc
@@ -1066,7 +1066,7 @@ jr_005_45aa:
 
 
 Call_005_45b0:
-    ld hl, $d160
+    ld hl, wActiveEntities
     add hl, bc
     ld a, [hl]
     and a
@@ -1462,7 +1462,7 @@ Call_005_47e4:
     ld bc, $0001
 
 Jump_005_47fe:
-    ld hl, $d160
+    ld hl, wActiveEntities
     add hl, bc
     ld a, [hl]
     and a
@@ -1588,7 +1588,7 @@ Call_005_489b:
     ld bc, $0001
 
 jr_005_48a5:
-    ld hl, $d160
+    ld hl, wActiveEntities
     add hl, bc
     ld a, [hl]
     and a

@@ -70,27 +70,27 @@ INCBIN "baserom.gb", $1c0ce, $1c202 - $1c0ce
 
 GreenGreensScreen0_Entities_XTrip:
     dbw 0, $0000
-    dbw 15, Unk1c304
-    dbw 17, Unk1c318
-    dbw 21, Unk1c322
-    dbw 22, Unk1c32C
-    dbw 24, Unk1c336
-    dbw 31, Unk1c340
-    dbw 33, Unk1c34A
-    dbw 41, Unk1c354
-    dbw 48, Unk1c35E
-    dbw 48, Unk1c368
-    dbw 49, Unk1c372
-    dbw 57, Unk1c386
-    dbw 61, Unk1c390
-    dbw 64, Unk1c39A
-    dbw 66, Unk1c3A4
-    dbw 67, Unk1c3AE
-    dbw 70, Unk1c3B8
-    dbw 71, Unk1c3C2
-    dbw 74, Unk1c3CC
-    dbw 79, Unk1c3D6
-    dbw 78, Unk1c3E0
+    dbw 15, GreenGreensScreen0_Entity0
+    dbw 17, GreenGreensScreen0_Entity1
+    dbw 21, GreenGreensScreen0_Entity2
+    dbw 22, GreenGreensScreen0_Entity3
+    dbw 24, GreenGreensScreen0_Entity4
+    dbw 31, GreenGreensScreen0_Entity5
+    dbw 33, GreenGreensScreen0_Entity6
+    dbw 41, GreenGreensScreen0_Entity7
+    dbw 48, GreenGreensScreen0_Entity8
+    dbw 48, GreenGreensScreen0_Entity9
+    dbw 49, GreenGreensScreen0_Entity10
+    dbw 57, GreenGreensScreen0_Entity11
+    dbw 61, GreenGreensScreen0_Entity12
+    dbw 64, GreenGreensScreen0_Entity13
+    dbw 66, GreenGreensScreen0_Entity14
+    dbw 67, GreenGreensScreen0_Entity15
+    dbw 70, GreenGreensScreen0_Entity16
+    dbw 71, GreenGreensScreen0_Entity17
+    dbw 74, GreenGreensScreen0_Entity18
+    dbw 79, GreenGreensScreen0_Entity19
+    dbw 78, GreenGreensScreen0_Entity20
     db $FF
 
 GreenGreensScreen1_Entities_XTrip:
@@ -179,125 +179,166 @@ GreenGreensScreen4_Entities_YTrip:
 
     db $FF ; stray terminator... was all of this data entered by hand?
 
-Unk1c304:
-    db $0F, $05, $00, $00
+GreenGreensScreen0_Entity0:
+    db 15, 5
+    db 0, 0
     dw Unk20587
     dw Unk102c8
-    db $8C, $34
+    dw Unk348c
 
-Unk1c30e:
-    db $11, $05, $F8, $00
+GreenGreensScreen0_UnusedEntity0:
+    db 17, 5
+    db -8, 0
     dw $4d19
-    db $D8, $51, $FF, $34
+    dw $51d8
+    dw Unk34ff
 
-Unk1c318:
-    db $11, $05, $00, $00
+GreenGreensScreen0_Entity1:
+    db 17, 5
+    db 0, 0
     dw Unk20587
     dw Unk102c8
-    db $8C, $34
+    dw Unk348c
 
-Unk1c322:
-    db $15, $04, $00, $00
+GreenGreensScreen0_Entity2:
+    db 21, 4
+    db 0, 0
     dw $45ae
     dw Unk103ff
-    db $8C, $34
+    dw Unk348c
 
-Unk1c32C:
-    db $16, $02, $00, $00
+GreenGreensScreen0_Entity3:
+    db 22, 2
+    db 0, 0
     dw $4c52
-    db $5D, $4D, $1A, $35
+    dw $4d5d
+    dw Unk351a
 
-Unk1c336:
-    db $18, $04, $00, $00
+GreenGreensScreen0_Entity4:
+    db 24, 4
+    db 0, 0
     dw $4c5b
-    db $99, $4D, $1A, $35
+    dw $4d99
+    dw Unk351a
 
-Unk1c340:
-    db $1F, $01, $00, $00
+GreenGreensScreen0_Entity5:
+    db 31, 1
+    db 0, 0
     dw $4647
-    db $08, $45, $8C, $34
+    dw $4508
+    dw Unk348c
 
-Unk1c34A:
-    db $21, $05, $00, $00
+GreenGreensScreen0_Entity6:
+    db 33, 5
+    db 0, 0
     dw $45ae
     dw Unk103ff
-    db $8C, $34
+    dw Unk348c
 
-Unk1c354:
-    db $29, $05, $08, $00
+GreenGreensScreen0_Entity7:
+    db 41, 5
+    db 8, 0
     dw $4d0b
-    db $E4, $51, $FF, $34
+    dw $51e4
+    dw Unk34ff
 
-Unk1c35E:
-    db $30, $02, $00, $00
+GreenGreensScreen0_Entity8:
+    db 48, 2
+    db 0, 0
     dw $4d28
-    db $7D, $46, $8C, $34
+    dw $467d
+    dw Unk348c
 
-Unk1c368:
-    db $30, $05, $F8, $00
+GreenGreensScreen0_Entity9:
+    db 48, 5
+    db $F8, $00
     dw $4d19
-    db $D8, $51, $FF, $34
+    dw $51d8
+    dw Unk34ff
 
-Unk1c372:
-    db $31, $02, $00, $08
+GreenGreensScreen0_Entity10:
+    db 49, 2
+    db 0, 8
     dw $4d28
-    db $7D, $46, $8C, $34
+    dw $467d
+    dw Unk348c
 
-Unk1c37c:
-    db $33, $03, $00, $00
+GreenGreensScreen0_UnusedEntity1:
+    db 51, 3
+    db 0, 0
     dw $4c5b
-    db $99, $4D, $1A, $35
+    dw $4d99
+    dw Unk351a
 
-Unk1c386:
-    db $39, $04, $00, $00
+GreenGreensScreen0_Entity11:
+    db 57, 4
+    db 0, 0
     dw $4c5b
-    db $99, $4D, $1A, $35
+    dw $4d99
+    dw Unk351a
 
-Unk1c390:
-    db $3D, $01, $00, $00
+GreenGreensScreen0_Entity12:
+    db 61, 1
+    db 0, 0
     dw $4647
-    db $08, $45, $8C, $34
+    dw $4508
+    dw Unk348c
 
-Unk1c39A:
-    db $40, $05, $00, $00
+GreenGreensScreen0_Entity13:
+    db 64, 5
+    db 0, 0
     dw $45cc
-    db $2F, $44, $8C, $34
+    dw $442f
+    dw Unk348c
 
-Unk1c3A4:
-    db $42, $05, $00, $00
+GreenGreensScreen0_Entity14:
+    db 66, 5
+    db 0, 0
     dw $4d3f
-    db $AE, $4E, $23, $35
+    dw $4eae
+    dw Unk3523
 
-Unk1c3AE:
-    db $43, $05, $08, $00
+GreenGreensScreen0_Entity15:
+    db 67, 5
+    db 8, 0
     dw $4d19
-    db $D8, $51, $FF, $34
+    dw $51d8
+    dw Unk34ff
 
-Unk1c3B8:
-    db $46, $05, $00, $00
+GreenGreensScreen0_Entity16:
+    db 70, 5
+    db 0, 0
     dw $45ae
     dw Unk103ff
-    db $8C, $34
+    dw Unk348c
 
-Unk1c3C2:
-    db $47, $03, $00, $00
+GreenGreensScreen0_Entity17:
+    db 71, 3
+    db 0, 0
     dw $4c52
-    db $5D, $4D, $1A, $35
+    dw $4d5d
+    dw Unk351a
 
-Unk1c3CC:
-    db $4A, $04, $00, $00
+GreenGreensScreen0_Entity18:
+    db 74, 4
+    db 0, 0
     dw $4c5b
-    db $99, $4D, $1A, $35
+    dw $4d99
+    dw Unk351a
 
-Unk1c3D6:
-    db $4F, $02, $00, $00
+GreenGreensScreen0_Entity19:
+    db 79, 2
+    db 0, 0
     dw $4647
-    db $7D, $46, $8C, $34
+    dw $467d
+    dw Unk348c
 
-Unk1c3E0:
-    db $4E, $03, $FA, $00
+GreenGreensScreen0_Entity20:
+    db 78, 3
+    db -6, 0
     dw $4958
-    db $1D, $43, $4D, $34
+    dw $431d
+    dw Unk344d
 
 INCBIN "baserom.gb", $1c3ea, $1c5b2 - $1c3ea
 

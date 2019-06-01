@@ -929,8 +929,8 @@ jr_006_45b5:
     cp $a0
     jr nc, .jr_006_46c7
 .jr_006_46c2:
-    ld a, $01
-    ld [$d160], a
+    ld a, 1
+    ld [wActiveEntities], a
 .jr_006_46c7:
     ld a, $01
     call Call_000_1dc3
