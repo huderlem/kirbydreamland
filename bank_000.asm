@@ -4878,9 +4878,9 @@ Call_000_21fb:
     push af
     ld a, [wExtraGameEnabled]
     and a
-    ld a, Bank(Unk1c000)
+    ld a, Bank(StageEntities)
     jr z, .jr_000_2214
-    ld a, $0f
+    ld a, Bank(StageEntities_ExtraGame)
 .jr_000_2214:
     ld [$d3f0], a
     ld [wLoadedROMBank], a
@@ -4900,7 +4900,7 @@ Call_000_21fb:
     ld a, [wCurStage]
     jr .jr_000_2249
 .jr_000_223a:
-    ld hl, Unk1c000
+    ld hl, StageEntities ; StageEntities and StageEntities_ExtraGame must have same bank address
     ld a, [wCurStage]
     ld e, a
     add hl, de
