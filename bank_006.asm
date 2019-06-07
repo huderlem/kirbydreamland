@@ -127,14 +127,14 @@ Call_006_40e4:
     add a
     sub b
     ld c, a
-    ld b, $00
-    ld hl, Unk388e
+    ld b, INDEX_GREEN_GREENS
+    ld hl, StageAttributes
     add hl, bc
     push hl
-    ld bc, $0005
+    ld bc, STAGE_ATTRIBUTES_INVERT_BGP
     add hl, bc
     ld a, [hl+]
-    cp $01
+    cp FLAG_INVERT_BGP
     jr z, jr_006_411a
 
     ld a, $c8

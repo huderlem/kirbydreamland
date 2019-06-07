@@ -8183,12 +8183,43 @@ jr_000_388a:
     pop hl
     ret
 
-Unk388e:
-    db $00, $01, $01, $28, $3C, $00, $01
-    db $00, $01, $01, $28, $58, $00, $0C
-    db $00, $01, $01, $28, $32, $00, $06
-    db $00, $01, $01, $48, $41, $00, $00
-    db $00, $01, $01, $28, $70, $00, $11
+
+StageAttributes:
+GreenGreensAttrs:
+    db $01      ; Start screen
+    db $01, $01 ; Stage start x, y
+    db $28, $3C ; Kirby start x, y
+    db $00      ; Invert BGP
+    db $01      ; Song number
+
+CasteLololoAttrs:
+    db $00
+    db $01, $01
+    db $28, $58
+    db $00
+    db $0C
+
+FloatIslandsAttrs:
+    db $00
+    db $01, $01
+    db $28, $32
+    db $00
+    db $06
+
+BubblyCloudsAttrs:
+    db $00
+    db $01, $01
+    db $48, $41
+    db $00
+    db $00
+
+MtDededeAttrs:
+    db $00
+    db $01, $01
+    db $28, $70
+    db $00
+    db $11
+
 
 StageMaps:
     dw GreenGreensMaps
