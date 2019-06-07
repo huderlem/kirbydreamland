@@ -264,7 +264,7 @@ Call_000_0326:
     ld a, [$d02d]
     cp $09
     jr nz, .jr_000_0359
-    ld a, [$d03c]
+    ld a, [wCurSong]
     call PlaySong
     xor a
     ld [$d3df], a
@@ -664,13 +664,13 @@ TryDoorWarp:
     call Call_000_0670
     ld a, $08
     ldh [$8c], a
-    ld a, [$d03d]
+    ld a, [wChangeSongTo]
     cp $ff
     jr z, .jr_000_0641
-    ld [$d03c], a
+    ld [wCurSong], a
     call PlaySong
     ld a, $ff
-    ld [$d03d], a
+    ld [wChangeSongTo], a
 .jr_000_0641:
     xor a
     ret
@@ -3488,7 +3488,7 @@ Call_000_19f9:
     push bc
     push hl
     ld a, $ff
-    ld [$d03d], a
+    ld [wChangeSongTo], a
     ld [wClearAllSprites], a
     call StartTimer
     ld hl, StageMaps
@@ -3560,7 +3560,7 @@ Call_000_19f9:
     jr z, .jr_000_1a79
     push hl
     ld a, $08
-    ld [$d03d], a
+    ld [wChangeSongTo], a
     pop hl
 .jr_000_1a79:
     inc hl
@@ -3737,7 +3737,7 @@ Call_000_19f9:
     ld b, $00
     add hl, bc
     ld a, [hl]
-    ld [$d03d], a
+    ld [wChangeSongTo], a
 .jump_000_1bc2:
     pop hl
     pop bc
@@ -7313,7 +7313,7 @@ Call_000_3059:
 .jr_000_306d:
     cp $78
     ret nz
-    ld a, [$d03c]
+    ld a, [wCurSong]
     jp PlaySong
 
 Call_000_3076:

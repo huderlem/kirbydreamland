@@ -50,12 +50,21 @@ wExtraGameSelected:: ; $d03a
 wCurStage:: ; $d03b
 	ds 1
 
-	ds 2
+wCurSong:: ; $d03c
+	ds 1
+
+wChangeSongTo:: ; $d03d - Eventually wCurSong will be equal to this
+	ds 1
 
 wCurStageScreen:: ; $d03e
 	ds 1
 
-	ds $12
+	ds $3
+
+wStageLengthInMetatiles:: ; $d042, prevents scrolling too far to the right
+	ds 1
+
+	ds $E
 
 wStageScrollTileX:: ; $d051
 	ds 1
