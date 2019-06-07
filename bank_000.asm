@@ -665,11 +665,11 @@ TryDoorWarp:
     ld a, $08
     ldh [$8c], a
     ld a, [wChangeSongTo]
-    cp $ff
+    cp MUSIC_NO_CHANGE
     jr z, .jr_000_0641
     ld [wCurSong], a
     call PlaySong
-    ld a, $ff
+    ld a, MUSIC_NO_CHANGE
     ld [wChangeSongTo], a
 .jr_000_0641:
     xor a
@@ -3488,7 +3488,7 @@ Call_000_19f9:
     push bc
     push hl
     ld a, $ff
-    ld [wChangeSongTo], a
+    ld [wChangeSongTo], a    ; $ff = MUSIC_NO_CHANGE
     ld [wClearAllSprites], a
     call StartTimer
     ld hl, StageMaps
@@ -3559,7 +3559,7 @@ Call_000_19f9:
     bit 3, [hl]
     jr z, .jr_000_1a79
     push hl
-    ld a, $08
+    ld a, MUSIC_MTDEDEDE_INTRO
     ld [wChangeSongTo], a
     pop hl
 .jr_000_1a79:
