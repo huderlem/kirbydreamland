@@ -17,8 +17,8 @@ NormalGameTilesGfx_BubblyClouds:
 NormalGameTilesGfx_MtDedede:
     INCBIN "gfx/stages/mt_dedede/tiles_normal_game.2bpp.lz"
 
-FontGfx:
-    INCBIN "gfx/font.2bpp.lz"
+FontIntroGfx:
+    INCBIN "gfx/font_intro.2bpp.lz"
 
 ; free space padding
 INCBIN "baserom.gb", $b906, $c000 - $b906
