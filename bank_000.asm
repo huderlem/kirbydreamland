@@ -8186,7 +8186,7 @@ jr_000_388a:
 
 StageAttributes:
 GreenGreensAttrs:
-    db $01      ; Start screen
+    db $00      ; Start screen
     db $01, $01 ; Stage start x, y
     db $28, $3C ; Kirby start x, y
     db $00      ; Invert BGP
