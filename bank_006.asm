@@ -24,9 +24,9 @@ ExecuteTitlescreen:
     ld de, _VRAM + $1000
     ld c, Bank(TitlescreenGfx2)
     call Decompress
-    ld hl, FontGfx
+    ld hl, FontIntroGfx
     ld de, _VRAM + $e00
-    ld c, Bank(FontGfx)
+    ld c, Bank(FontIntroGfx)
     call Decompress
     ld hl, TitlescreenTilemap
     ld de, _SCRN0
@@ -429,9 +429,9 @@ Call_006_42e8:
     ld a, [wCurStage]
     cp $04
     jr z, .jr_006_435b
-    ld hl, FontGfx
+    ld hl, FontIntroGfx
     ld de, _VRAM + $e00
-    ld c, Bank(FontGfx)
+    ld c, Bank(FontIntroGfx)
     call Decompress
     ld hl, StageIntroScreensTilesGfx
     ld de, _VRAM + $800
@@ -1055,9 +1055,9 @@ jr_006_45b5:
     ld a, $ff
     ld [wClearAllSprites], a
     call ClearSprites
-    ld hl, FontGfx
+    ld hl, FontIntroGfx
     ld de, _VRAM + $e00
-    ld c, Bank(FontGfx)
+    ld c, Bank(FontIntroGfx)
     call Decompress
     ld hl, StageIntroScreensTilesGfx
     ld de, _VRAM + $800
