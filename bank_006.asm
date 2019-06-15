@@ -7038,12 +7038,12 @@ ExecuteConfigurationModeScreen:
     ld a, $ff
     ld [wClearAllSprites], a
     call ClearSprites
-    ld hl, $4855
+    ld hl, NormalGameStatusBarGfx
     ld de, $9670
-    ld c, $02
+    ld c, Bank(NormalGameSpritesGfx)
     call Decompress
     ld hl, $7b0d
-    ld de, $8800
+    ld de, _VRAM + $800
     ld c, $06
     call Decompress
     ld hl, FontFullTilesGfx
