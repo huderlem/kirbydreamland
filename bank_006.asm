@@ -1009,8 +1009,8 @@ jr_006_45b5:
     ld de, _SCRN0
     ld c, $03
     call Decompress
-    ld hl, $41c7
-    ld de, $8e00
+    ld hl, FontFullTilesGfx
+    ld de, _VRAM + $e00
     ld c, $03
     call Decompress
     ld a, $03
@@ -1249,8 +1249,8 @@ jr_006_495b:
     call Call_000_21fb
     call Call_006_5098
     call StartTimer
-    ld hl, $41c7
-    ld de, $8e00
+    ld hl, FontFullTilesGfx
+    ld de, _VRAM + $e00
     ld c, $03
     call Decompress
     ld hl, $4fcf
@@ -7046,8 +7046,8 @@ ExecuteConfigurationModeScreen:
     ld de, $8800
     ld c, $06
     call Decompress
-    ld hl, $41c7
-    ld de, $8e00
+    ld hl, FontFullTilesGfx
+    ld de, _VRAM + $e00
     ld c, $03
     call Decompress
     ld hl, $4541
