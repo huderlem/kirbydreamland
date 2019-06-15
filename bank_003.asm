@@ -6,7 +6,12 @@ TitlescreenTilemap:
 FontFullTilesGfx:
     INCBIN "gfx/font_full.2bpp.lz"
 
-INCBIN "baserom.gb", $c2c8, $c6e0 - $c2c8
+INCBIN "baserom.gb", $c2c8, $c665 - $c2c8
+
+GameOverTextTilemap:
+  INCBIN "gfx/gameover.map.lz"
+
+INCBIN "baserom.gb", $c6b5, $c6e0 - $c6b5
 
 Metatiles_GreenGreens:
     INCBIN "data/stages/green_greens/metatiles.bin.lz"
