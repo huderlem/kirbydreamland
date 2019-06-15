@@ -1005,8 +1005,8 @@ jr_006_45b5:
     call StartTimer
     ld a, $0a
     call Call_000_21fb
-    ld hl, $4665
-    ld de, $9800
+    ld hl, GameOverTextTilemap
+    ld de, _SCRN0
     ld c, $03
     call Decompress
     ld hl, $41c7
