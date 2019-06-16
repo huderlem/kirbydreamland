@@ -44,7 +44,7 @@ ExecuteTitlescreen:
     call TryDrawExtraGameText
     ld a, $01
     call Call_000_1dc3
-    call Call_000_0670
+    call FadeIn
     ld a, $08
     ld [$d050], a
 .checkInput:
@@ -149,7 +149,7 @@ jr_006_411c:
     xor a
     ld_long $ff8c, a
     ld_long $ff8d, a
-    call Call_000_0648
+    call FadeOut
     ld a, $ff
     call PlaySE
     ld a, $ff
@@ -163,9 +163,9 @@ jr_006_411c:
 .jr_006_4142:
     ld a, $ff
     ld [wClearAllSprites], a
-    call Call_000_231e
-    call Call_000_0648
-    call Call_000_1c0a
+    call ClearActiveEntities
+    call FadeOut
+    call DrawStatusBarKirbyAndLives
     call StartTimer
     call Call_006_4285
     ld d, $00
@@ -304,7 +304,7 @@ jr_006_424a:
 jr_006_4263:
     call Call_000_1570
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     call Call_000_8dc
     ret
 
@@ -459,7 +459,7 @@ Call_006_42e8:
     xor a
     call Call_000_21fb
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     pop hl
     ld a, [hl]
     ld [$d03c], a
@@ -631,7 +631,7 @@ Call_006_4485:
     ld [wCurStageScreen], a
     push hl
     call Call_000_19c9
-    call Call_000_0648
+    call FadeOut
     ld a, $ff
     call PlaySE
     pop hl
@@ -680,7 +680,7 @@ Call_006_4485:
 
 jr_006_44eb:
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     pop hl
     pop af
     ret
@@ -965,7 +965,7 @@ jr_006_45b5:
     ld [wCurStageScreen], a
     push hl
     call Call_000_19c9
-    call Call_000_0648
+    call FadeOut
     call Call_000_19f9
     pop hl
     ld a, [hl+]
@@ -1000,7 +1000,7 @@ jr_006_45b5:
 .Unk474d:
     db $00, $01, $02, $03, $04, $05, $01, $03, $02, $04
 .noLivesRemaining:
-    call Call_000_0648
+    call FadeOut
     call InitWindow
     call StartTimer
     ld a, $0a
@@ -1019,7 +1019,7 @@ jr_006_45b5:
     ld [$d053], a
     ld [$d055], a
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     xor a
     ld [wSpriteProcessingOffset], a
     call Call_000_2e9c
@@ -1043,10 +1043,10 @@ jr_006_45b5:
 .jr_006_47b0:
     ld hl, $ff95
     set 0, [hl]
-    call Call_000_0648
+    call FadeOut
     call InitWindow
     call StartTimer
-    call Call_000_231e
+    call ClearActiveEntities
     inc a
     ld [wStageScrollTileX], a
     ld [wStageScrollTileY], a
@@ -1076,7 +1076,7 @@ Jump_006_4800:
     ld a, $04
     call PlaySong
     call StopTimer
-    call Call_000_0670
+    call FadeIn
 .jr_006_480b:
     ld hl, $ff8c
     set 6, [hl]
@@ -1124,7 +1124,7 @@ Jump_006_4800:
 .jump_006_485e:
     ld a, $3c
     call Call_000_1dc3
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     jp InitGame
 
@@ -1133,7 +1133,7 @@ Jump_006_486c:
     ld a, $ff
     ld [wClearAllSprites], a
     call ClearSprites
-    call Call_000_0648
+    call FadeOut
     ld a, $ff
     call PlaySE
     ld a, $ff
@@ -1170,7 +1170,7 @@ Jump_006_486c:
     ld c, $03
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld de, $00c8
     ld hl, $ff8c
 
@@ -1192,7 +1192,7 @@ jr_006_48e0:
     ld a, $ff
     ld [wClearAllSprites], a
     call ClearSprites
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     ld hl, $4000
     ld de, $8000
@@ -1224,7 +1224,7 @@ jr_006_48e0:
     ld hl, $c104
     call Call_000_1964
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld de, $01b0
     ld hl, $ff8c
 
@@ -1244,7 +1244,7 @@ jr_006_495b:
     ld a, $ff
     ld [wClearAllSprites], a
     call ClearSprites
-    call Call_000_0648
+    call FadeOut
     ld a, $05
     call Call_000_21fb
     call Call_006_5098
@@ -1266,7 +1266,7 @@ jr_006_495b:
     ld c, $03
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld de, $0200
     ld hl, $ff8c
 
@@ -1283,7 +1283,7 @@ jr_006_49b7:
     or e
     jr nz, jr_006_49b5
 
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     ld a, $06
     call Call_000_21fb
@@ -1316,7 +1316,7 @@ jr_006_49e7:
 
     push de
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     pop de
     ld hl, $9be0
     ld_long a, $ff91
@@ -1394,7 +1394,7 @@ Jump_006_4a65:
     ld a, $ff
     ld [wClearAllSprites], a
     call ClearSprites
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     ld a, $07
     call Call_000_21fb
@@ -1727,7 +1727,7 @@ Jump_006_4c5c:
     ld c, $03
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld de, $0144
     ld hl, $ff8c
 
@@ -1744,7 +1744,7 @@ jr_006_4cba:
     or e
     jr nz, jr_006_4cb8
 
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     ld a, $09
     call Call_000_21fb
@@ -1754,7 +1754,7 @@ jr_006_4cba:
     ld c, $03
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld de, $0190
     call Call_006_5086
     ld de, $01a4
@@ -1778,9 +1778,9 @@ jr_006_4cf3:
     jr nz, jr_006_4cf1
 
 jr_006_4d06:
-    call Call_000_0648
+    call FadeOut
     call StartTimer
-    call Call_000_231e
+    call ClearActiveEntities
     ld a, [wExtraGameEnabled]
     and a
     ld a, $01
@@ -1804,10 +1804,10 @@ jr_006_4d06:
     ld c, $0d
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld de, $01a0
     call Call_006_5086
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     ld a, $0d
     call Call_000_21fb
@@ -1821,10 +1821,10 @@ jr_006_4d06:
     ld c, $0d
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld de, $01a0
     call Call_006_5086
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     ld a, $0e
     call Call_000_21fb
@@ -1838,10 +1838,10 @@ jr_006_4d06:
     ld c, $0d
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld de, $00ec
     call Call_006_5086
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     ld a, $01
     ld [wCurStage], a
@@ -1858,10 +1858,10 @@ jr_006_4d06:
     ld c, $0d
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld de, $01a0
     call Call_006_5086
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     ld a, $10
     call Call_000_21fb
@@ -1875,10 +1875,10 @@ jr_006_4d06:
     ld c, $0d
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld de, $01a0
     call Call_006_5086
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     ld a, $02
     ld [wCurStage], a
@@ -1895,10 +1895,10 @@ jr_006_4d06:
     ld c, $0d
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld de, $01a0
     call Call_006_5086
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     ld a, $12
     call Call_000_21fb
@@ -1912,10 +1912,10 @@ jr_006_4d06:
     ld c, $0d
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld de, $01a0
     call Call_006_5086
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     ld a, $03
     ld [wCurStage], a
@@ -1932,10 +1932,10 @@ jr_006_4d06:
     ld c, $0d
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld de, $01a0
     call Call_006_5086
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     ld a, $14
     call Call_000_21fb
@@ -1949,10 +1949,10 @@ jr_006_4d06:
     ld c, $0d
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld de, $01a0
     call Call_006_5086
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     xor a
     ld [wCurStage], a
@@ -1969,10 +1969,10 @@ jr_006_4d06:
     ld c, $0d
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld de, $01a0
     call Call_006_5086
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     ld a, $01
     ld [wCurStage], a
@@ -1989,10 +1989,10 @@ jr_006_4d06:
     ld c, $0e
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld de, $01a0
     call Call_006_5086
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     ld a, $02
     ld [wCurStage], a
@@ -2009,10 +2009,10 @@ jr_006_4d06:
     ld c, $0e
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld de, $01a0
     call Call_006_5086
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     ld a, $03
     ld [wCurStage], a
@@ -2029,10 +2029,10 @@ jr_006_4d06:
     ld c, $0e
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld de, $01a0
     call Call_006_5086
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     ld hl, $6c49
     ld de, $8800
@@ -2050,7 +2050,7 @@ jr_006_4d06:
     ld c, $0e
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld de, $01a0
     call Call_006_5086
     ld de, $012c
@@ -2074,7 +2074,7 @@ jr_006_500b:
     jr nz, jr_006_5009
 
 jr_006_501e:
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     ld a, $ff
     call PlaySong
@@ -2090,7 +2090,7 @@ jr_006_501e:
     ld c, $0e
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
 
 jr_006_504d:
     ld de, $0000
@@ -2112,7 +2112,7 @@ Jump_006_5055:
     ld c, $0e
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
 
 jr_006_507e:
     ld de, $0000
@@ -7028,9 +7028,9 @@ Jump_006_5f00:
     rst $38
 
 ExecuteConfigurationModeScreen:
-    call Call_000_0648
+    call FadeOut
     call StartTimer
-    call Call_000_231e
+    call ClearActiveEntities
     call InitWindow
     xor a
     ld [$d053], a
@@ -7068,7 +7068,7 @@ jr_006_63db:
     jr nz, jr_006_63db
 
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld a, [wMaximumLives]
     call Call_006_652f
     ld hl, $ff8c
@@ -7306,7 +7306,7 @@ jr_006_652f:
 
 Jump_006_655e:
     pop hl
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     ld a, $02
     call Call_000_21fb
@@ -7316,7 +7316,7 @@ Jump_006_655e:
     ld c, $03
     call Decompress
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     xor a
     ld [wTemp], a
     ld hl, $d067

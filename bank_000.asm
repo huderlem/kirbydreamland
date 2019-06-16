@@ -82,7 +82,7 @@ InitGame:
     ld [$d050], a
     ld a, [wMaximumLives]
     ld [wRemainingLives], a
-    call Call_000_231e
+    call ClearActiveEntities
     ld a, [wExtraGameSelected]
     ld [wExtraGameEnabled], a
     ld a, Bank(Call_006_40e4)
@@ -588,7 +588,7 @@ TryDoorWarp:
     ldh [$8d], a
     ldh [$93], a
     call Call_000_19c9
-    call Call_000_0648
+    call FadeOut
     call Call_000_19f9
     pop hl
     ld a, [hl+]
@@ -661,7 +661,7 @@ TryDoorWarp:
     call Call_000_2e9c
     call ClearSprites
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld a, $08
     ldh [$8c], a
     ld a, [wChangeSongTo]
@@ -683,7 +683,7 @@ Call_000_0643:
     ret
 
 
-Call_000_0648:
+FadeOut:
     push hl
     ldh a, [$91]
     and $fb
@@ -708,7 +708,7 @@ Call_000_0648:
     ret
 
 
-Call_000_0670:
+FadeIn:
     ldh a, [$91]
     and $fb
     ldh [$91], a
@@ -771,7 +771,7 @@ ReadJoypad:
     ld a, $80
     ldh [$8c], a
     ei
-    call Call_000_0648
+    call FadeOut
     call StartTimer
     jp InitGame
 .noSoftReset:
@@ -3788,9 +3788,9 @@ InitWindow:
     ret
 
 
-Call_000_1c0a:
+DrawStatusBarKirbyAndLives:
     call StartTimer
-    ld c, $40
+    ld c, $40        ; Clear the window
     ld hl, $9c00
     ld a, $7f
 .jr_000_1c14:
@@ -3801,17 +3801,17 @@ Call_000_1c0a:
     ldh [rWX], a
     ld a, $80
     ldh [rWY], a
-    ld a, $67
+    ld a, $67      ; Kirby
     ld [$9c2e], a
-    ld a, $6b
+    ld a, $6b      ; X
     ld [$9c2f], a
-    ld a, $6f
+    ld a, $6f      ; Ki
     ld [$9c22], a
-    ld a, $70
+    ld a, $70      ; ir
     ld [$9c23], a
-    inc a
+    inc a          ; by
     ld [$9c24], a
-    ld a, $7f
+    ld a, $7f      ; Clear
     ld [$9c06], a
     ld [$9c07], a
     ld [$9c08], a
@@ -4926,7 +4926,7 @@ Call_000_21fb:
     pop af
     ld [wLoadedROMBank], a
     ld [MBC1RomBank], a
-    call Call_000_231e
+    call ClearActiveEntities
     xor a
     ld [$d3e9], a
     ld [$d3ea], a
@@ -5020,8 +5020,8 @@ Call_000_2317:
     ld hl, $d161
     jr jr_000_2323
 
-Call_000_231e:
-    ld b, $10
+ClearActiveEntities:
+    ld b, MAX_ENTITIES
     ld hl, wActiveEntities
 jr_000_2323:
     xor a
