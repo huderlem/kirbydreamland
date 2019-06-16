@@ -2011,7 +2011,7 @@ Call_001_4d3f:
     call Call_000_139b
     call Call_000_2e9c
     call StopTimer
-    call Call_000_0670
+    call FadeIn
     ld a, [$d03d]
     cp $ff
     ret z
