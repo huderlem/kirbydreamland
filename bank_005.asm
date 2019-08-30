@@ -1422,8 +1422,7 @@ Call_005_47c0:
     add hl, bc
     ld a, [hl]
     cp $ff
-    jr z, jr_005_47e2
-
+    jr z, .jr_005_47e2
     ld e, a
     and $07
     ld c, a
@@ -1433,15 +1432,14 @@ Call_005_47c0:
     srl e
     srl e
     srl e
-    ld hl, $3408
+    ld hl, Unk3408
     add hl, bc
     ld a, [hl]
     ld hl, $d3c4
     add hl, de
     or [hl]
     ld [hl], a
-
-jr_005_47e2:
+.jr_005_47e2:
     pop bc
     ret
 
@@ -1956,6 +1954,7 @@ jr_005_4a5b:
     ret
 
 
+Call_005_4a5f:
     ld hl, $d1a0
     add hl, bc
     set 2, [hl]
