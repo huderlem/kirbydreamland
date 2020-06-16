@@ -2254,7 +2254,7 @@ Metasprite_KirbyFlattenedLeft2: ;5BB5
     db $f0, $f8, $56, $21
 Metasprite_KirbyFlattenedSideLeft2: ;5BBD
     db $f8, $00, $54, $21
-Metasprite_KirbyFlattenedSideLeft3: ;5BC1 Not sure why there are so many of these
+Metasprite_KirbyFlattenedSideLeft3: ;5BC1
     db $f8, $f8, $54, $21
 Metasprite_KirbyFlattenedSideRight1: ;5BC5
     db $f8, $fc, $54, $01
@@ -2299,7 +2299,7 @@ Metasprite_Star1: ;5C25
 Metasprite_Star2: ;5C2D
     db $f8, $00, $74, $00
     db $f8, $f8, $64, $01
-Metasprite_UnkStar: ;5C35 Doesn't seem to be used. It's a copy of Star2 with the unused bit 4 set.
+Metasprite_UnkStar: ;5C35 
     db $f8, $00, $74, $10 
     db $f8, $f8, $64, $11
 Metasprite_Star3: ;5C3D
@@ -2311,7 +2311,7 @@ Metasprite_Star4: ;5C45
 Metasprite_Bomb: ;5C4D
     db $f8, $00, $76, $00
     db $f8, $f8, $66, $01
-Metasprite_UnkBomb: ;5C55 Another use of bit 4
+Metasprite_UnkBomb: ;5C55 
     db $f6, $00, $76, $10 
     db $f6, $f8, $66, $11
 Metasprite_HyperCandy: ;5C5D
@@ -2328,7 +2328,7 @@ Metasprite_Mic: ;5C75
     db $f8, $f8, $7e, $01
 Metasprite_EnergyDrink: ;5C7D
     db $f8, $fc, $6e, $01
-Metasprite_MaximTomato: ;5C81 Occording to the manual this is actually called "Bag of food."
+Metasprite_MaximTomato: ;5C81
     db $f8, $00, $6c, $20
     db $f8, $f8, $6c, $01
 Metasprite_1UP: ;5C89
@@ -2372,10 +2372,10 @@ Metasprite_AirPuffRight: ;5CF1
 Metasprite_AirPuffLeft: ;5CF9
     db $f8, $f8, $5c, $20
     db $f8, $00, $4c, $21
-Metasprite_AirPuffRightUnk: ;5D01 Another Unused sprite with bit 4 set.
+Metasprite_AirPuffRightUnk: ;5D01 
     db $f8, $f8, $4a, $10
     db $f8, $00, $5c, $11
-Metasprite_AirPuffFlippedUnk: ;5D09 This one is flipped upside down, along with bit 4 being set
+Metasprite_AirPuffFlippedUnk: ;5D09 
     db $f8, $f8, $4a, $50
     db $f8, $00, $5c, $51
 Metasprite_AirPuffLeftUnk: ;5D11
@@ -2449,7 +2449,7 @@ Metasprite_ExplosionAndSmoke8: ;5DE1
     db $e8, $fd, $5e, $20
     db $08, $fb, $4e, $40
     db $08, $03, $4e, $21
-Metasprite_StarBlock: ;5DF9 This one has bit 4 set and is actually used.
+Metasprite_StarBlock: ;5DF9 
     db $f8, $00, $90, $10
     db $f8, $f8, $80, $11
 Metasprite_EnemyBeamRight: ;5E01
@@ -2488,7 +2488,7 @@ Metasprite_Gordo1: ;5E45
 Metasprite_Gordo2: ;5E4D
     db $f8, $f8, $8a, $00
     db $f8, $00, $8a, $61
-Metasprite_WaddleDeeLeft1: ;5E55 The enemy sprites are facing the opposite direction of Kirby. Left comes first
+Metasprite_WaddleDeeLeft1: ;5E55
     db $f8, $00, $98, $00
     db $f8, $f8, $8c, $01
 Metasprite_WaddleDeeLeft2: ;5E5D
@@ -2509,7 +2509,7 @@ Metasprite_WaddleDooLeft2: ;5E7D
 Metasprite_WaddleDooBeamLeft: ;5E85
     db $f8, $f8, $96, $00
     db $f8, $00, $98, $01
-Metasprite_WaddleDooLeftUnk1: ;5E8D Bit 4 makes me sad :(
+Metasprite_WaddleDooLeftUnk1: ;5E8D 
     db $f8, $01, $98, $10
     db $f8, $f9, $92, $11
 Metasprite_WaddleDooLeftUnk2: ;5E95
@@ -2578,7 +2578,7 @@ Metasprite_Part2Unknown6: ;5F35
 Metasprite_Part2Unknown7: ;5F3D
     db $f8, $00, $ec, $00
     db $f8, $f8, $f0, $01
-Metasprite_Part2Unknown8: ;5F45 Reversed Part2Unknown6
+Metasprite_Part2Unknown8: ;5F45 
     db $f8, $f8, $f8, $20
     db $f8, $00, $fa, $21
 Metasprite_Part2Unknown9: ;5F4D 
