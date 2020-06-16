@@ -6,7 +6,7 @@ SECTION "ROM Bank $00b", ROMX[$4000], BANK[$b]
 ;7: Render priority
 ;6: Y flip
 ;5: X flip
-;4: End of Metasprite
+;4: Unused
 ;3: VRAM bank            (GB Color only)
 ;2: Palette number bit 3 (GB Color only)
 ;1: Palette number bit 2 (GB Color only)
